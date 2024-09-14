@@ -15,22 +15,34 @@ class Orbit {
         semiMajorAxis: number,
         eccentricity: number,
         periapsis: number,
-        apoapsis: number
+        apoapsis: number,
+        inclination: number,
+        centralBody: CelestialObject
     ) {
-        // const curve = new EllipseCurve(
-        //     x,
-        //     y,
-        //     perigee,
-        //     apogee,
-        //     0,
-        //     Math.PI * 2,
-        //     true
-        // );
-        // this.orbitLine = new Line(
-        //     new BufferGeometry().setFromPoints(curve.getSpacedPoints(100)),
-        //     new LineBasicMaterial({ color: 0xfefefe })
-        // );
-        // this.orbitLine.rotation.x = -Math.PI / 2;
+        this.centralBody = centralBody;
+        this.semiMajorAxis = semiMajorAxis;
+        this.eccentricity = eccentricity;
+        this.inclination = inclination;
+        this.periapsis = periapsis;
+        this.apoapsis = apoapsis;
+
+        const curve = new EllipseCurve(
+            this.centralBody.position.x,
+            this.centralBody.position.y,
+            periapsis,
+            apoapsis,
+            0,
+            Math.PI * 2
+        );
+
+        this.orbitLine = new Line(
+            new BufferGeometry().setFromPoints(curve.getSpacedPoints(100)),
+            new LineBasicMaterial({ color: 0xfefefe })
+        );
+
+        this.orbitLine.rotation.x = -Math.PI / 2;
+
+        this.centralBody.group.add(this.orbitLine);
     }
 
     public calculatePosition(): number {

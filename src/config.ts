@@ -1,5 +1,5 @@
 const config = {
-    DISTANCE_SCALE: 10000,
+    DISTANCE_SCALE: 1000000,
     SIZE_SCALE: 10000,
 };
 
