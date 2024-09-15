@@ -34,9 +34,8 @@ class SolarSystem {
         this.centralBody.init();
         for (let [_, celestialBody] of this.celestialBodies) {
             celestialBody.init();
-            if (celestialBody.mesh != null) {
-                console.log("added");
-                this.group.add(celestialBody.mesh);
+            if (celestialBody.group != null) {
+                this.group.add(celestialBody.group);
             }
         }
     }

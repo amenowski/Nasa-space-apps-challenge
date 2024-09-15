@@ -1,16 +1,9 @@
-import {
-    BoxGeometry,
-    MeshBasicMaterial,
-    Mesh,
-    SphereGeometry,
-    Group,
-} from "three";
 import CelestialObject from "./components/CelestialObject";
 import Orbit from "./components/Orbit";
 import SolarSystem from "./components/SolarSystem";
 import config from "./config";
-import Camera from "./core/camera";
-import { EventListeners } from "./core/eventListeners";
+import Camera from "./core/Camera";
+import { EventListeners } from "./core/EventListeners";
 import MainScene from "./core/MainScene";
 import Renderer from "./core/Renderer";
 
@@ -29,20 +22,20 @@ const earth = new CelestialObject(
     149e6 / config.DISTANCE_SCALE
 );
 
-console.log(149e6 / config.DISTANCE_SCALE);
-
 const earthOrbit = new Orbit(
-    149.598e6 / config.SIZE_SCALE,
-    0.0167,
-    147.095e6 / config.SIZE_SCALE,
-    152.1e6 / config.SIZE_SCALE,
-    0.00005,
+    1.00000261,
+    0.01671123,
+    102.93768193,
+    -0.00001531,
+    0.0,
     earth
 );
 
 mainScene.init();
-earth.addOrbit(earthOrbit);
+earth.setOrbit(earthOrbit);
 solarSystem.addCelestialBody(earth);
+
+// after addintion
 solarSystem.init();
 
 mainScene.addGroup(solarSystem.group);

@@ -18,7 +18,7 @@ class CelestialObject {
     public mesh: Mesh | null = null;
     public group: Group;
     private textureUrl: string;
-    private orbits: Orbit | null = null;
+    private orbit: Orbit | null = null;
 
     constructor(
         name: string,
@@ -43,11 +43,24 @@ class CelestialObject {
         const mat = new MeshBasicMaterial({ map: tex });
 
         this.mesh = new Mesh(geo, mat);
+        this.group.add(this.mesh);
 
-        this.mesh.position.set(this.distanceFromSun, 0, 0);
+        this.mesh.position.copy(this.position);
+        // this.group.position.set(this.distanceFromSun, 0, 0);
     }
 
-    public addOrbit(orbit: Orbit) {}
+    public setOrbit(orbit: Orbit) {
+        this.orbit = orbit;
+        this.orbit.visualize();
+        this.group.add(this.orbit.orbitLine);
+        const orbitGeo = this.orbit.orbitLine.geometry;
+
+        this.position.copy(
+            new Vector3().fromBufferAttribute(orbitGeo.attributes.position, 0)
+        );
+
+        console.log(this.orbit.orbitLine);
+    }
 
     public updatePosition(): void {}
 }
