@@ -3,18 +3,23 @@ import {
     Mesh,
     MeshBasicMaterial,
     SphereGeometry,
-    Vector3,
     TextureLoader,
+    Vector3,
 } from "three";
 import Orbit from "./Orbit";
+import {
+    calculateEccentricFromMean,
+    calculateMeanAnomaly,
+    calculateTrueFromEccentric,
+    UnixToJulianDate,
+} from "../utils/OrbitalCalculations";
 
 class CelestialObject {
     public name: string;
     public radius: number;
-    public position: Vector3;
+    public trueAnomaly: number;
     public satellites: CelestialObject[] = [];
     public speed: number;
-    public distanceFromSun: number;
     public mesh: Mesh | null = null;
     public group: Group;
     private textureUrl: string;
@@ -24,16 +29,14 @@ class CelestialObject {
         name: string,
         radius: number,
         textureUrl: string,
-        speed: number,
-        distanceFromSun: number
+        speed: number
     ) {
         this.name = name;
         this.radius = radius;
         this.textureUrl = textureUrl;
         this.speed = speed;
-        this.distanceFromSun = distanceFromSun;
 
-        this.position = new Vector3(radius, 0, 0);
+        this.trueAnomaly = 0;
         this.group = new Group();
     }
 
@@ -45,24 +48,43 @@ class CelestialObject {
         this.mesh = new Mesh(geo, mat);
         this.group.add(this.mesh);
 
-        this.mesh.position.copy(this.position);
-        // this.group.position.set(this.distanceFromSun, 0, 0);
+        if (this.orbit) {
+            const jd1 = UnixToJulianDate(new Date("2024-01-01"));
+            const jd = UnixToJulianDate(new Date());
+            // console.log();
+
+            const meanAnomaly = calculateMeanAnomaly(jd);
+            const eccentricAnomaly = calculateEccentricFromMean(
+                meanAnomaly,
+                this.orbit.eccentricity
+            );
+            this.trueAnomaly = calculateTrueFromEccentric(
+                eccentricAnomaly,
+                this.orbit.eccentricity
+            );
+            if (this.trueAnomaly < 0) this.trueAnomaly += Math.PI * 2;
+            // console.log(meanAnomaly, eccentricAnomaly, this.trueAnomaly);
+            this.mesh.position.copy(
+                this.orbit.calculatePosition(this.trueAnomaly)
+            );
+        }
     }
 
     public setOrbit(orbit: Orbit) {
         this.orbit = orbit;
         this.orbit.visualize();
         this.group.add(this.orbit.orbitLine);
-        const orbitGeo = this.orbit.orbitLine.geometry;
-
-        this.position.copy(
-            new Vector3().fromBufferAttribute(orbitGeo.attributes.position, 0)
-        );
-
-        console.log(this.orbit.orbitLine);
     }
 
-    public updatePosition(): void {}
+    public updatePosition(): void {
+        this.trueAnomaly += 0.002;
+
+        if (this.mesh && this.orbit) {
+            this.mesh.position.copy(
+                this.orbit.calculatePosition(this.trueAnomaly)
+            );
+        }
+    }
 }
 
 export default CelestialObject;

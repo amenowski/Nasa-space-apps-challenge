@@ -39,6 +39,12 @@ class SolarSystem {
             }
         }
     }
+
+    public update(): void {
+        for (let [_, celestialBody] of this.celestialBodies) {
+            celestialBody.updatePosition();
+        }
+    }
 }
 
 export default SolarSystem;

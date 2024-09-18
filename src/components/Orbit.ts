@@ -17,7 +17,6 @@ class Orbit {
         semiMajorAxis: number,
         eccentricity: number,
         periapsis: number,
-        // apoapsis: number,
         inclination: number,
         ascentingNode: number,
         centralBody: CelestialObject
@@ -28,7 +27,6 @@ class Orbit {
         this.inclination = inclination * 0.01745329; // convert to RAD
         this.periapsis = periapsis * 0.01745329; // convert to RAD
         this.ascendingNode = ascentingNode * 0.01745329; // convert to RAD
-        // this.apoapsis = apoapsis;
 
         this.orbitLine = new Line();
     }
@@ -44,16 +42,15 @@ class Orbit {
             i += 0.0785;
         }
 
-        console.log(points);
-
         const geo = new BufferGeometry().setFromPoints(points);
 
         this.orbitLine = new Line(geo, material);
     }
 
     public calculatePosition(uA: number): Vector3 {
+        const scale = 149597870.7 / config.DISTANCE_SCALE;
         const theta = uA;
-        const sLR = this.semiMajorAxis * ((1 - this.eccentricity) ^ 2);
+        const sLR = this.semiMajorAxis * Math.pow(1 - this.eccentricity, 2);
         const r = sLR / (1 + this.eccentricity * Math.cos(theta));
         const pos = new Vector3(0, 0, 0);
 
@@ -65,7 +62,7 @@ class Orbit {
                     Math.sin(this.ascendingNode));
 
         pos.z =
-            r *
+            -r *
             (Math.cos(this.periapsis + theta) * Math.sin(this.ascendingNode) +
                 Math.cos(this.inclination) *
                     Math.sin(this.periapsis + theta) *
@@ -75,9 +72,7 @@ class Orbit {
             r * (Math.sin(this.periapsis + theta) * Math.sin(this.inclination));
 
         // convert them to km and scale down to simulation ratio
-        pos.x *= 149597870.7 / config.DISTANCE_SCALE;
-        pos.y *= 149597870.7 / config.DISTANCE_SCALE;
-        pos.z *= 149597870.7 / config.DISTANCE_SCALE;
+        pos.multiplyScalar(scale);
 
         return pos;
     }
