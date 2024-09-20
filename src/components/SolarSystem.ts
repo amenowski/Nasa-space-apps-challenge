@@ -4,11 +4,14 @@ import CelestialObject from "./CelestialObject";
 import Sun from "./Sun";
 import { SolarPlanetData } from "../core/Types";
 import Orbit from "./Orbit";
+import { UI } from "../core/UI";
 
 class SolarSystem {
     public group: Group;
     private centralBody: Sun;
     private celestialBodies: Map<string, CelestialObject>;
+    private currentDate: Date;
+    private ui: UI;
     constructor() {
         this.group = new Group();
         // create sun
@@ -24,6 +27,8 @@ class SolarSystem {
         this.group.add(this.centralBody.mesh);
 
         this.celestialBodies = new Map<string, CelestialObject>();
+        this.currentDate = new Date();
+        this.ui = new UI();
     }
 
     public addCelestialBody(body: CelestialObject) {
@@ -71,9 +76,25 @@ class SolarSystem {
         }
     }
 
-    public update(): void {
+    public update(deltaTime: number): void {
+        // this.currentDate = new Date(
+        //     this.currentDate.getTime() + 1000 * 60 * 60 * 3
+        // );
+        // console.log(this.currentDate);
+
+        // let speed = (1 / 24) * 24;
+        let speed = 0;
+
+        this.currentDate = new Date(
+            this.currentDate.getTime() + 1000 * 3600 * 24 * deltaTime * speed
+        );
+
+        this.ui.setDate(this.currentDate);
+
+        // console.log(this.currentDate);
+
         for (let [_, celestialBody] of this.celestialBodies) {
-            celestialBody.updatePosition();
+            celestialBody.updatePosition(this.currentDate, deltaTime, speed);
         }
     }
 }

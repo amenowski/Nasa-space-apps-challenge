@@ -1,4 +1,4 @@
-import { ArrowHelper, Vector3 } from "three";
+import { ArrowHelper, Clock, Vector3 } from "three";
 import SolarSystem from "./components/SolarSystem";
 import Camera from "./core/Camera";
 import { EventListeners } from "./core/EventListeners";
@@ -8,6 +8,7 @@ import Renderer from "./core/Renderer";
 const mainScene = new MainScene();
 const renderer = new Renderer();
 const camera = new Camera(mainScene.getScene(), renderer);
+const clock = new Clock();
 new EventListeners(renderer, camera);
 
 const solarSystem = new SolarSystem();
@@ -44,15 +45,16 @@ function drawHelpers() {
     mainScene.getScene().add(arrowHelperZ);
 }
 
-drawHelpers();
+// drawHelpers();
 
 function animation() {
     camera.update();
-    // solarSystem.update();
+    solarSystem.update(clock.getDelta());
     renderer.render(mainScene.getScene(), camera.getCamera());
     requestAnimationFrame(animation);
 }
 
+clock.start();
 animation();
 
 // const date = new Date("2024-01-06");

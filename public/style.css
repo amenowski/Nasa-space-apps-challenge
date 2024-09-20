@@ -8,3 +8,15 @@ body {
     padding: 0;
     margin: 0;
 }
+
+.UI {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: white;
+    pointer-events: none;
+    display: flex;
+}

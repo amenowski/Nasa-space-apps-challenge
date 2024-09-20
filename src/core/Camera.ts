@@ -9,7 +9,7 @@ export default class Camera {
 
     constructor(scene: Scene, renderer: Renderer) {
         this.camera = new PerspectiveCamera(
-            75,
+            50,
             window.innerWidth / window.innerHeight,
             0.1,
             5000
