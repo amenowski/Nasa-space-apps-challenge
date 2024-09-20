@@ -2,6 +2,8 @@ import { Group } from "three";
 import config from "../config";
 import CelestialObject from "./CelestialObject";
 import Sun from "./Sun";
+import { SolarPlanetData } from "../core/Types";
+import Orbit from "./Orbit";
 
 class SolarSystem {
     public group: Group;
@@ -13,7 +15,7 @@ class SolarSystem {
         this.centralBody = new Sun(
             "Sun",
             19891e10,
-            696340 / config.SIZE_SCALE,
+            69634 / config.SIZE_SCALE,
             "./src/assets/textures/sun.jpg",
             1
         );
@@ -29,14 +31,43 @@ class SolarSystem {
         this.celestialBodies.set(body.name, body);
     }
 
-    public init(): void {
-        //init all planets
-        this.centralBody.init();
-        for (let [_, celestialBody] of this.celestialBodies) {
-            celestialBody.init();
-            if (celestialBody.group != null) {
-                this.group.add(celestialBody.group);
+    public async init(): Promise<void> {
+        // read SolarPlanet json and create planets with their orbit
+        const data = await fetch("./src/assets/data/SolarPlanets.json");
+        const json: SolarPlanetData[] = await data.json();
+
+        for (let object of json) {
+            if (object.type == "Planet") {
+                const celestialObject = new CelestialObject(
+                    object.name,
+                    object.radius / config.SIZE_SCALE,
+                    object.textureUrl
+                );
+
+                this.celestialBodies.set(object.name, celestialObject);
+
+                const orbitData = object.orbit;
+
+                const orbit = new Orbit(
+                    orbitData.meanAnomaly,
+                    orbitData.semiMajor,
+                    orbitData.eccentricity,
+                    orbitData.longOfPeri,
+                    orbitData.inclination,
+                    orbitData.ascendingNode,
+                    orbitData.period,
+                    new Date(orbitData.dataFrom),
+                    orbitData.changesPerCentury,
+                    celestialObject
+                );
+
+                celestialObject.setOrbit(orbit);
             }
+        }
+
+        for (let [_, object] of this.celestialBodies) {
+            object.init();
+            this.group.add(object.group);
         }
     }
 

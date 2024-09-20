@@ -1,10 +1,4 @@
-import {
-    Mesh,
-    MeshBasicMaterial,
-    SphereGeometry,
-    TextureLoader,
-    Vector3,
-} from "three";
+import { Mesh, MeshBasicMaterial, SphereGeometry, TextureLoader } from "three";
 
 class Sun {
     public name: string;

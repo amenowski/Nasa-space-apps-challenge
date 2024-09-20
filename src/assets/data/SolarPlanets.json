@@ -1,0 +1,95 @@
+[
+    {
+        "type": "Planet",
+        "name": "Mercury",
+        "radius": 24390,
+        "textureUrl": "./src/assets/textures/mercury.jpg",
+        "orbit": {
+            "semiMajor": 0.38709927,
+            "eccentricity": 0.20563593,
+            "inclination": 7.00497902,
+            "longOfPeri": 77.45779628,
+            "ascendingNode": 48.33076593,
+            "meanAnomaly": 3.050661,
+            "period": 0.24101123287671232876712328767123,
+            "dataFrom": "2000-01-01",
+            "changesPerCentury": {
+                "semiMajor": 0.00000037,
+                "eccentricity": 0.00001906,
+                "inclination": -0.00594749,
+                "longOfPeri": 0.16047689,
+                "ascendingNode": -0.12534081
+            }
+        }
+    },
+    {
+        "type": "Planet",
+        "name": "Venus",
+        "radius": 60518,
+        "textureUrl": "./src/assets/textures/Venus.jpg",
+        "orbit": {
+            "semiMajor": 0.72333566,
+            "eccentricity": 0.00677672,
+            "inclination": 3.39467605,
+            "longOfPeri": 131.60246718,
+            "ascendingNode": 76.67984255,
+            "meanAnomaly": 0.880519,
+            "period": 0.61643835616438356164383561643836,
+            "dataFrom": "2000-01-01",
+            "changesPerCentury": {
+                "semiMajor": 0.0000039,
+                "eccentricity": -0.00004107,
+                "inclination": -0.0007889,
+                "longOfPeri": 0.00268329,
+                "ascendingNode": -0.27769418
+            }
+        }
+    },
+    {
+        "type": "Planet",
+        "name": "Earth",
+        "radius": 63710,
+        "textureUrl": "./src/assets/textures/earth.jpg",
+        "orbit": {
+            "semiMajor": 1.00000261,
+            "eccentricity": 0.01671123,
+            "inclination": 0,
+            "longOfPeri": 102.93768193,
+            "ascendingNode": 0.0,
+            "meanAnomaly": 6.2398516,
+            "period": 1,
+            "dataFrom": "2000-01-01",
+            "changesPerCentury": {
+                "semiMajor": 0.00000562,
+                "eccentricity": -0.00004392,
+                "inclination": -0.01294668,
+                "longOfPeri": 0.32327364,
+                "ascendingNode": 0.0
+            }
+        }
+    },
+
+    {
+        "type": "Planet",
+        "name": "Mars",
+        "radius": 33895,
+        "textureUrl": "./src/assets/textures/mars.jpg",
+        "orbit": {
+            "semiMajor": 1.52371034,
+            "eccentricity": 0.0933941,
+            "inclination": 1.84969142,
+            "longOfPeri": 102.93768193,
+            "ascendingNode": 49.55953891,
+            "meanAnomaly": 0.338768,
+            "period": 1.88085,
+            "dataFrom": "2000-01-01",
+            "changesPerCentury": {
+                "semiMajor": 0.00001847,
+                "eccentricity": 0.00007882,
+                "inclination": -0.00813131,
+                "longOfPeri": 0.44441088,
+                "ascendingNode": -0.29257343
+            }
+        }
+    }
+]
