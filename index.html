@@ -5,13 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Vite + TS</title>
         <base href="." />
-        <link rel="stylesheet" href="/style.css" />
+        <link rel="stylesheet" href="./src/style.css" />
     </head>
     <body>
         <div class="UI">
-            <div class="timestamp"></div>
+            <div class="time-slider">
+                <div class="timestamp"></div>
 
-            <div class="time-slider"></div>
+                <div class="slider">
+                    <div class="drag"></div>
+                </div>
+
+                <p class="speed-display">real-time</p>
+            </div>
         </div>
         <script type="module" src="/src/index.ts"></script>
     </body>

@@ -5,6 +5,7 @@ import Sun from "./Sun";
 import { SolarPlanetData } from "../core/Types";
 import Orbit from "./Orbit";
 import { UI } from "../core/UI";
+import { SETTINGS } from "../core/Settings";
 
 class SolarSystem {
     public group: Group;
@@ -82,11 +83,12 @@ class SolarSystem {
         // );
         // console.log(this.currentDate);
 
-        // let speed = (1 / 24) * 24;
-        let speed = 0;
-
+        let speed = 1;
+        // let speed = 0;
+        console.log(SETTINGS.simulationSpeed);
         this.currentDate = new Date(
-            this.currentDate.getTime() + 1000 * 3600 * 24 * deltaTime * speed
+            this.currentDate.getTime() +
+                1000 * SETTINGS.simulationSpeed * deltaTime
         );
 
         this.ui.setDate(this.currentDate);
@@ -94,7 +96,11 @@ class SolarSystem {
         // console.log(this.currentDate);
 
         for (let [_, celestialBody] of this.celestialBodies) {
-            celestialBody.updatePosition(this.currentDate, deltaTime, speed);
+            celestialBody.updatePosition(
+                this.currentDate,
+                deltaTime,
+                SETTINGS.simulationSpeed / 86400
+            );
         }
     }
 }

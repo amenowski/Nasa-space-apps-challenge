@@ -56,27 +56,3 @@ function animation() {
 
 clock.start();
 animation();
-
-// const date = new Date("2024-01-06");
-
-// let jd = UnixToJulianDate(Date.now());
-// let jd2 = UnixToJulianDate(date.getTime());
-
-// // only for earth
-// const mean = calculateMeanAnomaly(jd);
-// const eccentric = calculateEccentricFromMean(mean, 0.01671123);
-// const trueA = calculateTrueFromEccentric(eccentric, 0.01671123);
-// console.log(mean, eccentric, trueA);
-// let date = new Date("2024-01-01");
-// for (let i = 1; i <= 12; ++i) {
-//     const toDeg = 180 / Math.PI;
-//     date.setMonth(i);
-//     console.log(`------- ${date.getMonth()} -------`);
-//     let jd = UnixToJulianDate(date.getTime());
-//     let mean = calculateMeanAnomaly(jd);
-//     let eccentric = calculateEccentricFromMean(mean, 0.01671123);
-//     let trueA = calculateTrueFromEccentric(eccentric, 0.01671123);
-//     if (eccentric < 0) eccentric += Math.PI * 2;
-//     if (trueA < 0) trueA += Math.PI * 2;
-//     console.log(`eccentric = ${eccentric * toDeg} | true = ${trueA * toDeg}`);
-// }
