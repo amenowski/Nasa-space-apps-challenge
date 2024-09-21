@@ -2,7 +2,7 @@
     {
         "type": "Planet",
         "name": "Mercury",
-        "radius": 24390,
+        "radius": 2439,
         "textureUrl": "./src/assets/textures/mercury.jpg",
         "orbit": {
             "semiMajor": 0.38709927,
@@ -25,7 +25,7 @@
     {
         "type": "Planet",
         "name": "Venus",
-        "radius": 60518,
+        "radius": 6051.8,
         "textureUrl": "./src/assets/textures/Venus.jpg",
         "orbit": {
             "semiMajor": 0.72333566,
@@ -48,7 +48,7 @@
     {
         "type": "Planet",
         "name": "Earth",
-        "radius": 63710,
+        "radius": 6371,
         "textureUrl": "./src/assets/textures/earth.jpg",
         "orbit": {
             "semiMajor": 1.00000261,
@@ -72,7 +72,7 @@
     {
         "type": "Planet",
         "name": "Mars",
-        "radius": 33895,
+        "radius": 3389.5,
         "textureUrl": "./src/assets/textures/mars.jpg",
         "orbit": {
             "semiMajor": 1.52371034,
@@ -89,6 +89,99 @@
                 "inclination": -0.00813131,
                 "longOfPeri": 0.44441088,
                 "ascendingNode": -0.29257343
+            }
+        }
+    },
+    {
+        "type": "Planet",
+        "name": "Jupiter",
+        "radius": 69911,
+        "textureUrl": "./src/assets/textures/jupiter.jpg",
+        "orbit": {
+            "semiMajor": 5.202887,
+            "eccentricity": 0.04838624,
+            "inclination": 1.30439695,
+            "longOfPeri": 14.72847983,
+            "ascendingNode": 100.47390909,
+            "meanAnomaly": 0.342957,
+            "period": 11.87,
+            "dataFrom": "2000-01-01",
+            "changesPerCentury": {
+                "semiMajor": -0.00011607,
+                "eccentricity": -0.00013253,
+                "inclination": -0.00183714,
+                "longOfPeri": 0.21252668,
+                "ascendingNode": 0.20469106
+            }
+        }
+    },
+
+    {
+        "type": "Planet",
+        "name": "Saturn",
+        "radius": 58232,
+        "textureUrl": "./src/assets/textures/saturn.jpg",
+        "orbit": {
+            "semiMajor": 9.53667594,
+            "eccentricity": 0.05386179,
+            "inclination": 2.48599187,
+            "longOfPeri": 92.59887831,
+            "ascendingNode": 113.66242448,
+            "meanAnomaly": 5.541595,
+            "period": 29.45,
+            "dataFrom": "2000-01-01",
+            "changesPerCentury": {
+                "semiMajor": -0.0012506,
+                "eccentricity": -0.00050991,
+                "inclination": 0.00193609,
+                "longOfPeri": -0.41897216,
+                "ascendingNode": -0.28867794
+            }
+        }
+    },
+    {
+        "type": "Planet",
+        "name": "Uranus",
+        "radius": 25362,
+        "textureUrl": "./src/assets/textures/uranus.jpg",
+        "orbit": {
+            "semiMajor": 19.18916464,
+            "eccentricity": 0.04725744,
+            "inclination": 0.77263783,
+            "longOfPeri": 170.9542763,
+            "ascendingNode": 74.01692503,
+            "meanAnomaly": 2.48308,
+            "period": 84.07,
+            "dataFrom": "2000-01-01",
+            "changesPerCentury": {
+                "semiMajor": -0.00196176,
+                "eccentricity": -0.00004397,
+                "inclination": -0.00242939,
+                "longOfPeri": 0.40805281,
+                "ascendingNode": 0.04240589
+            }
+        }
+    },
+    {
+        "type": "Planet",
+        "name": "Neptune",
+        "radius": 24622,
+        "textureUrl": "./src/assets/textures/neptune.jpg",
+        "orbit": {
+            "semiMajor": 30.06992276,
+            "eccentricity": 0.00859048,
+            "inclination": 1.77004347,
+            "longOfPeri": 44.96476227,
+            "ascendingNode": 131.78422574,
+            "meanAnomaly": 4.536285,
+            "period": 164.88,
+            "dataFrom": "2000-01-01",
+            "changesPerCentury": {
+                "semiMajor": 0.00026291,
+                "eccentricity": 0.00005105,
+                "inclination": 0.00035372,
+                "longOfPeri": -0.32241464,
+                "ascendingNode": -0.00508664
             }
         }
     }

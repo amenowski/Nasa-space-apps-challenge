@@ -36,7 +36,7 @@ class CelestialObject {
         this.meanAnomaly = 0;
     }
 
-    public init() {
+    public init(date: Date) {
         const tex = new TextureLoader().load(this.textureUrl);
         const geo = new SphereGeometry(this.radius);
         const mat = new MeshBasicMaterial({ map: tex });
@@ -44,8 +44,7 @@ class CelestialObject {
         this.group.add(this.mesh);
 
         if (this.orbit) {
-            const jd = UnixToJulianDate(new Date("2000-01-01"));
-            const currentDate = UnixToJulianDate(new Date());
+            const currentDate = UnixToJulianDate(date);
 
             this.meanAnomaly = calculateMeanAnomaly(
                 this.orbit.meanAnomaly,

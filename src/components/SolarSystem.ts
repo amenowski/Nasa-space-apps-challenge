@@ -19,7 +19,7 @@ class SolarSystem {
         this.centralBody = new Sun(
             "Sun",
             19891e10,
-            69634 / config.SIZE_SCALE,
+            696340 / config.SUN_SCALE,
             "./src/assets/textures/sun.jpg",
             1
         );
@@ -72,7 +72,7 @@ class SolarSystem {
         }
 
         for (let [_, object] of this.celestialBodies) {
-            object.init();
+            object.init(this.currentDate);
             this.group.add(object.group);
         }
     }
@@ -83,7 +83,6 @@ class SolarSystem {
         // );
         // console.log(this.currentDate);
 
-        let speed = 1;
         // let speed = 0;
         console.log(SETTINGS.simulationSpeed);
         this.currentDate = new Date(
