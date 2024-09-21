@@ -1,7 +1,7 @@
 import {
     Group,
     Mesh,
-    MeshBasicMaterial,
+    MeshStandardMaterial,
     SphereGeometry,
     TextureLoader,
 } from "three";
@@ -12,6 +12,7 @@ import {
     calculateTrueFromEccentric,
     UnixToJulianDate,
 } from "../utils/OrbitalCalculations";
+import { CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
 
 class CelestialObject {
     public name: string;
@@ -24,8 +25,15 @@ class CelestialObject {
     private meanMotion: number; // rad per day
     private textureUrl: string;
     private orbit: Orbit | null = null;
+    private textureLoader: TextureLoader;
+    private label: CSS2DObject | null = null;
 
-    constructor(name: string, radius: number, textureUrl: string) {
+    constructor(
+        name: string,
+        radius: number,
+        textureUrl: string,
+        textureLoader: TextureLoader
+    ) {
         this.name = name;
         this.radius = radius;
         this.textureUrl = textureUrl;
@@ -34,14 +42,26 @@ class CelestialObject {
         this.group = new Group();
         this.meanMotion = 0;
         this.meanAnomaly = 0;
+        this.textureLoader = textureLoader;
     }
 
     public init(date: Date) {
-        const tex = new TextureLoader().load(this.textureUrl);
+        const div = document.createElement("div");
+        div.className = "planet-label";
+        div.textContent = this.name;
+
+        const tex = this.textureLoader.load(this.textureUrl);
         const geo = new SphereGeometry(this.radius);
-        const mat = new MeshBasicMaterial({ map: tex });
+        const mat = new MeshStandardMaterial({ map: tex });
         this.mesh = new Mesh(geo, mat);
+        this.mesh.layers.enableAll();
+
         this.group.add(this.mesh);
+        this.label = new CSS2DObject(div);
+        this.label.position.set(0, this.radius, 0);
+        this.label.layers.set(0);
+
+        this.mesh.add(this.label);
 
         if (this.orbit) {
             const currentDate = UnixToJulianDate(date);
@@ -64,16 +84,11 @@ class CelestialObject {
             );
 
             if (this.trueAnomaly < 0) this.trueAnomaly += Math.PI * 2;
-            // console.log(`${this.name} = ${eccentricAnomaly} |
-            //      ${this.orbit.currentOrbitElements.eccentricity} | ${this.trueAnomaly}`);
-
             this.mesh.position.copy(
                 this.orbit.calculatePosition(this.trueAnomaly)
             );
 
             this.meanMotion = (Math.PI * 2) / (this.orbit.period * 365);
-
-            console.log(`${this.name} = ${this.meanMotion}`);
         }
     }
 

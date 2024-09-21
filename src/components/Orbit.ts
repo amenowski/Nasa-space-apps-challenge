@@ -1,8 +1,8 @@
 import { Line, BufferGeometry, LineBasicMaterial, Vector3 } from "three";
 import CelestialObject from "./CelestialObject";
-import config from "../config";
 import { UnixToJulianDate } from "../utils/OrbitalCalculations";
 import { orbitElements } from "../core/Types";
+import { SETTINGS } from "../core/Settings";
 
 class Orbit {
     public semiMajorAxis: number; // in AU
@@ -107,7 +107,7 @@ class Orbit {
         const i = this.currentOrbitElements.inclination;
         const pA = this.currentOrbitElements.longOfPeri - aN;
 
-        const scale = 149597870.7 / config.DISTANCE_SCALE;
+        const scale = 149597870.7 / SETTINGS.DISTANCE_SCALE;
         const theta = uA;
         const sLR = a * Math.pow(1 - e, 2);
         const r = sLR / (1 + e * Math.cos(theta));

@@ -1,4 +1,4 @@
-import Camera from "./camera";
+import Camera from "./Camera";
 import Renderer from "./Renderer";
 
 export class EventListeners {

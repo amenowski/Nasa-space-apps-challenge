@@ -7,7 +7,7 @@ export default class MainScene {
     }
 
     public init() {
-        this.scene.add(new AmbientLight(0xffffff));
+        this.scene.add(new AmbientLight(0xffffff, 1));
     }
 
     public getScene(): Scene {
@@ -17,4 +17,6 @@ export default class MainScene {
     public addGroup(group: Group) {
         this.scene.add(group);
     }
+
+    public textExample() {}
 }

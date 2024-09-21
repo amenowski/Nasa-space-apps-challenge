@@ -17,7 +17,7 @@ export default class Camera {
 
         this.controls = new OrbitControls(
             this.camera,
-            renderer.getDomElement()
+            renderer.getRendererDom()
         );
 
         this.aspect = window.innerWidth / window.innerHeight;
@@ -25,7 +25,8 @@ export default class Camera {
         this.camera.position.z = 0;
         this.camera.position.y = 500;
         // this.camera.position.x = 200;
-        this.camera.lookAt(0, 0, 0);
+        // this.camera.lookAt(0, 0, 0);
+        this.camera.layers.enableAll();
 
         scene.add(this.camera);
     }

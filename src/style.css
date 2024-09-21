@@ -20,6 +20,7 @@ body {
     pointer-events: none;
     display: flex;
     padding: 3em;
+    z-index: 9999;
 }
 
 .time-slider {
@@ -58,4 +59,11 @@ body {
 
 .time-slider .speed-display {
     user-select: none;
+}
+
+.planet-label {
+    color: white;
+    font-family: sans-serif;
+    padding: 2px;
+    background: transparent;
 }

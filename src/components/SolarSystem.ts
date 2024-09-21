@@ -1,5 +1,4 @@
-import { Group } from "three";
-import config from "../config";
+import { Group, TextureLoader } from "three";
 import CelestialObject from "./CelestialObject";
 import Sun from "./Sun";
 import { SolarPlanetData } from "../core/Types";
@@ -13,13 +12,14 @@ class SolarSystem {
     private celestialBodies: Map<string, CelestialObject>;
     private currentDate: Date;
     private ui: UI;
+    private textureLoader: TextureLoader;
     constructor() {
         this.group = new Group();
         // create sun
         this.centralBody = new Sun(
             "Sun",
             19891e10,
-            696340 / config.SUN_SCALE,
+            696340 / SETTINGS.SUN_SCALE,
             "./src/assets/textures/sun.jpg",
             1
         );
@@ -30,6 +30,7 @@ class SolarSystem {
         this.celestialBodies = new Map<string, CelestialObject>();
         this.currentDate = new Date();
         this.ui = new UI();
+        this.textureLoader = new TextureLoader();
     }
 
     public addCelestialBody(body: CelestialObject) {
@@ -46,8 +47,9 @@ class SolarSystem {
             if (object.type == "Planet") {
                 const celestialObject = new CelestialObject(
                     object.name,
-                    object.radius / config.SIZE_SCALE,
-                    object.textureUrl
+                    object.radius / SETTINGS.SIZE_SCALE,
+                    object.textureUrl,
+                    this.textureLoader
                 );
 
                 this.celestialBodies.set(object.name, celestialObject);
@@ -78,21 +80,12 @@ class SolarSystem {
     }
 
     public update(deltaTime: number): void {
-        // this.currentDate = new Date(
-        //     this.currentDate.getTime() + 1000 * 60 * 60 * 3
-        // );
-        // console.log(this.currentDate);
-
-        // let speed = 0;
-        console.log(SETTINGS.simulationSpeed);
         this.currentDate = new Date(
             this.currentDate.getTime() +
                 1000 * SETTINGS.simulationSpeed * deltaTime
         );
 
         this.ui.setDate(this.currentDate);
-
-        // console.log(this.currentDate);
 
         for (let [_, celestialBody] of this.celestialBodies) {
             celestialBody.updatePosition(
