@@ -22,7 +22,7 @@ export function calculateMeanAnomaly(
     period: number
 ): number {
     const TAU = Math.PI * 2;
-    const n = TAU / (period * 365); // deg per day;
+    const n = TAU / (period * 365); // rad per day;
     let meanAnomaly = m0 + n * (jd - 2451545);
     meanAnomaly = meanAnomaly % TAU;
     // if (meanAnomaly > Math.PI) meanAnomaly -= TAU;

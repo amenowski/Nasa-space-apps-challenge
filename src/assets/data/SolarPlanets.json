@@ -121,6 +121,9 @@
         "name": "Saturn",
         "radius": 58232,
         "textureUrl": "./src/assets/textures/saturn.jpg",
+        "ringTexture": "./src/assets/textures/saturn_ring.png",
+        "ringStart": 74500,
+        "ringEnd": 149268,
         "orbit": {
             "semiMajor": 9.53667594,
             "eccentricity": 0.05386179,

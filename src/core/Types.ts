@@ -11,7 +11,6 @@ export interface orbitData {
     eccentricity: number;
     inclination: number;
     longOfPeri: number;
-
     ascendingNode: number;
     meanAnomaly: number;
     period: number;
@@ -25,4 +24,10 @@ export interface SolarPlanetData {
     textureUrl: string;
     radius: number;
     orbit: orbitData;
+}
+
+export interface CelestialWithRingData extends SolarPlanetData {
+    ringStart: number;
+    ringEnd: number;
+    ringTexture: string;
 }

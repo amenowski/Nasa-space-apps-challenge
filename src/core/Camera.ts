@@ -22,11 +22,14 @@ export default class Camera {
 
         this.aspect = window.innerWidth / window.innerHeight;
         this.camera.aspect = this.aspect;
-        this.camera.position.z = 0;
-        this.camera.position.y = 500;
-        // this.camera.position.x = 200;
+        // this.camera.position.z = 600;
+        // this.camera.position.y = 200;
+        // this.camera.position.x = -500;
         // this.camera.lookAt(0, 0, 0);
         this.camera.layers.enableAll();
+
+        this.camera.position.z = 50;
+        this.camera.position.y = 50;
 
         scene.add(this.camera);
     }

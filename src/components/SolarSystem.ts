@@ -1,15 +1,16 @@
-import { Group, TextureLoader } from "three";
-import CelestialObject from "./CelestialObject";
 import Sun from "./Sun";
-import { SolarPlanetData } from "../core/Types";
 import Orbit from "./Orbit";
+import CelestialObject from "./CelestialObject";
+import CelestialWithRing from "./CelestialWithRing";
+import { Group, TextureLoader } from "three";
+import { SolarPlanetData, CelestialWithRingData } from "../core/Types";
 import { UI } from "../core/UI";
 import { SETTINGS } from "../core/Settings";
 
 class SolarSystem {
     public group: Group;
     private centralBody: Sun;
-    private celestialBodies: Map<string, CelestialObject>;
+    private celestialBodies: Map<string, CelestialObject | CelestialWithRing>;
     private currentDate: Date;
     private ui: UI;
     private textureLoader: TextureLoader;
@@ -41,16 +42,32 @@ class SolarSystem {
     public async init(): Promise<void> {
         // read SolarPlanet json and create planets with their orbit
         const data = await fetch("./src/assets/data/SolarPlanets.json");
-        const json: SolarPlanetData[] = await data.json();
+        const json: CelestialWithRingData[] | SolarPlanetData[] =
+            await data.json();
+        let celestialObject: CelestialObject | CelestialWithRing | null = null;
 
         for (let object of json) {
             if (object.type == "Planet") {
-                const celestialObject = new CelestialObject(
-                    object.name,
-                    object.radius / SETTINGS.SIZE_SCALE,
-                    object.textureUrl,
-                    this.textureLoader
-                );
+                if (object.name == "Saturn") {
+                    console.log(object);
+                    const objectData = object as CelestialWithRingData;
+                    celestialObject = new CelestialWithRing(
+                        objectData.name,
+                        objectData.radius / SETTINGS.SIZE_SCALE,
+                        objectData.ringStart / SETTINGS.SIZE_SCALE,
+                        objectData.ringEnd / SETTINGS.SIZE_SCALE,
+                        objectData.textureUrl,
+                        objectData.ringTexture,
+                        this.textureLoader
+                    );
+                } else {
+                    celestialObject = new CelestialObject(
+                        object.name,
+                        object.radius / SETTINGS.SIZE_SCALE,
+                        object.textureUrl,
+                        this.textureLoader
+                    );
+                }
 
                 this.celestialBodies.set(object.name, celestialObject);
 

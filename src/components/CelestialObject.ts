@@ -21,12 +21,12 @@ class CelestialObject {
     public satellites: CelestialObject[] = [];
     public mesh: Mesh | null = null;
     public group: Group;
-    private meanAnomaly: number;
-    private meanMotion: number; // rad per day
-    private textureUrl: string;
-    private orbit: Orbit | null = null;
-    private textureLoader: TextureLoader;
-    private label: CSS2DObject | null = null;
+    protected meanAnomaly: number;
+    protected meanMotion: number; // rad per day
+    protected textureUrl: string;
+    protected orbit: Orbit | null = null;
+    protected textureLoader: TextureLoader;
+    protected label: CSS2DObject | null = null;
 
     constructor(
         name: string,
