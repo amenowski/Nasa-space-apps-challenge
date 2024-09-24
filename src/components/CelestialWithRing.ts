@@ -4,7 +4,6 @@ import {
     MeshStandardMaterial,
     SphereGeometry,
     TextureLoader,
-    Vector3,
 } from "three";
 import CelestialObject from "./CelestialObject";
 import { CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
@@ -50,6 +49,7 @@ export default class CelestialWithRing extends CelestialObject {
 
         this.mesh = new Mesh(geo, mat);
         this.mesh.layers.enableAll();
+        this.group.name = this.name;
 
         this.group.add(this.mesh);
         this.label = new CSS2DObject(div);

@@ -2,10 +2,11 @@ import Sun from "./Sun";
 import Orbit from "./Orbit";
 import CelestialObject from "./CelestialObject";
 import CelestialWithRing from "./CelestialWithRing";
-import { Group, TextureLoader } from "three";
+import { Group, Raycaster, TextureLoader, Vector2, Vector3 } from "three";
 import { SolarPlanetData, CelestialWithRingData } from "../core/Types";
 import { UI } from "../core/UI";
 import { SETTINGS } from "../core/Settings";
+import Camera from "../core/Camera";
 
 class SolarSystem {
     public group: Group;
@@ -14,6 +15,7 @@ class SolarSystem {
     private currentDate: Date;
     private ui: UI;
     private textureLoader: TextureLoader;
+    private raycaster: Raycaster;
     constructor() {
         this.group = new Group();
         // create sun
@@ -32,11 +34,41 @@ class SolarSystem {
         this.currentDate = new Date();
         this.ui = new UI();
         this.textureLoader = new TextureLoader();
+        this.raycaster = new Raycaster();
     }
 
-    public addCelestialBody(body: CelestialObject) {
-        // add to the arrray
-        this.celestialBodies.set(body.name, body);
+    public shootRay(mouseCoords: Vector2, camera: Camera): void {
+        this.raycaster.setFromCamera(mouseCoords, camera.getCamera());
+
+        const intersections = this.raycaster.intersectObjects(
+            this.group.children,
+            true
+        );
+
+        for (let intersection of intersections) {
+            const selectedObject = intersection.object;
+
+            if (selectedObject.name == "Sun") {
+                camera.controls.target = new Vector3(0, 0, 0);
+                break;
+            }
+            if (selectedObject.parent) {
+                const celestialBody = this.celestialBodies.get(
+                    selectedObject.parent.name
+                );
+
+                if (!celestialBody) continue;
+
+                // console.log(celestialBody);
+
+                if (celestialBody.mesh) {
+                    camera.controls.target = celestialBody.mesh.position;
+                    console.log(camera.controls.getDistance());
+                }
+
+                break;
+            }
+        }
     }
 
     public async init(): Promise<void> {
@@ -49,7 +81,6 @@ class SolarSystem {
         for (let object of json) {
             if (object.type == "Planet") {
                 if (object.name == "Saturn") {
-                    console.log(object);
                     const objectData = object as CelestialWithRingData;
                     celestialObject = new CelestialWithRing(
                         objectData.name,

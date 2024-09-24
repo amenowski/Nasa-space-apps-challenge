@@ -3,8 +3,8 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import Renderer from "./Renderer";
 
 export default class Camera {
+    public controls: OrbitControls;
     private camera: PerspectiveCamera;
-    private controls: OrbitControls;
     private aspect: number;
 
     constructor(scene: Scene, renderer: Renderer) {

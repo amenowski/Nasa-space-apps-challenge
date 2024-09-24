@@ -1,6 +1,5 @@
-import { AmbientLight, DoubleSide, Group, Scene, TextureLoader } from "three";
-import { MeshStandardMaterial, Mesh } from "three";
-import { PlanetRingGeometry } from "../utils/PlanetRingGeometry";
+import { AmbientLight, Group, Scene } from "three";
+
 export default class MainScene {
     private scene: Scene;
     constructor() {
@@ -18,6 +17,4 @@ export default class MainScene {
     public addGroup(group: Group) {
         this.scene.add(group);
     }
-
-    public textExample() {}
 }

@@ -31,6 +31,7 @@ class Sun {
         const mat = new MeshBasicMaterial({ map: tex });
 
         this.mesh = new Mesh(geo, mat);
+        this.mesh.name = this.name;
 
         this.mesh.position.set(0, 0, 0);
     }

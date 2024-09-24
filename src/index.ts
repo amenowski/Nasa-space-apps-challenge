@@ -9,9 +9,9 @@ const mainScene = new MainScene();
 const renderer = new Renderer();
 const camera = new Camera(mainScene.getScene(), renderer);
 const clock = new Clock();
-new EventListeners(renderer, camera);
 
 const solarSystem = new SolarSystem();
+new EventListeners(renderer, camera, solarSystem);
 
 mainScene.init();
 

@@ -55,6 +55,7 @@ class CelestialObject {
         const mat = new MeshStandardMaterial({ map: tex });
         this.mesh = new Mesh(geo, mat);
         this.mesh.layers.enableAll();
+        this.group.name = this.name;
 
         this.group.add(this.mesh);
         this.label = new CSS2DObject(div);
