@@ -22,7 +22,9 @@ class SolarSystem {
     private targetTween: Tween | null = null;
     private zoomTween: Tween | null = null;
     private selectedObject: UniverseObject;
-    constructor() {
+    private camera: Camera;
+    constructor(camera: Camera) {
+        this.camera = camera;
         this.group = new Group();
         // create sun
         this.centralBody = new Sun(
@@ -55,6 +57,7 @@ class SolarSystem {
                 if (object.name == "Saturn") {
                     const objectData = object as CelestialWithRingData;
                     celestialObject = new CelestialWithRing(
+                        this,
                         objectData.name,
                         objectData.radius / SETTINGS.SIZE_SCALE,
                         objectData.ringStart / SETTINGS.SIZE_SCALE,
@@ -65,6 +68,7 @@ class SolarSystem {
                     );
                 } else {
                     celestialObject = new CelestialBody(
+                        this,
                         object.name,
                         object.radius / SETTINGS.SIZE_SCALE,
                         object.textureUrl,
@@ -119,10 +123,10 @@ class SolarSystem {
         }
     }
 
-    public shootRay(mouseCoords: Vector2, camera: Camera): void {
+    public shootRay(mouseCoords: Vector2): void {
         if (this.zoomTween?.isPlaying()) return;
-        this.raycaster.far = camera.getCamera().far;
-        this.raycaster.setFromCamera(mouseCoords, camera.getCamera());
+        this.raycaster.far = this.camera.getCamera().far;
+        this.raycaster.setFromCamera(mouseCoords, this.camera.getCamera());
 
         const intersections = this.raycaster.intersectObjects(
             this.group.children,
@@ -132,58 +136,42 @@ class SolarSystem {
         for (let intersection of intersections) {
             const object = intersection.object;
 
-            let cameraTarget = new Vector3(0, 0, 0);
-            let startPosition = new Vector3(0, 0, 0);
-            let endPosition = new Vector3(0, 0, 0);
+            const celestialBody = this.celestialBodies.get(object.name);
 
-            if (object.parent) {
-                let celestialBody;
-                if (object.name == "Sun") celestialBody = this.centralBody;
-                else
-                    celestialBody = this.celestialBodies.get(
-                        object.parent.name
-                    );
+            if (!celestialBody || this.selectedObject == celestialBody)
+                continue;
 
-                if (!celestialBody || this.selectedObject == celestialBody)
-                    continue;
+            this.moveToBody(celestialBody);
 
-                this.selectedObject = celestialBody;
-
-                const p = celestialBody.mesh!.position;
-                const cam = camera.getCamera();
-                const direction = new Vector3();
-                cam.getWorldDirection(direction);
-                cameraTarget = camera.controls.target.clone();
-                startPosition = cam.position.clone();
-                endPosition = new Vector3()
-                    .copy(p)
-                    .sub(
-                        direction.multiplyScalar(
-                            this.selectedObject.radius * 20
-                        )
-                    );
-
-                camera.controls.target = cameraTarget.clone();
-                camera.controls.enabled = false;
-
-                this.selectAnimation(
-                    camera,
-                    startPosition,
-                    endPosition,
-                    cameraTarget
-                );
-                break;
-            }
+            break;
         }
     }
 
+    public moveToBody(object: UniverseObject): void {
+        this.selectedObject = object;
+
+        const p = object.mesh!.position;
+        const cam = this.camera.getCamera();
+        const direction = new Vector3();
+        cam.getWorldDirection(direction);
+        let cameraTarget = this.camera.controls.target.clone();
+        let startPosition = cam.position.clone();
+        let endPosition = new Vector3()
+            .copy(p)
+            .sub(direction.multiplyScalar(this.selectedObject.radius * 20));
+
+        this.camera.controls.target = cameraTarget.clone();
+        this.camera.controls.enabled = false;
+
+        this.selectAnimation(startPosition, endPosition, cameraTarget);
+    }
+
     private selectAnimation(
-        camera: Camera,
         startPosition: Vector3,
         endPosition: Vector3,
         cameraTarget: Vector3
     ): void {
-        const cam = camera.getCamera();
+        const cam = this.camera.getCamera();
         const p = this.selectedObject.mesh!.position;
 
         this.zoomTween = new Tween(startPosition)
@@ -193,8 +181,9 @@ class SolarSystem {
                 cam.position.copy(startPosition);
             })
             .onComplete(() => {
-                camera.controls.enabled = true;
-                camera.controls.target = this.selectedObject.mesh!.position;
+                this.camera.controls.enabled = true;
+                this.camera.controls.target =
+                    this.selectedObject.mesh!.position;
             });
 
         this.targetTween = new Tween(cameraTarget)
@@ -208,7 +197,7 @@ class SolarSystem {
             )
             .easing(TWEEN.Easing.Cubic.InOut)
             .onUpdate(() => {
-                camera.controls.target.copy(cameraTarget);
+                this.camera.controls.target.copy(cameraTarget);
             })
             .start()
             .chain(this.zoomTween);

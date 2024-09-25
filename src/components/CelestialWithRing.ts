@@ -6,9 +6,8 @@ import {
     TextureLoader,
 } from "three";
 import CelestialObject from "./CelestialBody";
-import { CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
-
 import { PlanetRingGeometry } from "../utils/PlanetRingGeometry";
+import SolarSystem from "./SolarSystem";
 
 export default class CelestialWithRing extends CelestialObject {
     private ring: Mesh | null = null;
@@ -17,6 +16,7 @@ export default class CelestialWithRing extends CelestialObject {
     private ringTextureUrl: string;
 
     constructor(
+        system: SolarSystem,
         name: string,
         radius: number,
         ringStart: number,
@@ -25,17 +25,13 @@ export default class CelestialWithRing extends CelestialObject {
         ringTexture: string,
         textureLoader: TextureLoader
     ) {
-        super(name, radius, textureUrl, textureLoader);
+        super(system, name, radius, textureUrl, textureLoader);
         this.ringTextureUrl = ringTexture;
         this.ringStart = ringStart;
         this.ringEnd = ringEnd;
     }
 
     public init(date: Date) {
-        const div = document.createElement("div");
-        div.className = "planet-label";
-        div.textContent = this.name;
-
         const tex = this.textureLoader.load(this.textureUrl);
         const geo = new SphereGeometry(this.radius);
         const mat = new MeshStandardMaterial({
@@ -44,20 +40,15 @@ export default class CelestialWithRing extends CelestialObject {
 
         this.mesh = new Mesh(geo, mat);
         this.mesh.layers.enableAll();
-        this.group.name = this.name;
+        this.mesh.name = this.name;
 
         this.group.add(this.mesh);
-        this.label = new CSS2DObject(div);
-        this.label.position.set(0, this.radius, 0);
-        this.label.layers.set(0);
 
-        this.mesh.add(this.label);
-
+        this.createRing();
+        this.createLabel();
         if (this.orbit) {
             this.orbit.setFromDate(date);
         }
-
-        this.createRing();
     }
     private createRing(): void {
         const tex = this.textureLoader.load(this.ringTextureUrl);

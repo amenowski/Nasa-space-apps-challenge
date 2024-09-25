@@ -90,7 +90,11 @@ class Orbit {
     }
 
     public visualize(): void {
-        const material = new LineBasicMaterial({ color: 0xffffff });
+        const material = new LineBasicMaterial({
+            color: 0xffffff,
+            opacity: 0.5,
+            transparent: true,
+        });
         const points: Vector3[] = [];
 
         let i = 0;
@@ -103,6 +107,23 @@ class Orbit {
         const geo = new BufferGeometry().setFromPoints(points);
 
         this.orbitLine = new Line(geo, material);
+    }
+
+    public hovered(): void {
+        this.orbitLine.material = new LineBasicMaterial({
+            color: 0xff0000,
+            opacity: 1,
+            transparent: true,
+            linewidth: 10,
+        });
+    }
+
+    public unhovered(): void {
+        this.orbitLine.material = new LineBasicMaterial({
+            color: 0xffffff,
+            opacity: 0.5,
+            transparent: true,
+        });
     }
 
     public calculatePosition(uA: number): Vector3 {

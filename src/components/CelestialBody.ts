@@ -9,6 +9,7 @@ import Orbit from "./Orbit";
 
 import { CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
 import { UnixToJulianDate } from "../utils/OrbitalCalculations";
+import SolarSystem from "./SolarSystem";
 
 export default class CelestialBody {
     public name: string;
@@ -23,13 +24,16 @@ export default class CelestialBody {
     protected orbit: Orbit | null = null;
     protected textureLoader: TextureLoader;
     protected label: CSS2DObject | null = null;
+    protected system: SolarSystem;
 
     constructor(
+        system: SolarSystem,
         name: string,
         radius: number,
         textureUrl: string,
         textureLoader: TextureLoader
     ) {
+        this.system = system;
         this.name = name;
         this.radius = radius;
         this.textureUrl = textureUrl;
@@ -42,24 +46,15 @@ export default class CelestialBody {
     }
 
     public init(date: Date) {
-        const div = document.createElement("div");
-        div.className = "planet-label";
-        div.textContent = this.name;
-
         const tex = this.textureLoader.load(this.textureUrl);
         const geo = new SphereGeometry(this.radius);
         const mat = new MeshStandardMaterial({ map: tex });
         this.mesh = new Mesh(geo, mat);
         this.mesh.layers.enableAll();
-        this.group.name = this.name;
+        this.mesh.name = this.name;
 
         this.group.add(this.mesh);
-        this.label = new CSS2DObject(div);
-        this.label.position.set(0, this.radius, 0);
-        this.label.layers.set(0);
-
-        this.mesh.add(this.label);
-
+        this.createLabel();
         if (this.orbit) this.orbit.setFromDate(date);
     }
 
@@ -85,4 +80,29 @@ export default class CelestialBody {
             this.orbit.fromMeanAnomaly(this.meanAnomaly);
         }
     }
+
+    protected createLabel(): void {
+        const div = document.createElement("div");
+        div.className = "planet-label";
+        div.textContent = this.name;
+
+        this.label = new CSS2DObject(div);
+        this.label.position.set(0, this.radius, 0);
+        this.label.layers.set(0);
+        this.mesh!.add(this.label);
+
+        div.addEventListener("mouseover", () => {
+            this.orbit?.hovered();
+        });
+
+        div.addEventListener("mouseleave", () => {
+            this.orbit?.unhovered();
+        });
+
+        div.addEventListener("click", () => {
+            this.system.moveToBody(this);
+        });
+    }
+
+    protected moveCamera(): void {}
 }

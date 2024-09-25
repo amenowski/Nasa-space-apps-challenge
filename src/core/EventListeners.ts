@@ -23,7 +23,7 @@ export class EventListeners {
                 (e.clientY / this.renderer.getRendererDom().clientHeight) * 2 -
                 1
             );
-            this.solarSystem.shootRay(new Vector2(x, y), this.camera);
+            this.solarSystem.shootRay(new Vector2(x, y));
         });
     }
 
