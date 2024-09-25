@@ -3,8 +3,8 @@ import { Mesh, MeshBasicMaterial, SphereGeometry, TextureLoader } from "three";
 class Sun {
     public name: string;
     public mesh: Mesh;
+    public radius: number;
     private mass: number;
-    private radius: number;
     private textureUrl: string;
     private luminosity: number;
     // private surfaceTemp // maybe in future

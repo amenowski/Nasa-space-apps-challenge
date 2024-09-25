@@ -1,5 +1,5 @@
 import { Line, BufferGeometry, LineBasicMaterial, Vector3 } from "three";
-import CelestialObject from "./CelestialObject";
+import CelestialObject from "./CelestialBody";
 import { UnixToJulianDate } from "../utils/OrbitalCalculations";
 import { orbitElements } from "../core/Types";
 import { SETTINGS } from "../core/Settings";
@@ -92,7 +92,7 @@ class Orbit {
         while (i <= 6.28) {
             points.push(this.calculatePosition(i));
 
-            i += 0.0785;
+            i += 0.00285;
         }
 
         const geo = new BufferGeometry().setFromPoints(points);

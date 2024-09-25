@@ -5,7 +5,7 @@ import {
     SphereGeometry,
     TextureLoader,
 } from "three";
-import CelestialObject from "./CelestialObject";
+import CelestialObject from "./CelestialBody";
 import { CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
 import {
     UnixToJulianDate,
