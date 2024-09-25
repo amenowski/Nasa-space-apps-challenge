@@ -18,12 +18,13 @@ export function UnixToJulianDate(d: Date) {
 
 export function calculateMeanAnomaly(
     m0: number,
+    jd0: number,
     jd: number,
     period: number
 ): number {
     const TAU = Math.PI * 2;
     const n = TAU / (period * 365); // rad per day;
-    let meanAnomaly = m0 + n * (jd - 2451545);
+    let meanAnomaly = m0 + n * (jd - jd0);
     meanAnomaly = meanAnomaly % TAU;
     // if (meanAnomaly > Math.PI) meanAnomaly -= TAU;
     return meanAnomaly;

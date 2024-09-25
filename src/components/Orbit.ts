@@ -1,6 +1,11 @@
 import { Line, BufferGeometry, LineBasicMaterial, Vector3 } from "three";
 import CelestialObject from "./CelestialBody";
-import { UnixToJulianDate } from "../utils/OrbitalCalculations";
+import {
+    calculateEccentricFromMean,
+    calculateMeanAnomaly,
+    calculateTrueFromEccentric,
+    UnixToJulianDate,
+} from "../utils/OrbitalCalculations";
 import { orbitElements } from "../core/Types";
 import { SETTINGS } from "../core/Settings";
 
@@ -16,8 +21,7 @@ class Orbit {
     public period: number; // in years
     public changesPerCentury: orbitElements;
     public currentOrbitElements: orbitElements;
-    // public apoapsis: number;
-    public centralBody: CelestialObject;
+    public celestialBody: CelestialObject;
 
     public orbitLine: Line;
 
@@ -33,15 +37,16 @@ class Orbit {
         period: number,
         dataFrom: Date,
         changesPerCentury: orbitElements,
-        centralBody: CelestialObject
+        celestialBody: CelestialObject
     ) {
         this.meanAnomaly = meanAnomaly;
-        this.centralBody = centralBody;
+        this.celestialBody = celestialBody;
         this.semiMajorAxis = semiMajorAxis;
         this.eccentricity = eccentricity;
         this.inclination = inclination * 0.0174532925; // convert to RAD
         this.longOfPeri = longOfPeri * 0.0174532925; // convert to RAD
         this.ascendingNode = ascentingNode * 0.0174532925; // convert to RAD
+
         this.dataFrom = UnixToJulianDate(dataFrom);
         this.epoch = this.dataFrom;
 
@@ -89,7 +94,7 @@ class Orbit {
         const points: Vector3[] = [];
 
         let i = 0;
-        while (i <= 6.28) {
+        while (i <= 6.28 + 0.2) {
             points.push(this.calculatePosition(i));
 
             i += 0.00285;
@@ -125,7 +130,7 @@ class Orbit {
 
         pos.y = r * (Math.sin(pA + theta) * Math.sin(i));
 
-        // convert them to km and scale down to simulation ratio
+        // convert them to km and scale down to simulation
         pos.multiplyScalar(scale);
 
         return pos;
@@ -133,6 +138,53 @@ class Orbit {
 
     public getObject(): Line {
         return this.orbitLine;
+    }
+
+    public setFromDate(date: Date): void {
+        const currentDate = UnixToJulianDate(date);
+
+        this.celestialBody.meanAnomaly = calculateMeanAnomaly(
+            this.meanAnomaly,
+            this.dataFrom,
+            currentDate,
+            this.period
+        );
+
+        this.setEpoch(currentDate);
+
+        const eccentricAnomaly = calculateEccentricFromMean(
+            this.celestialBody.meanAnomaly,
+            this.currentOrbitElements.eccentricity
+        );
+        this.celestialBody.trueAnomaly = calculateTrueFromEccentric(
+            eccentricAnomaly,
+            this.currentOrbitElements.eccentricity
+        );
+
+        if (this.celestialBody.trueAnomaly < 0)
+            this.celestialBody.trueAnomaly += Math.PI * 2;
+        this.celestialBody.mesh!.position.copy(
+            this.calculatePosition(this.celestialBody.trueAnomaly)
+        );
+
+        this.celestialBody.meanMotion = (Math.PI * 2) / (this.period * 365);
+    }
+
+    public fromMeanAnomaly(meanAnomaly: number): void {
+        const eccentricAnomaly = calculateEccentricFromMean(
+            meanAnomaly,
+            this.currentOrbitElements.eccentricity
+        );
+        this.celestialBody.trueAnomaly = calculateTrueFromEccentric(
+            eccentricAnomaly,
+            this.currentOrbitElements.eccentricity
+        );
+
+        if (this.celestialBody.trueAnomaly < 0)
+            this.celestialBody.trueAnomaly += Math.PI * 2;
+        this.celestialBody.mesh!.position.copy(
+            this.calculatePosition(this.celestialBody.trueAnomaly)
+        );
     }
 }
 

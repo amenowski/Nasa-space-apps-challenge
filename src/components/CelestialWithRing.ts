@@ -7,12 +7,7 @@ import {
 } from "three";
 import CelestialObject from "./CelestialBody";
 import { CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
-import {
-    UnixToJulianDate,
-    calculateMeanAnomaly,
-    calculateEccentricFromMean,
-    calculateTrueFromEccentric,
-} from "../utils/OrbitalCalculations";
+
 import { PlanetRingGeometry } from "../utils/PlanetRingGeometry";
 
 export default class CelestialWithRing extends CelestialObject {
@@ -59,31 +54,7 @@ export default class CelestialWithRing extends CelestialObject {
         this.mesh.add(this.label);
 
         if (this.orbit) {
-            const currentDate = UnixToJulianDate(date);
-
-            this.meanAnomaly = calculateMeanAnomaly(
-                this.orbit.meanAnomaly,
-                currentDate,
-                this.orbit.period
-            );
-
-            this.orbit.setEpoch(currentDate);
-
-            const eccentricAnomaly = calculateEccentricFromMean(
-                this.meanAnomaly,
-                this.orbit.currentOrbitElements.eccentricity
-            );
-            this.trueAnomaly = calculateTrueFromEccentric(
-                eccentricAnomaly,
-                this.orbit.currentOrbitElements.eccentricity
-            );
-
-            if (this.trueAnomaly < 0) this.trueAnomaly += Math.PI * 2;
-            this.mesh.position.copy(
-                this.orbit.calculatePosition(this.trueAnomaly)
-            );
-
-            this.meanMotion = (Math.PI * 2) / (this.orbit.period * 365);
+            this.orbit.setFromDate(date);
         }
 
         this.createRing();

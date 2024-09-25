@@ -6,13 +6,9 @@ import {
     TextureLoader,
 } from "three";
 import Orbit from "./Orbit";
-import {
-    calculateEccentricFromMean,
-    calculateMeanAnomaly,
-    calculateTrueFromEccentric,
-    UnixToJulianDate,
-} from "../utils/OrbitalCalculations";
+
 import { CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
+import { UnixToJulianDate } from "../utils/OrbitalCalculations";
 
 export default class CelestialBody {
     public name: string;
@@ -21,8 +17,8 @@ export default class CelestialBody {
     public satellites: CelestialBody[] = [];
     public mesh: Mesh | null = null;
     public group: Group;
-    protected meanAnomaly: number;
-    protected meanMotion: number; // rad per day
+    public meanMotion: number; // rad per day
+    public meanAnomaly: number;
     protected textureUrl: string;
     protected orbit: Orbit | null = null;
     protected textureLoader: TextureLoader;
@@ -64,33 +60,7 @@ export default class CelestialBody {
 
         this.mesh.add(this.label);
 
-        if (this.orbit) {
-            const currentDate = UnixToJulianDate(date);
-
-            this.meanAnomaly = calculateMeanAnomaly(
-                this.orbit.meanAnomaly,
-                currentDate,
-                this.orbit.period
-            );
-
-            this.orbit.setEpoch(currentDate);
-
-            const eccentricAnomaly = calculateEccentricFromMean(
-                this.meanAnomaly,
-                this.orbit.currentOrbitElements.eccentricity
-            );
-            this.trueAnomaly = calculateTrueFromEccentric(
-                eccentricAnomaly,
-                this.orbit.currentOrbitElements.eccentricity
-            );
-
-            if (this.trueAnomaly < 0) this.trueAnomaly += Math.PI * 2;
-            this.mesh.position.copy(
-                this.orbit.calculatePosition(this.trueAnomaly)
-            );
-
-            this.meanMotion = (Math.PI * 2) / (this.orbit.period * 365);
-        }
+        if (this.orbit) this.orbit.setFromDate(date);
     }
 
     public setOrbit(orbit: Orbit) {
@@ -112,23 +82,7 @@ export default class CelestialBody {
             this.meanAnomaly = this.meanAnomaly % (Math.PI * 2);
 
             this.orbit.setEpoch(currentDate);
-
-            const eccentricAnomaly = calculateEccentricFromMean(
-                this.meanAnomaly,
-                this.orbit.currentOrbitElements.eccentricity
-            );
-            this.trueAnomaly = calculateTrueFromEccentric(
-                eccentricAnomaly,
-                this.orbit.currentOrbitElements.eccentricity
-            );
-
-            if (this.trueAnomaly < 0) this.trueAnomaly += Math.PI * 2;
-            // console.log(`${this.name} = ${eccentricAnomaly} |
-            //      ${this.orbit.currentOrbitElements.eccentricity} | ${this.trueAnomaly}`);
-
-            this.mesh.position.copy(
-                this.orbit.calculatePosition(this.trueAnomaly)
-            );
+            this.orbit.fromMeanAnomaly(this.meanAnomaly);
         }
     }
 }

@@ -67,3 +67,8 @@ body {
     padding: 2px;
     background: transparent;
 }
+
+.planet-label:hover {
+    color: red;
+    cursor: pointer;
+}
