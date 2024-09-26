@@ -58,7 +58,8 @@ export default class CelestialBody {
         const geo = new SphereGeometry(this.radius);
         const mat = new MeshStandardMaterial({ map: tex });
         this.mesh = new Mesh(geo, mat);
-        this.mesh.layers.enableAll();
+        this.mesh.layers.set(0);
+        this.group.layers.set(0);
         this.mesh.name = this.name;
 
         this.group.add(this.mesh);
@@ -92,7 +93,6 @@ export default class CelestialBody {
 
     public updateRender(distFromCam: number): void {
         if (distFromCam < this.radius * 100) {
-            console.log(`close to ${this.name}`);
             this.hideAdditionalInfo();
         } else {
             this.showAdditionalInfo();

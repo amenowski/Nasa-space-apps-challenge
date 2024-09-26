@@ -40,10 +40,12 @@ export default class CelestialWithRing extends CelestialObject {
         });
 
         this.mesh = new Mesh(geo, mat);
-        this.mesh.layers.enableAll();
+        // this.mesh.layers.enableAll();
+        this.mesh.layers.set(0);
         this.mesh.name = this.name;
 
         this.group.add(this.mesh);
+        this.group.layers.set(0);
 
         this.createRing();
         this.createLabel();
@@ -63,6 +65,7 @@ export default class CelestialWithRing extends CelestialObject {
             opacity: 0.87,
         });
         this.ring = new Mesh(geo, mat);
+        this.ring.layers.set(0);
 
         this.ring.rotation.x = Math.PI / 2;
         this.ring.rotation.y = 0.471239;

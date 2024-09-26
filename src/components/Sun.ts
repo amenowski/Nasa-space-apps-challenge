@@ -12,12 +12,12 @@ import {
 import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
 import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
+import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
 
 class Sun {
     public name: string;
     public mesh: Mesh;
     public radius: number;
-    private mass: number;
     private textureUrl: string;
     private composer: EffectComposer;
     // private surfaceTemp // maybe in future
@@ -27,12 +27,11 @@ class Sun {
         renderer: WebGLRenderer,
         camera: Camera,
         name: string,
-        mass: number,
         radius: number,
         textureUrl: string
     ) {
         this.name = name;
-        this.mass = mass;
+
         this.radius = radius;
         this.textureUrl = textureUrl;
         this.mesh = new Mesh();
@@ -52,6 +51,7 @@ class Sun {
 
         this.mesh = new Mesh(geo, mat);
         this.mesh.name = this.name;
+        this.mesh.layers.set(1);
 
         this.mesh.position.set(0, 0, 0);
         const light = new PointLight(0xffffff, 1, 0, 0);
@@ -59,12 +59,14 @@ class Sun {
 
         const bloomPass = new UnrealBloomPass(
             new Vector2(window.innerWidth, window.innerHeight),
-            1.1,
-            0.1,
-            0.2
+            0.3,
+            0.05,
+            0.8
         );
 
         this.composer.addPass(bloomPass);
+
+        this.composer.addPass(new OutputPass());
     }
 
     public render(): void {

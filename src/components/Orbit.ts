@@ -121,6 +121,7 @@ class Orbit {
         const geo = new BufferGeometry().setFromPoints(points);
 
         this.orbitLine = new Line(geo, this.unhoveredMaterial);
+        this.orbitLine.layers.set(0);
     }
 
     public hovered(): void {

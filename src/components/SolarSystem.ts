@@ -35,13 +35,13 @@ export default class SolarSystem {
     constructor(scene: Scene, renderer: WebGLRenderer, camera: Camera) {
         this.camera = camera;
         this.group = new Group();
+        this.group.layers.set(0);
         // create sun
         this.centralBody = new Sun(
             scene,
             renderer,
             camera.getCamera(),
             "Sun",
-            19891e10,
             696340 / SETTINGS.SUN_SCALE,
             "./src/assets/textures/sun.jpg"
         );
