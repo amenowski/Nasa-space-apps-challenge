@@ -28,6 +28,7 @@ export default class CelestialBody {
     protected icon: CSS2DObject | null = null;
     protected system: SolarSystem;
     protected color: Color;
+    protected htmlElements: HTMLDivElement[] = new Array<HTMLDivElement>(2);
 
     constructor(
         system: SolarSystem,
@@ -112,50 +113,72 @@ export default class CelestialBody {
     }
 
     protected createLabel(): void {
-        const div = document.createElement("div");
-        div.className = "planet-label";
-        div.textContent = this.name;
-        div.style.setProperty("--color", `${this.color.getStyle()}`);
+        this.htmlElements[0] = document.createElement("div");
+        this.htmlElements[0].className = "planet-label";
+        this.htmlElements[0].textContent = this.name;
+        this.htmlElements[0].style.setProperty(
+            "--color",
+            `${this.color.getStyle()}`
+        );
 
-        this.label = new CSS2DObject(div);
+        this.label = new CSS2DObject(this.htmlElements[0]);
         this.label.position.set(0, 0, 0);
         this.label.layers.set(0);
         this.mesh!.add(this.label);
 
-        div.addEventListener("mouseover", () => {
-            this.orbit?.hovered();
-        });
+        // this.htmlElements[0].addEventListener("mouseover", () => {
+        //     this.orbit?.hovered();
+        //     this.infoHover();
+        // });
 
-        div.addEventListener("mouseleave", () => {
-            this.orbit?.unhovered();
-        });
+        // this.htmlElements[0].addEventListener("mouseleave", () => {
+        //     this.orbit?.unhovered();
+        //     this.infoUnhover();
+        // });
 
-        div.addEventListener("click", () => {
-            this.system.moveToBody(this);
-        });
+        // this.htmlElements[0].addEventListener("pointerdown", () => {
+        //     this.system.moveToBody(this);
+        // });
     }
 
     protected createIcon(): void {
-        const div = document.createElement("div");
-        div.className = "planet-icon";
+        this.htmlElements[1] = document.createElement("div");
+        this.htmlElements[1].className = "planet-icon";
 
-        div.style.setProperty("--color", `${this.color.getStyle()}`);
+        this.htmlElements[1].style.setProperty(
+            "--color",
+            `${this.color.getStyle()}`
+        );
 
-        this.icon = new CSS2DObject(div);
+        this.icon = new CSS2DObject(this.htmlElements[1]);
         this.icon.position.set(0, 0, 0);
         this.icon.layers.set(0);
         this.mesh!.add(this.icon);
 
-        div.addEventListener("mouseover", () => {
+        this.htmlElements[1].addEventListener("mouseover", () => {
             this.orbit?.hovered();
+            this.infoHover();
         });
 
-        div.addEventListener("mouseleave", () => {
+        this.htmlElements[1].addEventListener("mouseleave", () => {
             this.orbit?.unhovered();
+            this.infoUnhover();
         });
 
-        div.addEventListener("click", () => {
+        this.htmlElements[1].addEventListener("pointerdown", () => {
             this.system.moveToBody(this);
+        });
+    }
+
+    protected infoHover(): void {
+        this.htmlElements.map((elem) => {
+            elem.classList.add("hovered");
+        });
+    }
+
+    protected infoUnhover(): void {
+        this.htmlElements.map((elem) => {
+            elem.classList.remove("hovered");
         });
     }
 }

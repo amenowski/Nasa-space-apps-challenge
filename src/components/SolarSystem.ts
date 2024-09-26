@@ -2,7 +2,15 @@ import Sun from "./Sun";
 import Orbit from "./Orbit";
 import CelestialBody from "./CelestialBody";
 import CelestialWithRing from "./CelestialWithRing";
-import { Group, Raycaster, TextureLoader, Vector2, Vector3 } from "three";
+import {
+    Group,
+    Raycaster,
+    Scene,
+    TextureLoader,
+    Vector2,
+    Vector3,
+    WebGLRenderer,
+} from "three";
 import { SolarPlanetData, CelestialWithRingData } from "../core/Types";
 import { UI } from "../core/UI";
 import { SETTINGS } from "../core/Settings";
@@ -23,11 +31,15 @@ export default class SolarSystem {
     private zoomTween: Tween | null = null;
     private selectedObject: UniverseObject;
     private camera: Camera;
-    constructor(camera: Camera) {
+
+    constructor(scene: Scene, renderer: WebGLRenderer, camera: Camera) {
         this.camera = camera;
         this.group = new Group();
         // create sun
         this.centralBody = new Sun(
+            scene,
+            renderer,
+            camera.getCamera(),
             "Sun",
             19891e10,
             696340 / SETTINGS.SUN_SCALE,

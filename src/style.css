@@ -67,6 +67,8 @@ body {
     padding: 2px;
     background: transparent;
     top: -1em;
+    opacity: 0.5;
+    transition: top 200ms ease;
 }
 
 .planet-icon {
@@ -77,12 +79,16 @@ body {
     border-radius: 100%;
 }
 
-.planet-label:hover,
-.planet-icon:hover {
+.planet-label.hovered,
+.planet-icon.hovered {
     opacity: 1;
     cursor: pointer;
 }
 
-.planet-icon:hover {
-    transform: scale(2);
+.planet-label.hovered {
+    top: -1.25em;
 }
+
+/* .planet-icon:hover {
+    transform: scale(2);
+} */
