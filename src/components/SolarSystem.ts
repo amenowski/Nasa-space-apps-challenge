@@ -147,12 +147,6 @@ export default class SolarSystem {
         }
     }
 
-    public setCurrentDatePosition(): void {
-        for (let [_, celestialBody] of this.celestialBodies) {
-            celestialBody.setLivePosition(this.currentDate);
-        }
-    }
-
     public renderSun(): void {
         this.centralBody.render();
     }
@@ -222,7 +216,9 @@ export default class SolarSystem {
         this.currentDate = new Date();
         this.isLive = true;
 
-        this.setCurrentDatePosition();
+        for (let [_, celestialBody] of this.celestialBodies) {
+            celestialBody.setLivePosition(this.currentDate);
+        }
     }
 
     private selectAnimation(
