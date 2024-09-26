@@ -1,4 +1,10 @@
-import { Mesh, MeshBasicMaterial, SphereGeometry, TextureLoader } from "three";
+import {
+    Mesh,
+    MeshStandardMaterial,
+    PointLight,
+    SphereGeometry,
+    TextureLoader,
+} from "three";
 
 class Sun {
     public name: string;
@@ -6,17 +12,14 @@ class Sun {
     public radius: number;
     private mass: number;
     private textureUrl: string;
-    private luminosity: number;
     // private surfaceTemp // maybe in future
 
     constructor(
         name: string,
         mass: number,
         radius: number,
-        textureUrl: string,
-        luminosity: number
+        textureUrl: string
     ) {
-        this.luminosity = luminosity;
         this.name = name;
         this.mass = mass;
         this.radius = radius;
@@ -28,12 +31,15 @@ class Sun {
         // console.log(this.radius);
         const tex = new TextureLoader().load(this.textureUrl);
         const geo = new SphereGeometry(this.radius);
-        const mat = new MeshBasicMaterial({ map: tex });
+        const mat = new MeshStandardMaterial({ map: tex });
 
         this.mesh = new Mesh(geo, mat);
         this.mesh.name = this.name;
 
         this.mesh.position.set(0, 0, 0);
+
+        const light = new PointLight(0xffffff, 1, 0, 0);
+        this.mesh.add(light);
     }
 }
 

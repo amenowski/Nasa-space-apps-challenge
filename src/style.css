@@ -66,6 +66,7 @@ body {
     font-family: sans-serif;
     padding: 2px;
     background: transparent;
+    top: -1em;
 }
 
 .planet-icon {
@@ -77,7 +78,11 @@ body {
 }
 
 .planet-label:hover,
-.planet-icon {
+.planet-icon:hover {
     opacity: 1;
     cursor: pointer;
+}
+
+.planet-icon:hover {
+    transform: scale(2);
 }

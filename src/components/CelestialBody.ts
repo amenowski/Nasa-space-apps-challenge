@@ -89,6 +89,28 @@ export default class CelestialBody {
         }
     }
 
+    public updateRender(distFromCam: number): void {
+        if (distFromCam < this.radius * 100) {
+            console.log(`close to ${this.name}`);
+            this.hideAdditionalInfo();
+        } else {
+            this.showAdditionalInfo();
+        }
+    }
+
+    protected hideAdditionalInfo(): void {
+        // hide orbit, label, icon
+        if (this.orbit) this.orbit.hide();
+        if (this.label) this.label.visible = false;
+        if (this.icon) this.icon.visible = false;
+    }
+
+    protected showAdditionalInfo(): void {
+        if (this.orbit) this.orbit.show();
+        if (this.label) this.label.visible = true;
+        if (this.icon) this.icon.visible = true;
+    }
+
     protected createLabel(): void {
         const div = document.createElement("div");
         div.className = "planet-label";
@@ -96,7 +118,7 @@ export default class CelestialBody {
         div.style.setProperty("--color", `${this.color.getStyle()}`);
 
         this.label = new CSS2DObject(div);
-        this.label.position.set(0, this.radius, 0);
+        this.label.position.set(0, 0, 0);
         this.label.layers.set(0);
         this.mesh!.add(this.label);
 
@@ -136,6 +158,4 @@ export default class CelestialBody {
             this.system.moveToBody(this);
         });
     }
-
-    protected moveCamera(): void {}
 }

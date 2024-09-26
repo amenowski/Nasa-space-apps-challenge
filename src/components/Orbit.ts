@@ -162,6 +162,14 @@ class Orbit {
         return pos;
     }
 
+    public hide(): void {
+        this.orbitLine.visible = false;
+    }
+
+    public show(): void {
+        this.orbitLine.visible = true;
+    }
+
     public getObject(): Line {
         return this.orbitLine;
     }

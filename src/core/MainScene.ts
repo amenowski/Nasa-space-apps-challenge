@@ -7,7 +7,7 @@ export default class MainScene {
     }
 
     public init() {
-        this.scene.add(new AmbientLight(0xffffff, 1));
+        this.scene.add(new AmbientLight(0xffffff, 0.05));
     }
 
     public getScene(): Scene {

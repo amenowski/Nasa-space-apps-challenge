@@ -1,6 +1,7 @@
-import { PerspectiveCamera, Scene } from "three";
+import { PerspectiveCamera, Scene, Vector3 } from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import Renderer from "./Renderer";
+import { SETTINGS } from "./Settings";
 
 export default class Camera {
     public controls: OrbitControls;
@@ -12,7 +13,7 @@ export default class Camera {
             50,
             window.innerWidth / window.innerHeight,
             0.1,
-            1000000
+            SETTINGS.CAMERA_RENDER_DISTANCE
         );
 
         this.controls = new OrbitControls(
@@ -28,13 +29,20 @@ export default class Camera {
         // this.camera.lookAt(0, 0, 0);
         this.camera.layers.enableAll();
 
-        this.camera.position.z = 50;
-        this.camera.position.y = 50;
+        this.defaultPosition();
+
+        this.controls.maxDistance = SETTINGS.CAMERA_MAX_DISTANCE;
 
         scene.add(this.camera);
     }
 
-    public init() {
+    public defaultPosition(): void {
+        this.camera.position.copy(
+            new Vector3(0, 276314.90723615506, 276314.9072361552)
+        );
+    }
+
+    public init(): void {
         this.camera.updateProjectionMatrix();
     }
 

@@ -31,8 +31,7 @@ export default class SolarSystem {
             "Sun",
             19891e10,
             696340 / SETTINGS.SUN_SCALE,
-            "./src/assets/textures/sun.jpg",
-            1
+            "./src/assets/textures/sun.jpg"
         );
 
         this.centralBody.init();
@@ -150,6 +149,16 @@ export default class SolarSystem {
         }
     }
 
+    public getDistancesToObjects(): void {
+        const cam = this.camera.getCamera();
+        let dist: number = 0;
+        for (let [_, body] of this.celestialBodies) {
+            dist = cam.position.distanceTo(body.mesh!.position);
+
+            body.updateRender(dist);
+        }
+    }
+
     public moveToBody(object: UniverseObject): void {
         this.selectedObject = object;
 
@@ -161,7 +170,11 @@ export default class SolarSystem {
         let startPosition = cam.position.clone();
         let endPosition = new Vector3()
             .copy(p)
-            .sub(direction.multiplyScalar(this.selectedObject.radius * 20));
+            .sub(
+                direction.multiplyScalar(
+                    this.selectedObject.radius * SETTINGS.ZOOM_TO_OBJECT
+                )
+            );
 
         this.camera.controls.target = cameraTarget.clone();
         this.camera.controls.enabled = false;

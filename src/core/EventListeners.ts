@@ -25,6 +25,10 @@ export class EventListeners {
             );
             this.solarSystem.shootRay(new Vector2(x, y));
         });
+
+        this.camera.controls.addEventListener("change", () => {
+            this.solarSystem.getDistancesToObjects();
+        });
     }
 
     private onResize() {
