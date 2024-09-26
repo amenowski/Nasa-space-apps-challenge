@@ -31,6 +31,7 @@ export default class SolarSystem {
     private zoomTween: Tween | null = null;
     private selectedObject: UniverseObject;
     private camera: Camera;
+    private isLive: boolean;
 
     constructor(scene: Scene, renderer: WebGLRenderer, camera: Camera) {
         this.camera = camera;
@@ -51,10 +52,14 @@ export default class SolarSystem {
 
         this.celestialBodies = new Map<string, CelestialBody>();
         this.currentDate = new Date();
-        this.ui = new UI();
+        this.ui = new UI(this);
         this.textureLoader = new TextureLoader();
         this.raycaster = new Raycaster();
         this.selectedObject = this.centralBody;
+
+        this.ui.updateTimelineInfo(this.currentDate);
+
+        this.isLive = true;
     }
 
     public async init(): Promise<void> {
@@ -126,7 +131,12 @@ export default class SolarSystem {
         if (this.targetTween) this.targetTween.update();
         if (this.zoomTween) this.zoomTween.update();
 
-        this.ui.setDate(this.currentDate);
+        this.ui.updateTimelineInfo(this.currentDate);
+
+        if (this.isLive && SETTINGS.simulationSpeed != 1) {
+            this.isLive = false;
+            this.ui.noLive();
+        }
 
         for (let [_, celestialBody] of this.celestialBodies) {
             celestialBody.updatePosition(
@@ -134,6 +144,12 @@ export default class SolarSystem {
                 deltaTime,
                 SETTINGS.simulationSpeed / 86400
             );
+        }
+    }
+
+    public setCurrentDatePosition(): void {
+        for (let [_, celestialBody] of this.celestialBodies) {
+            celestialBody.setLivePosition(this.currentDate);
         }
     }
 
@@ -200,6 +216,13 @@ export default class SolarSystem {
 
     public resize(): void {
         this.centralBody.resize();
+    }
+
+    public setLiveDate(): void {
+        this.currentDate = new Date();
+        this.isLive = true;
+
+        this.setCurrentDatePosition();
     }
 
     private selectAnimation(

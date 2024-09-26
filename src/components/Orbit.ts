@@ -76,7 +76,7 @@ class Orbit {
 
         this.unhoveredMaterial = new LineBasicMaterial({
             color: this.color,
-            opacity: 0.7,
+            opacity: 0.4,
             transparent: true,
         });
 

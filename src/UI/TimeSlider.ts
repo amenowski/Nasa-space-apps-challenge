@@ -23,7 +23,7 @@ export default class TimeSlider {
         );
 
         this.speedDisplay = document.querySelector<HTMLParagraphElement>(
-            ".time-slider .speed-display"
+            ".time-slider .simulation-speed"
         );
 
         this.sliderStages = [
@@ -59,7 +59,15 @@ export default class TimeSlider {
         SETTINGS.simulationSpeed = this.currentStage.value;
     }
 
-    public setEventListeners() {
+    public reset(): void {
+        this.currentStage = this.sliderStages[0];
+        SETTINGS.simulationSpeed = this.currentStage.value;
+
+        if (this.speedDisplay) this.speedDisplay.style.opacity = "0";
+        this.drag?.style.setProperty("--offset", `0px`);
+    }
+
+    public setEventListeners(): void {
         if (this.drag && this.container) {
             this.drag.addEventListener("mousedown", () => {
                 this.mouseDown = true;
@@ -102,10 +110,10 @@ export default class TimeSlider {
 
                         if (this.currentStage.breakpoint == 0) {
                             SETTINGS.simulationSpeed = this.currentStage.value;
-                            this.speedDisplay.innerText =
-                                this.currentStage.label;
+                            this.speedDisplay.style.opacity = "0";
                             break;
                         }
+                        this.speedDisplay.style.opacity = "1";
                         SETTINGS.simulationSpeed =
                             this.currentStage.value * Math.sign(progress);
 

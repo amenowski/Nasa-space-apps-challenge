@@ -4,9 +4,14 @@
     box-sizing: border-box;
 }
 
+:root {
+    font-size: 16px;
+}
+
 body {
     padding: 0;
     margin: 0;
+    font-family: "Open Sans", sans-serif;
 }
 
 .UI {
@@ -18,24 +23,38 @@ body {
     overflow: hidden;
     color: white;
     pointer-events: none;
-    display: flex;
     padding: 3em;
     z-index: 9999;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    /* background-color: blue; */
 }
 
 .time-slider {
     display: flex;
     flex-direction: column;
     gap: 1em;
+    grid-row-start: 3;
+    grid-column-start: 2;
+    /* background-color: blue; */
+    justify-content: end;
+    align-items: center;
+    justify-self: center;
+    width: 80%;
 }
 
 .time-slider .slider {
     pointer-events: all;
-    background: radial-gradient(
+    /* background: radial-gradient(
         circle,
         rgba(255, 249, 249, 0.3281512434075192) 0%,
         rgba(255, 249, 249, 0.8) 100%
-    );
+    ); */
+    background-color: rgba(255, 255, 255, 0.7);
+    /* opacity: 0.5; */
 
     width: 20em;
     height: 0.25em;
@@ -43,6 +62,7 @@ body {
     align-items: center;
     position: relative;
     justify-content: center;
+    border-radius: 16px;
 }
 
 .time-slider .slider .drag {
@@ -59,6 +79,63 @@ body {
 
 .time-slider .speed-display {
     user-select: none;
+}
+
+.time-slider .info {
+    width: 100%;
+    display: flex;
+    gap: 1em;
+    font-weight: bold;
+    /* justify-content: space-between; */
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    text-transform: uppercase;
+}
+
+.time-slider .info .live-btn {
+    border: 2px solid white;
+    padding: 0 1.25em;
+    border-radius: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    max-height: 2rem;
+    pointer-events: all;
+    /* opacity: 0.7; */
+    transition: border 200ms ease;
+}
+.time-slider .info .live-btn:hover {
+    opacity: 1;
+    border: 2px solid red;
+    cursor: pointer;
+}
+
+.time-slider .info .live-btn p {
+    font-size: 0.75em;
+    font-weight: bold;
+    letter-spacing: 0.3ch;
+}
+
+.time-slider .info .live-btn .circle {
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 100%;
+    background-color: red;
+}
+
+.time-slider .info .live-btn.no-live .circle {
+    background-color: gray;
+}
+
+.time-slider .simulation-speed {
+    user-select: none;
+    transition: opacity 400ms ease-in;
+    font-size: 0.75em;
+    font-weight: bold;
+    letter-spacing: 0.2ch;
+    text-transform: uppercase;
 }
 
 .planet-label {

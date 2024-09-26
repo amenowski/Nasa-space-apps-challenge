@@ -79,7 +79,7 @@ export default class CelestialBody {
         deltaTime: number,
         daysPerSec: number
     ): void {
-        if (this.mesh && this.orbit) {
+        if (this.orbit) {
             const currentDate = UnixToJulianDate(date);
 
             this.meanAnomaly =
@@ -88,6 +88,12 @@ export default class CelestialBody {
 
             this.orbit.setEpoch(currentDate);
             this.orbit.fromMeanAnomaly(this.meanAnomaly);
+        }
+    }
+
+    public setLivePosition(date: Date) {
+        if (this.mesh && this.orbit) {
+            this.orbit.setFromDate(date);
         }
     }
 
