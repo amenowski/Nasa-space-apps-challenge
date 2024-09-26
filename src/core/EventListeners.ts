@@ -34,5 +34,6 @@ export class EventListeners {
     private onResize() {
         this.camera.onResize();
         this.renderer.onResize();
+        this.solarSystem.resize();
     }
 }

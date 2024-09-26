@@ -10,7 +10,11 @@ const renderer = new Renderer();
 const camera = new Camera(mainScene.getScene(), renderer);
 const clock = new Clock();
 
-const solarSystem = new SolarSystem(camera);
+const solarSystem = new SolarSystem(
+    mainScene.getScene(),
+    renderer.getRenderer(),
+    camera
+);
 new EventListeners(renderer, camera, solarSystem);
 
 mainScene.init();
@@ -48,9 +52,12 @@ function drawHelpers() {
 // drawHelpers();
 
 function animation() {
-    camera.update();
     solarSystem.update(clock.getDelta());
+
     renderer.render(mainScene.getScene(), camera.getCamera());
+    solarSystem.renderSun();
+
+    camera.update();
     requestAnimationFrame(animation);
 }
 

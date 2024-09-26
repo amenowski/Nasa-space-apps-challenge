@@ -47,7 +47,7 @@ export default class SolarSystem {
         );
 
         this.centralBody.init();
-        this.group.add(this.centralBody.mesh);
+        scene.add(this.centralBody.mesh);
 
         this.celestialBodies = new Map<string, CelestialBody>();
         this.currentDate = new Date();
@@ -137,6 +137,10 @@ export default class SolarSystem {
         }
     }
 
+    public renderSun(): void {
+        this.centralBody.render();
+    }
+
     public shootRay(mouseCoords: Vector2): void {
         if (this.zoomTween?.isPlaying()) return;
         this.raycaster.far = this.camera.getCamera().far;
@@ -192,6 +196,10 @@ export default class SolarSystem {
         this.camera.controls.enabled = false;
 
         this.selectAnimation(startPosition, endPosition, cameraTarget);
+    }
+
+    public resize(): void {
+        this.centralBody.resize();
     }
 
     private selectAnimation(
