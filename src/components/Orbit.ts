@@ -1,4 +1,4 @@
-import { Line, BufferGeometry, LineBasicMaterial, Vector3 } from "three";
+import { Line, BufferGeometry, LineBasicMaterial, Vector3, Color } from "three";
 import CelestialObject from "./CelestialBody";
 import {
     calculateEccentricFromMean,
@@ -26,6 +26,10 @@ class Orbit {
     public orbitLine: Line;
 
     private centuriesPast: number;
+    private color: Color;
+
+    private unhoveredMaterial: LineBasicMaterial;
+    private hoveredMaterial: LineBasicMaterial;
 
     constructor(
         meanAnomaly: number,
@@ -37,7 +41,8 @@ class Orbit {
         period: number,
         dataFrom: Date,
         changesPerCentury: orbitElements,
-        celestialBody: CelestialObject
+        celestialBody: CelestialObject,
+        color: string
     ) {
         this.meanAnomaly = meanAnomaly;
         this.celestialBody = celestialBody;
@@ -67,6 +72,20 @@ class Orbit {
         this.changesPerCentury.ascendingNode *= 0.0174532925;
 
         this.centuriesPast = 0;
+        this.color = new Color(color);
+
+        this.unhoveredMaterial = new LineBasicMaterial({
+            color: this.color,
+            opacity: 0.7,
+            transparent: true,
+        });
+
+        this.hoveredMaterial = new LineBasicMaterial({
+            color: this.color,
+            opacity: 1,
+            transparent: true,
+            linewidth: 10,
+        });
     }
 
     public setEpoch(epoch: number) {
@@ -90,11 +109,6 @@ class Orbit {
     }
 
     public visualize(): void {
-        const material = new LineBasicMaterial({
-            color: 0xffffff,
-            opacity: 0.5,
-            transparent: true,
-        });
         const points: Vector3[] = [];
 
         let i = 0;
@@ -106,24 +120,15 @@ class Orbit {
 
         const geo = new BufferGeometry().setFromPoints(points);
 
-        this.orbitLine = new Line(geo, material);
+        this.orbitLine = new Line(geo, this.unhoveredMaterial);
     }
 
     public hovered(): void {
-        this.orbitLine.material = new LineBasicMaterial({
-            color: 0xff0000,
-            opacity: 1,
-            transparent: true,
-            linewidth: 10,
-        });
+        this.orbitLine.material = this.hoveredMaterial;
     }
 
     public unhovered(): void {
-        this.orbitLine.material = new LineBasicMaterial({
-            color: 0xffffff,
-            opacity: 0.5,
-            transparent: true,
-        });
+        this.orbitLine.material = this.unhoveredMaterial;
     }
 
     public calculatePosition(uA: number): Vector3 {

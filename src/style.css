@@ -62,13 +62,22 @@ body {
 }
 
 .planet-label {
-    color: white;
+    color: var(--color);
     font-family: sans-serif;
     padding: 2px;
     background: transparent;
 }
 
-.planet-label:hover {
-    color: red;
+.planet-icon {
+    background-color: var(--color);
+    opacity: 0.8;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+}
+
+.planet-label:hover,
+.planet-icon {
+    opacity: 1;
     cursor: pointer;
 }

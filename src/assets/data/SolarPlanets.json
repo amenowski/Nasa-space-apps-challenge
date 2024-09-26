@@ -3,6 +3,7 @@
         "type": "Planet",
         "name": "Mercury",
         "radius": 2439,
+        "color": "#837D7D",
         "textureUrl": "./src/assets/textures/mercury.jpg",
         "orbit": {
             "semiMajor": 0.38709927,
@@ -26,6 +27,7 @@
         "type": "Planet",
         "name": "Venus",
         "radius": 6051.8,
+        "color": "#AE681B",
         "textureUrl": "./src/assets/textures/Venus.jpg",
         "orbit": {
             "semiMajor": 0.72333566,
@@ -49,6 +51,7 @@
         "type": "Planet",
         "name": "Earth",
         "radius": 6371,
+        "color": "#4A8BD5",
         "textureUrl": "./src/assets/textures/earth.jpg",
         "orbit": {
             "semiMajor": 1.00000261,
@@ -73,6 +76,7 @@
         "type": "Planet",
         "name": "Mars",
         "radius": 3389.5,
+        "color": "#CF5D38",
         "textureUrl": "./src/assets/textures/mars.jpg",
         "orbit": {
             "semiMajor": 1.52371034,
@@ -96,6 +100,7 @@
         "type": "Planet",
         "name": "Jupiter",
         "radius": 69911,
+        "color": "#DCBA9B",
         "textureUrl": "./src/assets/textures/jupiter.jpg",
         "orbit": {
             "semiMajor": 5.202887,
@@ -120,6 +125,7 @@
         "type": "Planet",
         "name": "Saturn",
         "radius": 58232,
+        "color": "#BCA77F",
         "textureUrl": "./src/assets/textures/saturn.jpg",
         "ringTexture": "./src/assets/textures/saturn_ring.png",
         "ringStart": 74500,
@@ -146,6 +152,7 @@
         "type": "Planet",
         "name": "Uranus",
         "radius": 25362,
+        "color": "#4768FA",
         "textureUrl": "./src/assets/textures/uranus.jpg",
         "orbit": {
             "semiMajor": 19.18916464,
@@ -169,6 +176,7 @@
         "type": "Planet",
         "name": "Neptune",
         "radius": 24622,
+        "color": "#71A6FF",
         "textureUrl": "./src/assets/textures/neptune.jpg",
         "orbit": {
             "semiMajor": 30.06992276,

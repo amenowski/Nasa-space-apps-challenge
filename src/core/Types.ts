@@ -23,6 +23,7 @@ export interface SolarPlanetData {
     name: string;
     textureUrl: string;
     radius: number;
+    color: string;
     orbit: orbitData;
 }
 

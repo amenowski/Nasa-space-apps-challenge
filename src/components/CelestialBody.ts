@@ -1,4 +1,5 @@
 import {
+    Color,
     Group,
     Mesh,
     MeshStandardMaterial,
@@ -24,25 +25,31 @@ export default class CelestialBody {
     protected orbit: Orbit | null = null;
     protected textureLoader: TextureLoader;
     protected label: CSS2DObject | null = null;
+    protected icon: CSS2DObject | null = null;
     protected system: SolarSystem;
+    protected color: Color;
 
     constructor(
         system: SolarSystem,
         name: string,
         radius: number,
+        color: string,
         textureUrl: string,
         textureLoader: TextureLoader
     ) {
+        this.group = new Group();
+
         this.system = system;
         this.name = name;
         this.radius = radius;
         this.textureUrl = textureUrl;
+        this.textureLoader = textureLoader;
 
-        this.trueAnomaly = 0;
-        this.group = new Group();
         this.meanMotion = 0;
         this.meanAnomaly = 0;
-        this.textureLoader = textureLoader;
+        this.trueAnomaly = 0;
+
+        this.color = new Color(color);
     }
 
     public init(date: Date) {
@@ -55,6 +62,7 @@ export default class CelestialBody {
 
         this.group.add(this.mesh);
         this.createLabel();
+        this.createIcon();
         if (this.orbit) this.orbit.setFromDate(date);
     }
 
@@ -85,11 +93,36 @@ export default class CelestialBody {
         const div = document.createElement("div");
         div.className = "planet-label";
         div.textContent = this.name;
+        div.style.setProperty("--color", `${this.color.getStyle()}`);
 
         this.label = new CSS2DObject(div);
         this.label.position.set(0, this.radius, 0);
         this.label.layers.set(0);
         this.mesh!.add(this.label);
+
+        div.addEventListener("mouseover", () => {
+            this.orbit?.hovered();
+        });
+
+        div.addEventListener("mouseleave", () => {
+            this.orbit?.unhovered();
+        });
+
+        div.addEventListener("click", () => {
+            this.system.moveToBody(this);
+        });
+    }
+
+    protected createIcon(): void {
+        const div = document.createElement("div");
+        div.className = "planet-icon";
+
+        div.style.setProperty("--color", `${this.color.getStyle()}`);
+
+        this.icon = new CSS2DObject(div);
+        this.icon.position.set(0, 0, 0);
+        this.icon.layers.set(0);
+        this.mesh!.add(this.icon);
 
         div.addEventListener("mouseover", () => {
             this.orbit?.hovered();

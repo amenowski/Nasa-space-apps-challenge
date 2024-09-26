@@ -19,13 +19,14 @@ export default class CelestialWithRing extends CelestialObject {
         system: SolarSystem,
         name: string,
         radius: number,
+        color: string,
         ringStart: number,
         ringEnd: number,
         textureUrl: string,
         ringTexture: string,
         textureLoader: TextureLoader
     ) {
-        super(system, name, radius, textureUrl, textureLoader);
+        super(system, name, radius, color, textureUrl, textureLoader);
         this.ringTextureUrl = ringTexture;
         this.ringStart = ringStart;
         this.ringEnd = ringEnd;
@@ -46,6 +47,7 @@ export default class CelestialWithRing extends CelestialObject {
 
         this.createRing();
         this.createLabel();
+        this.createIcon();
         if (this.orbit) {
             this.orbit.setFromDate(date);
         }

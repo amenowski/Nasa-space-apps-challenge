@@ -11,7 +11,7 @@ import TWEEN, { Tween } from "@tweenjs/tween.js";
 
 type UniverseObject = CelestialBody | CelestialWithRing | Sun;
 
-class SolarSystem {
+export default class SolarSystem {
     public group: Group;
     private centralBody: Sun;
     private celestialBodies: Map<string, CelestialBody | CelestialWithRing>;
@@ -60,6 +60,7 @@ class SolarSystem {
                         this,
                         objectData.name,
                         objectData.radius / SETTINGS.SIZE_SCALE,
+                        objectData.color,
                         objectData.ringStart / SETTINGS.SIZE_SCALE,
                         objectData.ringEnd / SETTINGS.SIZE_SCALE,
                         objectData.textureUrl,
@@ -71,6 +72,7 @@ class SolarSystem {
                         this,
                         object.name,
                         object.radius / SETTINGS.SIZE_SCALE,
+                        object.color,
                         object.textureUrl,
                         this.textureLoader
                     );
@@ -90,7 +92,8 @@ class SolarSystem {
                     orbitData.period,
                     new Date(orbitData.dataFrom),
                     orbitData.changesPerCentury,
-                    celestialObject
+                    celestialObject,
+                    object.color
                 );
 
                 celestialObject.setOrbit(orbit);
@@ -203,5 +206,3 @@ class SolarSystem {
             .chain(this.zoomTween);
     }
 }
-
-export default SolarSystem;
