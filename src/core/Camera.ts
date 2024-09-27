@@ -20,6 +20,8 @@ export default class Camera {
             this.camera,
             renderer.getRendererDom()
         );
+        this.controls.enableDamping = true;
+        this.controls.enablePan = false;
 
         this.aspect = window.innerWidth / window.innerHeight;
         this.camera.aspect = this.aspect;

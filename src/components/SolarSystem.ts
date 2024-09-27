@@ -29,7 +29,7 @@ export default class SolarSystem {
     private raycaster: Raycaster;
     private targetTween: Tween | null = null;
     private zoomTween: Tween | null = null;
-    private selectedObject: UniverseObject;
+    private selectedObject: UniverseObject | null = null;
     private camera: Camera;
     private isLive: boolean;
 
@@ -55,7 +55,7 @@ export default class SolarSystem {
         this.ui = new UI(this);
         this.textureLoader = new TextureLoader();
         this.raycaster = new Raycaster();
-        this.selectedObject = this.centralBody;
+        this.selectedObject = null;
 
         this.ui.updateTimelineInfo(this.currentDate);
 
@@ -145,6 +145,8 @@ export default class SolarSystem {
                 SETTINGS.simulationSpeed / 86400
             );
         }
+
+        this.followPlanet();
     }
 
     public renderSun(): void {
@@ -183,12 +185,15 @@ export default class SolarSystem {
 
             body.updateRender(dist);
         }
+
+        if (this.selectedObject)
+            SETTINGS.DISTANCE_TO_OBJECT = this.camera.controls.getDistance();
     }
 
     public moveToBody(object: UniverseObject): void {
         this.selectedObject = object;
 
-        const p = object.mesh!.position;
+        const p = this.selectedObject.mesh!.position;
         const cam = this.camera.getCamera();
         const direction = new Vector3();
         cam.getWorldDirection(direction);
@@ -221,11 +226,31 @@ export default class SolarSystem {
         }
     }
 
+    private followPlanet(): void {
+        if (
+            !this.selectedObject ||
+            this.zoomTween?.isPlaying() ||
+            this.targetTween?.isPlaying()
+        )
+            return;
+
+        let direction = new Vector3();
+        const cam = this.camera.getCamera();
+        cam.getWorldDirection(direction);
+
+        let endPosition = new Vector3()
+            .copy(this.selectedObject.mesh!.position)
+            .sub(direction.multiplyScalar(SETTINGS.DISTANCE_TO_OBJECT));
+        cam.position.copy(endPosition);
+    }
+
     private selectAnimation(
         startPosition: Vector3,
         endPosition: Vector3,
         cameraTarget: Vector3
     ): void {
+        if (!this.selectedObject) return;
+
         const cam = this.camera.getCamera();
         const p = this.selectedObject.mesh!.position;
 
@@ -236,6 +261,7 @@ export default class SolarSystem {
                 cam.position.copy(startPosition);
             })
             .onComplete(() => {
+                if (!this.selectedObject) return;
                 this.camera.controls.enabled = true;
                 this.camera.controls.target =
                     this.selectedObject.mesh!.position;
