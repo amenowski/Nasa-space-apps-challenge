@@ -83,10 +83,9 @@ export default class TimeSlider {
             //     this.mouseDown = false;
             // });
 
-            const containerRect = this.container.getBoundingClientRect();
-            const dragRect = this.drag.getBoundingClientRect();
-
             window.addEventListener("mousemove", (e) => {
+                const containerRect = this.container!.getBoundingClientRect();
+                const dragRect = this.drag!.getBoundingClientRect();
                 if (!this.mouseDown) return;
                 const mid = containerRect.width / 2;
                 const { x } = containerRect;

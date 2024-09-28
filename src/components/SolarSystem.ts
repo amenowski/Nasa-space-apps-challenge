@@ -32,6 +32,7 @@ export default class SolarSystem {
     private selectedObject: UniverseObject | null = null;
     private camera: Camera;
     private isLive: boolean;
+    private resetCam: boolean = true;
 
     constructor(scene: Scene, renderer: WebGLRenderer, camera: Camera) {
         this.camera = camera;
@@ -209,6 +210,7 @@ export default class SolarSystem {
 
         this.camera.controls.target = cameraTarget.clone();
         this.camera.controls.enabled = false;
+        this.resetCam = false;
 
         this.selectAnimation(startPosition, endPosition, cameraTarget);
     }
@@ -226,11 +228,18 @@ export default class SolarSystem {
         }
     }
 
+    public resetCamPosition(): void {
+        this.resetCam = true;
+        this.camera.moveToDefaultPosition();
+        this.ui.hideResetPosition();
+    }
+
     private followPlanet(): void {
         if (
             !this.selectedObject ||
             this.zoomTween?.isPlaying() ||
-            this.targetTween?.isPlaying()
+            this.targetTween?.isPlaying() ||
+            this.resetCam
         )
             return;
 
@@ -265,6 +274,8 @@ export default class SolarSystem {
                 this.camera.controls.enabled = true;
                 this.camera.controls.target =
                     this.selectedObject.mesh!.position;
+
+                this.ui.showResetPosition();
             });
 
         this.targetTween = new Tween(cameraTarget)
@@ -276,7 +287,7 @@ export default class SolarSystem {
                 },
                 500
             )
-            .easing(TWEEN.Easing.Cubic.InOut)
+            .easing(TWEEN.Easing.Exponential.In)
             .onUpdate(() => {
                 this.camera.controls.target.copy(cameraTarget);
             })

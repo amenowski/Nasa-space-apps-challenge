@@ -2,11 +2,15 @@ import { PerspectiveCamera, Scene, Vector3 } from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import Renderer from "./Renderer";
 import { SETTINGS } from "./Settings";
+import TWEEN, { Tween } from "@tweenjs/tween.js";
 
 export default class Camera {
     public controls: OrbitControls;
+    private defaultPosition: Vector3;
     private camera: PerspectiveCamera;
     private aspect: number;
+    private positionAnim: Tween | null = null;
+    private targetAnim: Tween | null = null;
 
     constructor(scene: Scene, renderer: Renderer) {
         this.camera = new PerspectiveCamera(
@@ -25,23 +29,43 @@ export default class Camera {
 
         this.aspect = window.innerWidth / window.innerHeight;
         this.camera.aspect = this.aspect;
-        // this.camera.position.z = 600;
-        // this.camera.position.y = 200;
-        // this.camera.position.x = -500;
-        // this.camera.lookAt(0, 0, 0);
         this.camera.layers.enableAll();
 
-        this.defaultPosition();
+        this.defaultPosition = new Vector3(
+            0,
+            276314.90723615506,
+            276314.9072361552
+        );
+        this.camera.position.copy(this.defaultPosition);
+
+        // this.moveToDefaultPosition();
 
         this.controls.maxDistance = SETTINGS.CAMERA_MAX_DISTANCE;
 
         scene.add(this.camera);
     }
 
-    public defaultPosition(): void {
-        this.camera.position.copy(
-            new Vector3(0, 276314.90723615506, 276314.9072361552)
-        );
+    public moveToDefaultPosition(): void {
+        const startPos = this.camera.position.clone();
+        const currentTarget = this.controls.target.clone();
+
+        // make also tween for camera target
+        this.targetAnim = new Tween(currentTarget)
+            .to(new Vector3(0, 0, 0), 800)
+            .easing(TWEEN.Easing.Cubic.InOut)
+            .onUpdate(() => {
+                this.controls.target = currentTarget.clone();
+            });
+
+        this.positionAnim = new Tween(startPos)
+            .to(this.defaultPosition, 1000)
+            .easing(TWEEN.Easing.Cubic.In)
+            .onUpdate(() => {
+                this.camera.position.copy(startPos);
+            })
+
+            .start()
+            .chain(this.targetAnim);
     }
 
     public init(): void {
@@ -49,6 +73,8 @@ export default class Camera {
     }
 
     public update(): void {
+        this.positionAnim?.update();
+        this.targetAnim?.update();
         this.controls.update();
     }
 

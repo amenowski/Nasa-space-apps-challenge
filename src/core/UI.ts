@@ -8,6 +8,8 @@ export class UI {
     private liveBtn: HTMLDivElement | null = null;
     private timeSlider: TimeSlider;
     private solarSystem: SolarSystem;
+    private moveToDefaultBtn: HTMLDivElement | null = null;
+
     constructor(solarSystem: SolarSystem) {
         this.clock = document.querySelector<HTMLDivElement>(
             ".UI .time-slider .info .clock"
@@ -18,10 +20,22 @@ export class UI {
         this.liveBtn = document.querySelector(
             ".UI .time-slider .info .live-btn"
         );
+
+        this.moveToDefaultBtn = document.querySelector(".UI .move-to-default");
+
         this.timeSlider = new TimeSlider();
 
         this.setEventListeners();
         this.solarSystem = solarSystem;
+    }
+
+    public showResetPosition(): void {
+        if (this.moveToDefaultBtn) this.moveToDefaultBtn.classList.add("show");
+    }
+
+    public hideResetPosition(): void {
+        if (this.moveToDefaultBtn)
+            this.moveToDefaultBtn.classList.remove("show");
     }
 
     public noLive(): void {
@@ -56,6 +70,11 @@ export class UI {
                 this.solarSystem.setLiveDate();
                 this.live();
                 this.timeSlider.reset();
+            });
+
+        if (this.moveToDefaultBtn)
+            this.moveToDefaultBtn.addEventListener("click", () => {
+                this.solarSystem.resetCamPosition();
             });
     }
 
