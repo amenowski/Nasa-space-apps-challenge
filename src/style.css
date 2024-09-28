@@ -149,8 +149,9 @@ body {
 
 .planet-label.hovered,
 .planet-icon.hovered {
-    opacity: 1;
+    opacity: 1 !important;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .planet-label.hovered {

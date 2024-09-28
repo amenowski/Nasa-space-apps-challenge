@@ -1,0 +1,22 @@
+[
+    {
+        "type": "Satellite",
+        "name": "Moon",
+        "radius": 1737.4,
+        "color": "#7F7B7A",
+        "textureUrl": "./src/assets/textures/moon.jpg",
+        "sidRotPerSec": 0.0000026617,
+        "obliquity": 6.67,
+        "centerBody": "Earth",
+        "orbit": {
+            "semiMajor": 384399,
+            "eccentricity": 0.0549,
+            "inclination": 5.145,
+            "longOfPeri": 83.353,
+            "ascendingNode": 125.04452,
+            "period": 0.07485364931506849315068493150685,
+            "meanAnomaly": 2.355556,
+            "dataFrom": "2000-01-01"
+        }
+    }
+]

@@ -19,7 +19,7 @@ class Orbit {
     public dataFrom: number;
     public epoch: number;
     public period: number; // in years
-    public changesPerCentury: orbitElements;
+    public changesPerCentury: orbitElements | null;
     public currentOrbitElements: orbitElements;
     public celestialBody: CelestialObject;
 
@@ -40,9 +40,9 @@ class Orbit {
         ascentingNode: number,
         period: number,
         dataFrom: Date,
-        changesPerCentury: orbitElements,
         celestialBody: CelestialObject,
-        color: string
+        color: string,
+        changesPerCentury: orbitElements | null = null
     ) {
         this.meanAnomaly = meanAnomaly;
         this.celestialBody = celestialBody;
@@ -67,9 +67,11 @@ class Orbit {
             longOfPeri: this.longOfPeri,
         };
 
-        this.changesPerCentury.inclination *= 0.0174532925;
-        this.changesPerCentury.longOfPeri *= 0.0174532925;
-        this.changesPerCentury.ascendingNode *= 0.0174532925;
+        if (this.changesPerCentury) {
+            this.changesPerCentury.inclination *= 0.0174532925;
+            this.changesPerCentury.longOfPeri *= 0.0174532925;
+            this.changesPerCentury.ascendingNode *= 0.0174532925;
+        }
 
         this.centuriesPast = 0;
         this.color = new Color(color);
@@ -91,6 +93,8 @@ class Orbit {
     public setEpoch(epoch: number) {
         this.epoch = epoch;
 
+        if (!this.changesPerCentury) return;
+
         const T = (this.epoch - this.dataFrom) / 36525;
         // console.log(T);
         if (this.centuriesPast != T) {
@@ -108,7 +112,7 @@ class Orbit {
         }
     }
 
-    public visualize(): void {
+    public visualize(origin: Vector3 | null = null): void {
         const points: Vector3[] = [];
 
         let i = 0;
@@ -122,6 +126,8 @@ class Orbit {
 
         this.orbitLine = new Line(geo, this.unhoveredMaterial);
         this.orbitLine.layers.set(0);
+
+        if (origin) this.orbitLine.position.copy(origin);
     }
 
     public hovered(): void {
@@ -132,7 +138,10 @@ class Orbit {
         this.orbitLine.material = this.unhoveredMaterial;
     }
 
-    public calculatePosition(uA: number): Vector3 {
+    public calculatePosition(
+        uA: number,
+        origin: Vector3 | null = null
+    ): Vector3 {
         const e = this.currentOrbitElements.eccentricity;
         const a = this.currentOrbitElements.semiMajor;
         const aN = this.currentOrbitElements.ascendingNode;
@@ -160,6 +169,8 @@ class Orbit {
         // convert them to km and scale down to simulation
         pos.multiplyScalar(scale);
 
+        if (origin) pos.add(origin);
+
         return pos;
     }
 
@@ -175,7 +186,7 @@ class Orbit {
         return this.orbitLine;
     }
 
-    public setFromDate(date: Date): void {
+    public setFromDate(date: Date, origin: Vector3 | null = null): Vector3 {
         const currentDate = UnixToJulianDate(date);
 
         this.celestialBody.meanAnomaly = calculateMeanAnomaly(
@@ -198,14 +209,18 @@ class Orbit {
 
         if (this.celestialBody.trueAnomaly < 0)
             this.celestialBody.trueAnomaly += Math.PI * 2;
-        this.celestialBody.mesh!.position.copy(
-            this.calculatePosition(this.celestialBody.trueAnomaly)
-        );
 
         this.celestialBody.meanMotion = (Math.PI * 2) / (this.period * 365);
+
+        return origin
+            ? this.calculatePosition(this.celestialBody.trueAnomaly, origin)
+            : this.calculatePosition(this.celestialBody.trueAnomaly);
     }
 
-    public fromMeanAnomaly(meanAnomaly: number): void {
+    public fromMeanAnomaly(
+        meanAnomaly: number,
+        origin: Vector3 | null = null
+    ): Vector3 {
         const eccentricAnomaly = calculateEccentricFromMean(
             meanAnomaly,
             this.currentOrbitElements.eccentricity
@@ -217,9 +232,8 @@ class Orbit {
 
         if (this.celestialBody.trueAnomaly < 0)
             this.celestialBody.trueAnomaly += Math.PI * 2;
-        this.celestialBody.mesh!.position.copy(
-            this.calculatePosition(this.celestialBody.trueAnomaly)
-        );
+
+        return this.calculatePosition(this.celestialBody.trueAnomaly, origin);
     }
 }
 

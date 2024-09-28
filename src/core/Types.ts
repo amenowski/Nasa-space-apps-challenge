@@ -29,6 +29,10 @@ export interface SolarPlanetData {
     sidRotPerSec: number;
 }
 
+export interface SatellitesData extends SolarPlanetData {
+    centerBody: string;
+}
+
 export interface CelestialWithRingData extends SolarPlanetData {
     ringStart: number;
     ringEnd: number;

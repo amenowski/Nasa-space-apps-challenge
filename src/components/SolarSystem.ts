@@ -11,11 +11,16 @@ import {
     Vector3,
     WebGLRenderer,
 } from "three";
-import { SolarPlanetData, CelestialWithRingData } from "../core/Types";
+import {
+    SolarPlanetData,
+    CelestialWithRingData,
+    SatellitesData,
+} from "../core/Types";
 import { UI } from "../core/UI";
 import { SETTINGS } from "../core/Settings";
 import Camera from "../core/Camera";
 import TWEEN, { Tween } from "@tweenjs/tween.js";
+import Satellite from "./Satellite";
 
 type UniverseObject = CelestialBody | CelestialWithRing | Sun;
 
@@ -23,6 +28,7 @@ export default class SolarSystem {
     public group: Group;
     private centralBody: Sun;
     private celestialBodies: Map<string, CelestialBody | CelestialWithRing>;
+    private satellites: Map<string, Satellite>;
     private currentDate: Date;
     private ui: UI;
     private textureLoader: TextureLoader;
@@ -52,6 +58,7 @@ export default class SolarSystem {
         scene.add(this.centralBody.mesh);
 
         this.celestialBodies = new Map<string, CelestialBody>();
+        this.satellites = new Map<string, Satellite>();
         this.currentDate = new Date();
         this.ui = new UI(this);
         this.textureLoader = new TextureLoader();
@@ -64,67 +71,8 @@ export default class SolarSystem {
     }
 
     public async init(): Promise<void> {
-        const data = await fetch("./src/assets/data/SolarPlanets.json");
-        const json: CelestialWithRingData[] | SolarPlanetData[] =
-            await data.json();
-        let celestialObject: CelestialBody | CelestialWithRing | null = null;
-
-        for (let object of json) {
-            if (object.type == "Planet") {
-                if (object.name == "Saturn") {
-                    const objectData = object as CelestialWithRingData;
-                    celestialObject = new CelestialWithRing(
-                        this,
-                        objectData.name,
-                        objectData.radius / SETTINGS.SIZE_SCALE,
-                        objectData.obliquity,
-                        objectData.sidRotPerSec,
-                        objectData.color,
-                        objectData.ringStart / SETTINGS.SIZE_SCALE,
-                        objectData.ringEnd / SETTINGS.SIZE_SCALE,
-                        objectData.textureUrl,
-                        objectData.ringTexture,
-                        this.textureLoader
-                    );
-                } else {
-                    celestialObject = new CelestialBody(
-                        this,
-                        object.name,
-                        object.radius / SETTINGS.SIZE_SCALE,
-                        object.obliquity,
-                        object.sidRotPerSec,
-                        object.color,
-                        object.textureUrl,
-                        this.textureLoader
-                    );
-                }
-
-                this.celestialBodies.set(object.name, celestialObject);
-
-                const orbitData = object.orbit;
-
-                const orbit = new Orbit(
-                    orbitData.meanAnomaly,
-                    orbitData.semiMajor,
-                    orbitData.eccentricity,
-                    orbitData.longOfPeri,
-                    orbitData.inclination,
-                    orbitData.ascendingNode,
-                    orbitData.period,
-                    new Date(orbitData.dataFrom),
-                    orbitData.changesPerCentury,
-                    celestialObject,
-                    object.color
-                );
-
-                celestialObject.setOrbit(orbit);
-            }
-        }
-
-        for (let [_, object] of this.celestialBodies) {
-            object.init(this.currentDate);
-            this.group.add(object.group);
-        }
+        await this.initPlanets();
+        await this.initSatellites();
     }
 
     public update(deltaTime: number): void {
@@ -241,6 +189,113 @@ export default class SolarSystem {
         this.resetCam = true;
         this.camera.moveToDefaultPosition();
         this.ui.hideResetPosition();
+    }
+
+    private async initPlanets(): Promise<void> {
+        const data = await fetch("./src/assets/data/SolarPlanets.json");
+        const json: CelestialWithRingData[] | SolarPlanetData[] =
+            await data.json();
+        let celestialObject: CelestialBody | CelestialWithRing | null = null;
+
+        for (let object of json) {
+            if (object.type == "Planet") {
+                if (object.name == "Saturn") {
+                    const objectData = object as CelestialWithRingData;
+                    celestialObject = new CelestialWithRing(
+                        this,
+                        objectData.name,
+                        objectData.radius / SETTINGS.SIZE_SCALE,
+                        objectData.obliquity,
+                        objectData.sidRotPerSec,
+                        objectData.color,
+                        objectData.ringStart / SETTINGS.SIZE_SCALE,
+                        objectData.ringEnd / SETTINGS.SIZE_SCALE,
+                        objectData.textureUrl,
+                        objectData.ringTexture,
+                        this.textureLoader
+                    );
+                } else {
+                    celestialObject = new CelestialBody(
+                        this,
+                        object.name,
+                        object.radius / SETTINGS.SIZE_SCALE,
+                        object.obliquity,
+                        object.sidRotPerSec,
+                        object.color,
+                        object.textureUrl,
+                        this.textureLoader
+                    );
+                }
+
+                this.celestialBodies.set(object.name, celestialObject);
+
+                const orbitData = object.orbit;
+
+                const orbit = new Orbit(
+                    orbitData.meanAnomaly,
+                    orbitData.semiMajor,
+                    orbitData.eccentricity,
+                    orbitData.longOfPeri,
+                    orbitData.inclination,
+                    orbitData.ascendingNode,
+                    orbitData.period,
+                    new Date(orbitData.dataFrom),
+                    celestialObject,
+                    object.color,
+                    orbitData.changesPerCentury
+                );
+
+                celestialObject.setOrbit(orbit);
+            }
+        }
+
+        for (let [_, object] of this.celestialBodies) {
+            object.init(this.currentDate);
+            this.group.add(object.group);
+        }
+    }
+
+    private async initSatellites(): Promise<void> {
+        const data = await fetch("./src/assets/data/CommonSatellites.json");
+        const json: SatellitesData[] = await data.json();
+
+        for (let object of json) {
+            if (!this.celestialBodies.has(object.centerBody)) continue;
+            const satellite = new Satellite(
+                this,
+                object.name,
+                object.radius / SETTINGS.SIZE_SCALE,
+                object.obliquity,
+                object.sidRotPerSec,
+                object.color,
+                object.textureUrl,
+                this.textureLoader,
+                this.celestialBodies.get(object.centerBody)!
+            );
+
+            this.satellites.set(satellite.name, satellite);
+
+            const orbitData = object.orbit;
+
+            const orbit = new Orbit(
+                orbitData.meanAnomaly,
+                orbitData.semiMajor / 149597870.7,
+                orbitData.eccentricity,
+                orbitData.longOfPeri,
+                orbitData.inclination,
+                orbitData.ascendingNode,
+                orbitData.period,
+                new Date(orbitData.dataFrom),
+                satellite,
+                object.color,
+                null
+            );
+
+            satellite.setOrbit(orbit);
+        }
+
+        for (let [_, satellite] of this.satellites)
+            satellite.init(this.currentDate);
     }
 
     private followPlanet(): void {

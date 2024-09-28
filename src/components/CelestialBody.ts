@@ -11,12 +11,13 @@ import Orbit from "./Orbit";
 import { CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
 import { UnixToJulianDate } from "../utils/DateConverter";
 import SolarSystem from "./SolarSystem";
+import Satellite from "./Satellite";
 
 export default class CelestialBody {
     public name: string;
     public radius: number;
     public trueAnomaly: number;
-    public satellites: CelestialBody[] = [];
+    public satellites: Map<string, Satellite> = new Map();
     public mesh: Mesh | null = null;
     public group: Group;
     public meanMotion: number; // rad per day
@@ -72,7 +73,7 @@ export default class CelestialBody {
         this.group.add(this.mesh);
         this.createLabel();
         this.createIcon();
-        if (this.orbit) this.orbit.setFromDate(date);
+        if (this.orbit) this.mesh.position.copy(this.orbit.setFromDate(date));
     }
 
     public setOrbit(orbit: Orbit) {
@@ -101,7 +102,12 @@ export default class CelestialBody {
                 this.meanAnomaly + this.meanMotion * deltaTime * daysPerSec;
             this.meanAnomaly = this.meanAnomaly % (Math.PI * 2);
             this.orbit.setEpoch(currentDate);
-            this.orbit.fromMeanAnomaly(this.meanAnomaly);
+            this.mesh!.position.copy(
+                this.orbit.fromMeanAnomaly(this.meanAnomaly)
+            );
+
+            for (let [_, satellite] of this.satellites)
+                satellite.updatePosition(date, deltaTime, daysPerSec);
         }
     }
 
@@ -119,17 +125,22 @@ export default class CelestialBody {
         }
     }
 
+    public addSatellite(satellite: Satellite): void {
+        this.satellites.set(satellite.name, satellite);
+
+        if (satellite.mesh) this.group.add(satellite.group);
+    }
+
     protected hideAdditionalInfo(): void {
-        // hide orbit, label, icon
         if (this.orbit) this.orbit.hide();
-        if (this.label) this.label.visible = false;
-        if (this.icon) this.icon.visible = false;
+        if (this.label) this.label.element.style.opacity = "0";
+        if (this.icon) this.icon.element.style.opacity = "0";
     }
 
     protected showAdditionalInfo(): void {
         if (this.orbit) this.orbit.show();
-        if (this.label) this.label.visible = true;
-        if (this.icon) this.icon.visible = true;
+        if (this.label) this.label.element.style.opacity = "0.5";
+        if (this.icon) this.icon.element.style.opacity = "0.5";
     }
 
     protected createLabel(): void {
@@ -145,20 +156,6 @@ export default class CelestialBody {
         this.label.position.set(0, 0, 0);
         this.label.layers.set(0);
         this.mesh!.add(this.label);
-
-        // this.htmlElements[0].addEventListener("mouseover", () => {
-        //     this.orbit?.hovered();
-        //     this.infoHover();
-        // });
-
-        // this.htmlElements[0].addEventListener("mouseleave", () => {
-        //     this.orbit?.unhovered();
-        //     this.infoUnhover();
-        // });
-
-        // this.htmlElements[0].addEventListener("pointerdown", () => {
-        //     this.system.moveToBody(this);
-        // });
     }
 
     protected createIcon(): void {
