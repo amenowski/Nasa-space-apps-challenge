@@ -4,10 +4,10 @@ import {
     calculateEccentricFromMean,
     calculateMeanAnomaly,
     calculateTrueFromEccentric,
-    UnixToJulianDate,
 } from "../utils/OrbitalCalculations";
 import { orbitElements } from "../core/Types";
 import { SETTINGS } from "../core/Settings";
+import { UnixToJulianDate } from "../utils/DateConverter";
 
 class Orbit {
     public semiMajorAxis: number; // in AU

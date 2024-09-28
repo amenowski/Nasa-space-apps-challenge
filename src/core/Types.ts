@@ -25,6 +25,8 @@ export interface SolarPlanetData {
     radius: number;
     color: string;
     orbit: orbitData;
+    obliquity: number;
+    sidRotPerSec: number;
 }
 
 export interface CelestialWithRingData extends SolarPlanetData {

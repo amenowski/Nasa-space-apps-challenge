@@ -77,6 +77,8 @@ export default class SolarSystem {
                         this,
                         objectData.name,
                         objectData.radius / SETTINGS.SIZE_SCALE,
+                        objectData.obliquity,
+                        objectData.sidRotPerSec,
                         objectData.color,
                         objectData.ringStart / SETTINGS.SIZE_SCALE,
                         objectData.ringEnd / SETTINGS.SIZE_SCALE,
@@ -89,6 +91,8 @@ export default class SolarSystem {
                         this,
                         object.name,
                         object.radius / SETTINGS.SIZE_SCALE,
+                        object.obliquity,
+                        object.sidRotPerSec,
                         object.color,
                         object.textureUrl,
                         this.textureLoader
@@ -145,6 +149,11 @@ export default class SolarSystem {
                 deltaTime,
                 SETTINGS.simulationSpeed / 86400
             );
+
+            if (celestialBody instanceof CelestialWithRing) {
+                // console.log("simea");
+                celestialBody.updateRing();
+            }
         }
 
         this.followPlanet();

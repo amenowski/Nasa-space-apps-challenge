@@ -5,6 +5,8 @@
         "radius": 2439,
         "color": "#837D7D",
         "textureUrl": "./src/assets/textures/mercury.jpg",
+        "obliquity": 2.04,
+        "sidRotPerSec": 0.00000124001,
         "orbit": {
             "semiMajor": 0.38709927,
             "eccentricity": 0.20563593,
@@ -29,6 +31,8 @@
         "radius": 6051.8,
         "color": "#AE681B",
         "textureUrl": "./src/assets/textures/Venus.jpg",
+        "obliquity": 177.36,
+        "sidRotPerSec": -0.00000029924,
         "orbit": {
             "semiMajor": 0.72333566,
             "eccentricity": 0.00677672,
@@ -53,6 +57,8 @@
         "radius": 6371,
         "color": "#4A8BD5",
         "textureUrl": "./src/assets/textures/earth.jpg",
+        "obliquity": 23.439,
+        "sidRotPerSec": 0.00007292115,
         "orbit": {
             "semiMajor": 1.00000261,
             "eccentricity": 0.01671123,
@@ -78,6 +84,8 @@
         "radius": 3389.5,
         "color": "#CF5D38",
         "textureUrl": "./src/assets/textures/mars.jpg",
+        "obliquity": 25.19,
+        "sidRotPerSec": 0.0000708822,
         "orbit": {
             "semiMajor": 1.52371034,
             "eccentricity": 0.0933941,
@@ -102,6 +110,8 @@
         "radius": 69911,
         "color": "#DCBA9B",
         "textureUrl": "./src/assets/textures/jupiter.jpg",
+        "obliquity": 3.13,
+        "sidRotPerSec": 0.00017585,
         "orbit": {
             "semiMajor": 5.202887,
             "eccentricity": 0.04838624,
@@ -130,6 +140,8 @@
         "ringTexture": "./src/assets/textures/saturn_ring.png",
         "ringStart": 74500,
         "ringEnd": 149268,
+        "obliquity": 26.73,
+        "sidRotPerSec": 0.000163785,
         "orbit": {
             "semiMajor": 9.53667594,
             "eccentricity": 0.05386179,
@@ -154,6 +166,8 @@
         "radius": 25362,
         "color": "#4768FA",
         "textureUrl": "./src/assets/textures/uranus.jpg",
+        "obliquity": 97.77,
+        "sidRotPerSec": -0.000101237,
         "orbit": {
             "semiMajor": 19.18916464,
             "eccentricity": 0.04725744,
@@ -178,6 +192,8 @@
         "radius": 24622,
         "color": "#71A6FF",
         "textureUrl": "./src/assets/textures/neptune.jpg",
+        "obliquity": 28.32,
+        "sidRotPerSec": 0.000108338,
         "orbit": {
             "semiMajor": 30.06992276,
             "eccentricity": 0.00859048,

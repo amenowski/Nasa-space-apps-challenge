@@ -19,6 +19,8 @@ export default class CelestialWithRing extends CelestialObject {
         system: SolarSystem,
         name: string,
         radius: number,
+        obliquity: number,
+        sidRotPerSec: number,
         color: string,
         ringStart: number,
         ringEnd: number,
@@ -26,7 +28,16 @@ export default class CelestialWithRing extends CelestialObject {
         ringTexture: string,
         textureLoader: TextureLoader
     ) {
-        super(system, name, radius, color, textureUrl, textureLoader);
+        super(
+            system,
+            name,
+            radius,
+            obliquity,
+            sidRotPerSec,
+            color,
+            textureUrl,
+            textureLoader
+        );
         this.ringTextureUrl = ringTexture;
         this.ringStart = ringStart;
         this.ringEnd = ringEnd;
@@ -43,6 +54,7 @@ export default class CelestialWithRing extends CelestialObject {
         // this.mesh.layers.enableAll();
         this.mesh.layers.set(0);
         this.mesh.name = this.name;
+        this.mesh.rotation.z = -this.obliquity * 0.0174532925;
 
         this.group.add(this.mesh);
         this.group.layers.set(0);
@@ -53,6 +65,10 @@ export default class CelestialWithRing extends CelestialObject {
         if (this.orbit) {
             this.orbit.setFromDate(date);
         }
+    }
+
+    public updateRing(): void {
+        this.ring!.position.copy(this.mesh!.position.clone());
     }
     private createRing(): void {
         const tex = this.textureLoader.load(this.ringTextureUrl);
@@ -67,11 +83,12 @@ export default class CelestialWithRing extends CelestialObject {
         this.ring = new Mesh(geo, mat);
         this.ring.layers.set(0);
 
-        this.ring.rotation.x = Math.PI / 2;
-        this.ring.rotation.y = 0.471239;
-
         if (this.mesh) {
-            this.mesh.add(this.ring);
+            this.group.add(this.ring);
+            // this.mesh.add(this.ring);
+            this.ring.rotation.x = -Math.PI / 2 - 0.471239;
+            // this.ring.rotation.y = -this.mesh.rotation.y;
+            this.ring.position.copy(this.mesh.position.clone());
         }
     }
 }

@@ -9,7 +9,7 @@ import {
 import Orbit from "./Orbit";
 
 import { CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
-import { UnixToJulianDate } from "../utils/OrbitalCalculations";
+import { UnixToJulianDate } from "../utils/DateConverter";
 import SolarSystem from "./SolarSystem";
 
 export default class CelestialBody {
@@ -29,11 +29,15 @@ export default class CelestialBody {
     protected system: SolarSystem;
     protected color: Color;
     protected htmlElements: HTMLDivElement[] = new Array<HTMLDivElement>(2);
+    protected obliquity: number;
+    protected sidRotPerSec: number;
 
     constructor(
         system: SolarSystem,
         name: string,
         radius: number,
+        obliquity: number,
+        sidRotPerSec: number,
         color: string,
         textureUrl: string,
         textureLoader: TextureLoader
@@ -43,6 +47,8 @@ export default class CelestialBody {
         this.system = system;
         this.name = name;
         this.radius = radius;
+        this.obliquity = obliquity;
+        this.sidRotPerSec = sidRotPerSec;
         this.textureUrl = textureUrl;
         this.textureLoader = textureLoader;
 
@@ -61,6 +67,7 @@ export default class CelestialBody {
         this.mesh.layers.set(0);
         this.group.layers.set(0);
         this.mesh.name = this.name;
+        this.mesh.rotation.z = -this.obliquity * 0.0174532925;
 
         this.group.add(this.mesh);
         this.createLabel();
@@ -74,18 +81,25 @@ export default class CelestialBody {
         this.group.add(this.orbit.orbitLine);
     }
 
+    public rotateObject(date: Date): void {
+        let secondsElapsed = date.getTime() / 1000;
+
+        if (this.mesh)
+            this.mesh.rotation.y = this.sidRotPerSec * secondsElapsed;
+    }
+
     public updatePosition(
         date: Date,
         deltaTime: number,
         daysPerSec: number
     ): void {
+        this.rotateObject(date);
         if (this.orbit) {
             const currentDate = UnixToJulianDate(date);
 
             this.meanAnomaly =
                 this.meanAnomaly + this.meanMotion * deltaTime * daysPerSec;
             this.meanAnomaly = this.meanAnomaly % (Math.PI * 2);
-
             this.orbit.setEpoch(currentDate);
             this.orbit.fromMeanAnomaly(this.meanAnomaly);
         }
