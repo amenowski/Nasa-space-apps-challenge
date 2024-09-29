@@ -22,7 +22,7 @@ import Camera from "../core/Camera";
 import TWEEN, { Tween } from "@tweenjs/tween.js";
 import Satellite from "./Satellite";
 
-type UniverseObject = CelestialBody | CelestialWithRing | Sun;
+type UniverseObject = CelestialBody | CelestialWithRing;
 
 export default class SolarSystem {
     public group: Group;
@@ -340,6 +340,7 @@ export default class SolarSystem {
                     this.selectedObject.mesh!.position;
 
                 this.ui.showResetPosition();
+                this.selectedObject.showSatellites();
             });
 
         this.targetTween = new Tween(cameraTarget)

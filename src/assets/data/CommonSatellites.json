@@ -18,5 +18,266 @@
             "meanAnomaly": 2.355556,
             "dataFrom": "2000-01-01"
         }
+    },
+    {
+        "type": "Satellite",
+        "name": "Phobos",
+        "radius": 13.1,
+        "color": "#9c877a",
+        "textureUrl": "./src/assets/textures/phobos.jpg",
+        "sidRotPerSec": 0.01306,
+        "obliquity": 0,
+        "centerBody": "Mars",
+        "orbit": {
+            "semiMajor": 9377.2,
+            "eccentricity": 0.0151,
+            "inclination": 26.04,
+            "longOfPeri": 67.1876317989193,
+            "ascendingNode": 84.81060423679303,
+            "period": 8.739726027397260273972602739726e-4,
+            "meanAnomaly": 6.0355294,
+            "dataFrom": "2000-01-01"
+        }
+    },
+    {
+        "type": "Satellite",
+        "name": "Deimos",
+        "radius": 6.2,
+        "color": "#9c877a",
+        "textureUrl": "./src/assets/textures/deimos.png",
+        "sidRotPerSec": 0.0033,
+        "obliquity": 0,
+        "centerBody": "Mars",
+        "orbit": {
+            "semiMajor": 23463,
+            "eccentricity": 0.00033,
+            "inclination": 27.58,
+            "longOfPeri": 67.18716317989193,
+            "ascendingNode": 83.6637869299841,
+            "period": 0.00346027397260273972602739726027,
+            "meanAnomaly": 0.04261399,
+            "dataFrom": "2000-01-01"
+        }
+    },
+    {
+        "type": "Satellite",
+        "name": "Ganymede",
+        "radius": 2631.2,
+        "color": "#786D68",
+        "textureUrl": "./src/assets/textures/ganymede.png",
+        "sidRotPerSec": 0.01960273972602739726027397260274,
+        "obliquity": 0,
+        "centerBody": "Jupiter",
+        "orbit": {
+            "semiMajor": 1070000,
+            "eccentricity": 0.00146,
+            "inclination": 0.207,
+            "longOfPeri": 294.4008205,
+            "ascendingNode": 83.6637869299841,
+            "period": 0.01960273972602739726027397260274,
+            "meanAnomaly": 4.546075795,
+            "dataFrom": "2000-01-01"
+        }
+    },
+    {
+        "type": "Satellite",
+        "name": "Callisto",
+        "radius": 2410.3,
+        "color": "#786D68",
+        "textureUrl": "./src/assets/textures/callisto.png",
+        "sidRotPerSec": 0.04572876712328767123287671232877,
+        "obliquity": 0,
+        "centerBody": "Jupiter",
+        "orbit": {
+            "semiMajor": 1883000,
+            "eccentricity": 0.00744,
+            "inclination": 2.016913183162201,
+            "longOfPeri": 352.9490044,
+            "ascendingNode": 337.9431223566548,
+            "period": 0.04572876712328767123287671232877,
+            "meanAnomaly": 0.1317057468,
+            "dataFrom": "2000-01-01"
+        }
+    },
+
+    {
+        "type": "Satellite",
+        "name": "Io",
+        "radius": 1821.49,
+        "color": "#786D68",
+        "textureUrl": "./src/assets/textures/io.png",
+        "sidRotPerSec": 0.00484931506849315068493150684932,
+        "obliquity": 0,
+        "centerBody": "Jupiter",
+        "orbit": {
+            "semiMajor": 422000,
+            "eccentricity": 0.00472,
+            "inclination": 2.212685881373811,
+            "longOfPeri": 39.80874532,
+            "ascendingNode": 336.8522291524058,
+            "period": 0.00484931506849315068493150684932,
+            "meanAnomaly": 4.129723012,
+            "dataFrom": "2000-01-01"
+        }
+    },
+    {
+        "type": "Satellite",
+        "name": "Europa",
+        "radius": 1560.8,
+        "color": "#786D68",
+        "textureUrl": "./src/assets/textures/europa.png",
+        "sidRotPerSec": 0.00972602739726027397260273972603,
+        "centerBody": "Jupiter",
+        "obliquity": 0,
+        "orbit": {
+            "semiMajor": 671000,
+            "eccentricity": 0.00981,
+            "inclination": 1.79095768853441,
+            "longOfPeri": 226.9519326,
+            "ascendingNode": 332.6275081023024,
+            "period": 0.00972602739726027397260273972603,
+            "meanAnomaly": 5.149811903,
+            "dataFrom": "2000-01-01"
+        }
+    },
+    {
+        "type": "Satellite",
+        "name": "Titan",
+        "radius": 2575.5,
+        "color": "#5E5E5E",
+        "textureUrl": "./src/assets/textures/titan.jpg",
+        "sidRotPerSec": 0,
+        "centerBody": "Saturn",
+        "obliquity": 0,
+        "orbit": {
+            "semiMajor": 1221934.800913171,
+            "eccentricity": 0.002860066256432539,
+            "inclination": 27.71833887311165,
+            "longOfPeri": 333.6482889,
+            "ascendingNode": 169.2391602866279,
+            "period": 0.04368608493,
+            "meanAnomaly": 2.852499763,
+            "dataFrom": "2000-01-01"
+        }
+    },
+    {
+        "type": "Satellite",
+        "name": "Enceladus",
+        "radius": 252.3,
+        "color": "#5E5E5E",
+        "textureUrl": "./src/assets/textures/enceladus.png",
+        "sidRotPerSec": 6.55200427e-5,
+        "centerBody": "Saturn",
+        "obliquity": 0,
+        "orbit": {
+            "semiMajor": 238419.8688441309,
+            "eccentricity": 0.006351597350212341,
+            "inclination": 28.05202310549093,
+            "longOfPeri": 304.9896208,
+            "ascendingNode": 169.5065956328603,
+            "period": 0.003754021918,
+            "meanAnomaly": 0.1213596976,
+            "dataFrom": "2000-01-01"
+        }
+    },
+    {
+        "type": "Satellite",
+        "name": "Iapetus",
+        "radius": 734.5,
+        "color": "#5E5E5E",
+        "textureUrl": "./src/assets/textures/iapetus.png",
+        "sidRotPerSec": 0.003793341632,
+        "centerBody": "Saturn",
+        "obliquity": 0,
+        "orbit": {
+            "semiMajor": 3562566.556811612,
+            "eccentricity": 0.02786249162022612,
+            "inclination": 17.23820439459392,
+            "longOfPeri": 9.350150533,
+            "ascendingNode": 139.6917551276544,
+            "period": 0.2173424658,
+            "meanAnomaly": 3.630591897,
+            "dataFrom": "2000-01-01"
+        }
+    },
+    {
+        "type": "Satellite",
+        "name": "Ariel",
+        "radius": 581.1,
+        "color": "#5E5E5E",
+        "textureUrl": "./src/assets/textures/ariel.webp",
+        "sidRotPerSec": 1.20499444e-4,
+        "centerBody": "Uranus",
+        "obliquity": 0,
+        "orbit": {
+            "semiMajor": 1.909413381611361e5,
+            "eccentricity": 1.520877907438045e-3,
+            "inclination": 9.772132068789766e1,
+            "longOfPeri": 210.9010803,
+            "ascendingNode": 1.676167759466086e2,
+            "period": 0.006904109589,
+            "meanAnomaly": 2.702498221,
+            "dataFrom": "2000-01-01"
+        }
+    },
+    {
+        "type": "Satellite",
+        "name": "Titania",
+        "radius": 788.9,
+        "color": "#5E5E5E",
+        "textureUrl": "./src/assets/textures/titania.webp",
+        "sidRotPerSec": 4.1629689e-4,
+        "centerBody": "Uranus",
+        "obliquity": 0,
+        "orbit": {
+            "semiMajor": 4.362945303521447e5,
+            "eccentricity": 2.516856383155163e-3,
+            "inclination": 9.782120747250453e1,
+            "longOfPeri": 11.56727045,
+            "ascendingNode": 1.676132186550346e2,
+            "period": 0.02385205479,
+            "meanAnomaly": 1.267067067,
+            "dataFrom": "2000-01-01"
+        }
+    },
+    {
+        "type": "Satellite",
+        "name": "Miranda",
+        "radius": 240,
+        "color": "#5E5E5E",
+        "textureUrl": "./src/assets/textures/miranda.webp",
+        "sidRotPerSec": 6.75657598e-5,
+        "centerBody": "Uranus",
+        "obliquity": 0,
+        "orbit": {
+            "semiMajor": 1.298717760697238e5,
+            "eccentricity": 1.502345771442349e-3,
+            "inclination": 9.726798584672046e1,
+            "longOfPeri": 73.8831064,
+            "ascendingNode": 1.720659665343774e2,
+            "period": 0.003871232877,
+            "meanAnomaly": 0.1068968767,
+            "dataFrom": "2000-01-01"
+        }
+    },
+    {
+        "type": "Satellite",
+        "name": "Triton",
+        "radius": 1352.6,
+        "color": "#5E5E5E",
+        "textureUrl": "./src/assets/textures/triton.webp",
+        "sidRotPerSec": 2.8102163e-4,
+        "centerBody": "Neptune",
+        "obliquity": 0,
+        "orbit": {
+            "semiMajor": 3.547658843162152e5,
+            "eccentricity": 6.368939270099938e-6,
+            "inclination": 1.302557894944188e2,
+            "longOfPeri": 290.5659563,
+            "ascendingNode": 2.158516384153697e2,
+            "period": 0.01610135342,
+            "meanAnomaly": 6.281694439,
+            "dataFrom": "2000-01-01"
+        }
     }
 ]

@@ -7,7 +7,6 @@ import {
 import CelestialBody from "./CelestialBody";
 import SolarSystem from "./SolarSystem";
 import Orbit from "./Orbit";
-import { UnixToJulianDate } from "../utils/DateConverter";
 
 export default class Satellite extends CelestialBody {
     private centerBody: CelestialBody;
@@ -44,8 +43,8 @@ export default class Satellite extends CelestialBody {
         const geo = new SphereGeometry(this.radius);
         const mat = new MeshStandardMaterial({ map: tex });
         this.mesh = new Mesh(geo, mat);
-        this.mesh.layers.set(0);
-        this.group.layers.set(0);
+        this.mesh.layers.set(3);
+        this.group.layers.set(3);
         this.mesh.name = this.name;
         this.mesh.rotation.z = -this.obliquity * 0.0174532925;
 
@@ -57,6 +56,7 @@ export default class Satellite extends CelestialBody {
                 this.orbit.setFromDate(date, this.centerBody.mesh!.position)
             );
 
+        this.hideAdditionalInfo();
         this.centerBody.addSatellite(this);
     }
 
@@ -73,7 +73,9 @@ export default class Satellite extends CelestialBody {
         deltaTime: number,
         daysPerSec: number
     ): void {
-        // this.rotateObject(date);
+        this.rotateObject(date);
+
+        // if (this.name == "Europa") console.log(this.label!.visible);
         if (this.orbit) {
             this.meanAnomaly =
                 this.meanAnomaly + this.meanMotion * deltaTime * daysPerSec;
@@ -87,5 +89,17 @@ export default class Satellite extends CelestialBody {
             );
             this.orbit!.orbitLine.position.copy(this.centerBody.mesh!.position);
         }
+    }
+
+    public hideAdditionalInfo(): void {
+        if (this.label) this.label.visible = false;
+        if (this.icon) this.icon.visible = false;
+        if (this.orbit?.orbitLine) this.orbit.orbitLine.visible = false;
+    }
+
+    public showAdditionalInfo(): void {
+        if (this.label) this.label.visible = true;
+        if (this.icon) this.icon.visible = true;
+        if (this.orbit?.orbitLine) this.orbit.orbitLine.visible = true;
     }
 }

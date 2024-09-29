@@ -16,7 +16,7 @@ export default class Camera {
         this.camera = new PerspectiveCamera(
             50,
             window.innerWidth / window.innerHeight,
-            0.1,
+            0.001,
             SETTINGS.CAMERA_RENDER_DISTANCE
         );
 

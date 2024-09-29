@@ -114,6 +114,9 @@ export default class CelestialBody {
     public setLivePosition(date: Date) {
         if (this.mesh && this.orbit) {
             this.orbit.setFromDate(date);
+
+            for (let [_, satellite] of this.satellites)
+                satellite.setLivePosition(date);
         }
     }
 
@@ -122,6 +125,10 @@ export default class CelestialBody {
             this.hideAdditionalInfo();
         } else {
             this.showAdditionalInfo();
+
+            for (let [_, satellite] of this.satellites) {
+                satellite.hideAdditionalInfo();
+            }
         }
     }
 
@@ -129,6 +136,11 @@ export default class CelestialBody {
         this.satellites.set(satellite.name, satellite);
 
         if (satellite.mesh) this.group.add(satellite.group);
+    }
+
+    public showSatellites(): void {
+        for (let [_, satellite] of this.satellites)
+            satellite.showAdditionalInfo();
     }
 
     protected hideAdditionalInfo(): void {
@@ -156,6 +168,7 @@ export default class CelestialBody {
         this.label.position.set(0, 0, 0);
         this.label.layers.set(0);
         this.mesh!.add(this.label);
+        console.log(this.label);
     }
 
     protected createIcon(): void {
