@@ -23,6 +23,10 @@ solarSystem.init();
 
 mainScene.addGroup(solarSystem.group);
 
+solarSystem.fetchAsteroidData("ceres");
+solarSystem.fetchAsteroidData("apophis");
+solarSystem.fetchAsteroidData("pallas");
+
 function animation() {
     solarSystem.update(clock.getDelta());
 

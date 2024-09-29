@@ -21,7 +21,7 @@ class Orbit {
     public period: number; // in years
     public changesPerCentury: orbitElements | null;
     public currentOrbitElements: orbitElements;
-    public celestialBody: CelestialObject;
+    public celestialObject: CelestialObject;
 
     public orbitLine: Line;
 
@@ -39,20 +39,24 @@ class Orbit {
         inclination: number,
         ascentingNode: number,
         period: number,
-        dataFrom: Date,
-        celestialBody: CelestialObject,
+        dataFrom: Date | number,
+        celestialObject: CelestialObject,
         color: string,
         changesPerCentury: orbitElements | null = null
     ) {
         this.meanAnomaly = meanAnomaly;
-        this.celestialBody = celestialBody;
+        this.celestialObject = celestialObject;
         this.semiMajorAxis = semiMajorAxis;
         this.eccentricity = eccentricity;
         this.inclination = inclination * 0.0174532925; // convert to RAD
         this.longOfPeri = longOfPeri * 0.0174532925; // convert to RAD
         this.ascendingNode = ascentingNode * 0.0174532925; // convert to RAD
 
-        this.dataFrom = UnixToJulianDate(dataFrom);
+        if (typeof dataFrom == "number") {
+            this.dataFrom = dataFrom;
+        } else {
+            this.dataFrom = UnixToJulianDate(dataFrom);
+        }
         this.epoch = this.dataFrom;
 
         this.changesPerCentury = changesPerCentury;
@@ -188,7 +192,7 @@ class Orbit {
     public setFromDate(date: Date, origin: Vector3 | null = null): Vector3 {
         const currentDate = UnixToJulianDate(date);
 
-        this.celestialBody.meanAnomaly = calculateMeanAnomaly(
+        this.celestialObject.meanAnomaly = calculateMeanAnomaly(
             this.meanAnomaly,
             this.dataFrom,
             currentDate,
@@ -198,22 +202,22 @@ class Orbit {
         this.setEpoch(currentDate);
 
         const eccentricAnomaly = calculateEccentricFromMean(
-            this.celestialBody.meanAnomaly,
+            this.celestialObject.meanAnomaly,
             this.currentOrbitElements.eccentricity
         );
-        this.celestialBody.trueAnomaly = calculateTrueFromEccentric(
+        this.celestialObject.trueAnomaly = calculateTrueFromEccentric(
             eccentricAnomaly,
             this.currentOrbitElements.eccentricity
         );
 
-        if (this.celestialBody.trueAnomaly < 0)
-            this.celestialBody.trueAnomaly += Math.PI * 2;
+        if (this.celestialObject.trueAnomaly < 0)
+            this.celestialObject.trueAnomaly += Math.PI * 2;
 
-        this.celestialBody.meanMotion = (Math.PI * 2) / (this.period * 365);
+        this.celestialObject.meanMotion = (Math.PI * 2) / (this.period * 365);
 
         return origin
-            ? this.calculatePosition(this.celestialBody.trueAnomaly, origin)
-            : this.calculatePosition(this.celestialBody.trueAnomaly);
+            ? this.calculatePosition(this.celestialObject.trueAnomaly, origin)
+            : this.calculatePosition(this.celestialObject.trueAnomaly);
     }
 
     public fromMeanAnomaly(
@@ -224,15 +228,15 @@ class Orbit {
             meanAnomaly,
             this.currentOrbitElements.eccentricity
         );
-        this.celestialBody.trueAnomaly = calculateTrueFromEccentric(
+        this.celestialObject.trueAnomaly = calculateTrueFromEccentric(
             eccentricAnomaly,
             this.currentOrbitElements.eccentricity
         );
 
-        if (this.celestialBody.trueAnomaly < 0)
-            this.celestialBody.trueAnomaly += Math.PI * 2;
+        if (this.celestialObject.trueAnomaly < 0)
+            this.celestialObject.trueAnomaly += Math.PI * 2;
 
-        return this.calculatePosition(this.celestialBody.trueAnomaly, origin);
+        return this.calculatePosition(this.celestialObject.trueAnomaly, origin);
     }
 }
 

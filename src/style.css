@@ -158,6 +158,21 @@ body {
     top: -1.25em;
 }
 
+.asteroid-icon {
+    width: 1em;
+    height: 1em;
+    opacity: 0.5;
+}
+
+.asteroid-icon.hovered {
+    opacity: 1 !important;
+}
+
+.asteroid-icon img {
+    width: 100%;
+    height: 100%;
+}
+
 .move-to-default {
     pointer-events: all;
     grid-row-start: 1;

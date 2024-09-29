@@ -15,12 +15,16 @@ import {
     SolarPlanetData,
     CelestialWithRingData,
     SatellitesData,
+    SDBD_RESPONSE,
 } from "../core/Types";
 import { UI } from "../core/UI";
 import { SETTINGS } from "../core/Settings";
 import Camera from "../core/Camera";
 import TWEEN, { Tween } from "@tweenjs/tween.js";
 import Satellite from "./Satellite";
+
+import Asteroid from "./Asteroid";
+import axios from "axios";
 
 type UniverseObject = CelestialBody | CelestialWithRing;
 
@@ -107,8 +111,73 @@ export default class SolarSystem {
         this.followPlanet();
     }
 
-    public renderSun(): void {
-        this.centralBody.render();
+    public async fetchAsteroidData(asteroidName: string): Promise<void> {
+        const data = await axios.get(
+            `/api/sbdb.api?sstr=${asteroidName}&r-notes=true&ca-data=true&phys-par=true&full-prec=true`
+        );
+        const res: SDBD_RESPONSE = data.data;
+
+        let radius: number = 0;
+        let rotPeriod: number = 0;
+        for (const psyP of res.phys_par) {
+            if (psyP.name == "diameter") radius = parseFloat(psyP.value) / 2;
+            if (psyP.name == "rot_per")
+                rotPeriod = parseFloat(psyP.value) / 3600;
+        }
+
+        const asteroid = new Asteroid(
+            this,
+            res.object.shortname,
+            radius,
+            0,
+            rotPeriod,
+            "#ff0000",
+            "./src/assets/textures/moon.jpg",
+            this.textureLoader
+        );
+
+        let ma: number = 0;
+        let sA: number = 0;
+        let e: number = 0;
+        let longOfPeri: number = 0;
+        let aP: number = 0;
+        let i: number = 0;
+        let aN: number = 0;
+        let period: number = 0;
+        let epoch: number = parseFloat(res.orbit.epoch);
+
+        for (const orbitElem of res.orbit.elements) {
+            if (orbitElem.name == "ma")
+                ma = parseFloat(orbitElem.value) * (Math.PI / 180);
+            if (orbitElem.name == "a") sA = parseFloat(orbitElem.value);
+            if (orbitElem.name == "e") e = parseFloat(orbitElem.value);
+            if (orbitElem.name == "w") aP = parseFloat(orbitElem.value);
+            if (orbitElem.name == "i") i = parseFloat(orbitElem.value);
+            if (orbitElem.name == "om") aN = parseFloat(orbitElem.value);
+            if (orbitElem.name == "per") period = parseFloat(orbitElem.value);
+        }
+
+        longOfPeri = aN + aP;
+        period /= 365.25;
+
+        const orbit = new Orbit(
+            ma,
+            sA,
+            e,
+            longOfPeri,
+            i,
+            aN,
+            period,
+            epoch,
+            asteroid,
+            "#ff0000"
+        );
+
+        asteroid.setOrbit(orbit);
+
+        this.celestialBodies.set(asteroid.name, asteroid);
+        asteroid.init(this.currentDate);
+        this.group.add(asteroid.group);
     }
 
     public shootRay(mouseCoords: Vector2): void {
@@ -141,7 +210,7 @@ export default class SolarSystem {
         for (let [_, body] of this.celestialBodies) {
             dist = cam.position.distanceTo(body.mesh!.position);
 
-            body.updateRender(dist);
+            body.updateRender(dist, body == this.selectedObject);
         }
 
         if (this.selectedObject)
@@ -189,6 +258,11 @@ export default class SolarSystem {
         this.resetCam = true;
         this.camera.moveToDefaultPosition();
         this.ui.hideResetPosition();
+        this.selectedObject = null;
+    }
+
+    public renderSun(): void {
+        this.centralBody.render();
     }
 
     private async initPlanets(): Promise<void> {

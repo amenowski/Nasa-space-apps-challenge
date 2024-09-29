@@ -18,7 +18,7 @@ export default class CelestialBody {
     public radius: number;
     public trueAnomaly: number;
     public satellites: Map<string, Satellite> = new Map();
-    public mesh: Mesh | null = null;
+    public mesh: Mesh | Group | null = null;
     public group: Group;
     public meanMotion: number; // rad per day
     public meanAnomaly: number;
@@ -60,7 +60,7 @@ export default class CelestialBody {
         this.color = new Color(color);
     }
 
-    public init(date: Date) {
+    public init(date: Date): void {
         const tex = this.textureLoader.load(this.textureUrl);
         const geo = new SphereGeometry(this.radius);
         const mat = new MeshStandardMaterial({ map: tex });
@@ -120,14 +120,20 @@ export default class CelestialBody {
         }
     }
 
-    public updateRender(distFromCam: number): void {
+    public updateRender(distFromCam: number, isFocused: boolean): void {
         if (distFromCam < this.radius * 100) {
             this.hideAdditionalInfo();
         } else {
             this.showAdditionalInfo();
 
-            for (let [_, satellite] of this.satellites) {
-                satellite.hideAdditionalInfo();
+            if (isFocused) {
+                for (let [_, satellite] of this.satellites) {
+                    satellite.showAdditionalInfo();
+                }
+            } else {
+                for (let [_, satellite] of this.satellites) {
+                    satellite.hideAdditionalInfo();
+                }
             }
         }
     }
@@ -168,7 +174,6 @@ export default class CelestialBody {
         this.label.position.set(0, 0, 0);
         this.label.layers.set(0);
         this.mesh!.add(this.label);
-        console.log(this.label);
     }
 
     protected createIcon(): void {
