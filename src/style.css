@@ -148,7 +148,8 @@ body {
 }
 
 .planet-label.hovered,
-.planet-icon.hovered {
+.planet-icon.hovered,
+.asteroid-icon.hovered {
     opacity: 1 !important;
     cursor: pointer;
     font-weight: bold;
@@ -162,10 +163,6 @@ body {
     width: 1em;
     height: 1em;
     opacity: 0.5;
-}
-
-.asteroid-icon.hovered {
-    opacity: 1 !important;
 }
 
 .asteroid-icon img {
@@ -207,4 +204,60 @@ body {
 
 .move-to-default:hover img {
     transform: translateX(-20%);
+}
+
+.search-bar {
+    --border-color: #454553;
+    --bg-color: #1c1c22;
+    --bg-color-hover: #2a2a33;
+    --border-radius: 12px;
+    top: 2em;
+    right: 2em;
+    position: absolute;
+    pointer-events: all;
+    display: flex;
+    flex-direction: column;
+    width: 12em;
+}
+
+.search-bar .result {
+    background-color: var(--bg-color);
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    max-height: 40vh;
+    /* overflow: hidden; */
+    overflow-y: auto;
+}
+
+.search-bar .result p {
+    padding: 1em 1em;
+    margin: 0;
+    transition: background-color 200ms ease;
+    font-size: 0.8rem;
+    max-width: 30ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.search-bar .result p:hover {
+    background-color: var(--bg-color-hover);
+    cursor: pointer;
+}
+
+.search-bar input {
+    outline: none;
+    border: none;
+    background-color: var(--bg-color);
+    height: 2em;
+    padding: 1em 1em;
+    font-size: 1em;
+    color: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+
+.search-bar input.result {
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
 }

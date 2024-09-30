@@ -15,7 +15,7 @@ import {
     SolarPlanetData,
     CelestialWithRingData,
     SatellitesData,
-    SDBD_RESPONSE,
+    AsteroidData,
 } from "../core/Types";
 import { UI } from "../core/UI";
 import { SETTINGS } from "../core/Settings";
@@ -24,7 +24,6 @@ import TWEEN, { Tween } from "@tweenjs/tween.js";
 import Satellite from "./Satellite";
 
 import Asteroid from "./Asteroid";
-import axios from "axios";
 
 type UniverseObject = CelestialBody | CelestialWithRing;
 
@@ -43,6 +42,8 @@ export default class SolarSystem {
     private camera: Camera;
     private isLive: boolean;
     private resetCam: boolean = true;
+    private asteroids: Map<string, AsteroidData>;
+    private phas: Map<string, AsteroidData>;
 
     constructor(scene: Scene, renderer: WebGLRenderer, camera: Camera) {
         this.camera = camera;
@@ -63,6 +64,8 @@ export default class SolarSystem {
 
         this.celestialBodies = new Map<string, CelestialBody>();
         this.satellites = new Map<string, Satellite>();
+        this.asteroids = new Map<string, AsteroidData>();
+        this.phas = new Map<string, AsteroidData>();
         this.currentDate = new Date();
         this.ui = new UI(this);
         this.textureLoader = new TextureLoader();
@@ -77,6 +80,7 @@ export default class SolarSystem {
     public async init(): Promise<void> {
         await this.initPlanets();
         await this.initSatellites();
+        await this.loadAsteroidsData();
     }
 
     public update(deltaTime: number): void {
@@ -111,73 +115,63 @@ export default class SolarSystem {
         this.followPlanet();
     }
 
-    public async fetchAsteroidData(asteroidName: string): Promise<void> {
-        const data = await axios.get(
-            `/api/sbdb.api?sstr=${asteroidName}&r-notes=true&ca-data=true&phys-par=true&full-prec=true`
-        );
-        const res: SDBD_RESPONSE = data.data;
+    public searchForObjects(input: string): void {
+        const regExp = new RegExp(`${input}`, "gi");
+        let matches: string[] = [];
 
-        let radius: number = 0;
-        let rotPeriod: number = 0;
-        for (const psyP of res.phys_par) {
-            if (psyP.name == "diameter") radius = parseFloat(psyP.value) / 2;
-            if (psyP.name == "rot_per")
-                rotPeriod = parseFloat(psyP.value) / 3600;
+        for (let [key, _] of this.asteroids) {
+            if (regExp.test(key)) {
+                matches.push(key);
+            }
         }
+
+        this.ui.displayResult(matches);
+    }
+
+    public async loadAsteroid(asteroidName: string): Promise<void> {
+        let matches: AsteroidData[] = [];
+
+        for (let [key, ad] of this.asteroids) {
+            if (asteroidName == key) {
+                matches.push(ad);
+            }
+        }
+
+        const asteroidData = matches[0];
+
+        if (!asteroidData) return;
 
         const asteroid = new Asteroid(
             this,
-            res.object.shortname,
-            radius,
+            asteroidData.full_name,
+            asteroidData.diameter / 2,
             0,
-            rotPeriod,
-            "#ff0000",
+            asteroidData.rot_per / 3600,
+            "#ffffff",
             "./src/assets/textures/moon.jpg",
             this.textureLoader
         );
 
-        let ma: number = 0;
-        let sA: number = 0;
-        let e: number = 0;
-        let longOfPeri: number = 0;
-        let aP: number = 0;
-        let i: number = 0;
-        let aN: number = 0;
-        let period: number = 0;
-        let epoch: number = parseFloat(res.orbit.epoch);
-
-        for (const orbitElem of res.orbit.elements) {
-            if (orbitElem.name == "ma")
-                ma = parseFloat(orbitElem.value) * (Math.PI / 180);
-            if (orbitElem.name == "a") sA = parseFloat(orbitElem.value);
-            if (orbitElem.name == "e") e = parseFloat(orbitElem.value);
-            if (orbitElem.name == "w") aP = parseFloat(orbitElem.value);
-            if (orbitElem.name == "i") i = parseFloat(orbitElem.value);
-            if (orbitElem.name == "om") aN = parseFloat(orbitElem.value);
-            if (orbitElem.name == "per") period = parseFloat(orbitElem.value);
-        }
-
-        longOfPeri = aN + aP;
-        period /= 365.25;
-
+        let longOfPeri = asteroidData.om + asteroidData.w;
+        // period /= 365.25;
         const orbit = new Orbit(
-            ma,
-            sA,
-            e,
+            asteroidData.ma * (Math.PI / 180),
+            asteroidData.a,
+            asteroidData.e,
             longOfPeri,
-            i,
-            aN,
-            period,
-            epoch,
+            asteroidData.i,
+            asteroidData.om,
+            asteroidData.per_y,
+            asteroidData.epoch,
             asteroid,
-            "#ff0000"
+            "#ffffff"
         );
-
         asteroid.setOrbit(orbit);
-
         this.celestialBodies.set(asteroid.name, asteroid);
         asteroid.init(this.currentDate);
         this.group.add(asteroid.group);
+
+        this.moveToBody(asteroid);
     }
 
     public shootRay(mouseCoords: Vector2): void {
@@ -218,6 +212,9 @@ export default class SolarSystem {
     }
 
     public moveToBody(object: UniverseObject): void {
+        if (object instanceof Asteroid) {
+            object.loadModel();
+        }
         this.selectedObject = object;
 
         const p = this.selectedObject.mesh!.position;
@@ -241,10 +238,6 @@ export default class SolarSystem {
         this.selectAnimation(startPosition, endPosition, cameraTarget);
     }
 
-    public resize(): void {
-        this.centralBody.resize();
-    }
-
     public setLiveDate(): void {
         this.currentDate = new Date();
         this.isLive = true;
@@ -263,6 +256,10 @@ export default class SolarSystem {
 
     public renderSun(): void {
         this.centralBody.render();
+    }
+
+    public resize(): void {
+        this.centralBody.resize();
     }
 
     private async initPlanets(): Promise<void> {
@@ -370,6 +367,26 @@ export default class SolarSystem {
 
         for (let [_, satellite] of this.satellites)
             satellite.init(this.currentDate);
+    }
+
+    private async loadAsteroidsData(): Promise<void> {
+        let data = await fetch("./src/assets/data/PHA.json");
+        let json: AsteroidData[] = await data.json();
+
+        for (let ad of json) {
+            if (!ad.diameter) continue;
+
+            this.asteroids.set(ad.full_name, ad);
+            this.phas.set(ad.full_name, ad);
+        }
+
+        data = await fetch("./src/assets/data/NEO.json");
+        json = await data.json();
+
+        for (let ad of json) {
+            if (!ad.diameter) continue;
+            this.asteroids.set(ad.full_name, ad);
+        }
     }
 
     private followPlanet(): void {

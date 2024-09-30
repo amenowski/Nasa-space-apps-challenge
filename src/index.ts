@@ -19,13 +19,16 @@ new EventListeners(renderer, camera, solarSystem);
 
 mainScene.init();
 
-solarSystem.init();
+await solarSystem.init();
 
 mainScene.addGroup(solarSystem.group);
 
-solarSystem.fetchAsteroidData("ceres");
-solarSystem.fetchAsteroidData("apophis");
-solarSystem.fetchAsteroidData("pallas");
+// solarSystem.loadAsteroid("apophis");
+// solarSystem.loadAsteroid("icarus");
+// solarSystem.loadAsteroid("Geographos");
+// solarSystem.loadAsteroid("eros");
+
+// 504680 (2009 EO2)
 
 function animation() {
     solarSystem.update(clock.getDelta());

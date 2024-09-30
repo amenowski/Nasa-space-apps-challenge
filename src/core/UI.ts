@@ -1,4 +1,5 @@
 import SolarSystem from "../components/SolarSystem";
+import SearchBar from "../UI/SearchBar";
 import TimeSlider from "../UI/TimeSlider";
 import { getMonthShortName } from "../utils/DateConverter";
 
@@ -6,9 +7,10 @@ export class UI {
     private date: HTMLDivElement | null = null;
     private clock: HTMLDivElement | null = null;
     private liveBtn: HTMLDivElement | null = null;
+    private moveToDefaultBtn: HTMLDivElement | null = null;
+    private searchBar: SearchBar;
     private timeSlider: TimeSlider;
     private solarSystem: SolarSystem;
-    private moveToDefaultBtn: HTMLDivElement | null = null;
 
     constructor(solarSystem: SolarSystem) {
         this.clock = document.querySelector<HTMLDivElement>(
@@ -24,6 +26,7 @@ export class UI {
         this.moveToDefaultBtn = document.querySelector(".UI .move-to-default");
 
         this.timeSlider = new TimeSlider();
+        this.searchBar = new SearchBar(solarSystem);
 
         this.setEventListeners();
         this.solarSystem = solarSystem;
@@ -62,8 +65,13 @@ export class UI {
         if (this.date) this.date.innerText = `${day} ${month}, ${year}`;
     }
 
+    public displayResult(results: string[]): void {
+        this.searchBar.displaySearchResult(results);
+    }
+
     private setEventListeners(): void {
         this.timeSlider.setEventListeners();
+        this.searchBar.setEventListeners();
 
         if (this.liveBtn)
             this.liveBtn.addEventListener("click", () => {

@@ -130,3 +130,24 @@ export interface SDBD_RESPONSE {
     ca_data: CloseApproachData[];
     phys_par: PhysicalParameter[];
 }
+
+export interface AsteroidData {
+    full_name: string; // The full name or designation of the asteroid
+    neo: "Y" | "N"; // Whether it's a Near-Earth Object (NEO)
+    pha: "Y" | "N"; // Whether it's a Potentially Hazardous Asteroid (PHA)
+    a: number; // Semi-major axis (in astronomical units, AU)
+    e: number; // Eccentricity of the orbit
+    i: number; // Inclination of the orbit (in degrees)
+    om: number; // Longitude of the ascending node (in degrees)
+    w: number; // Argument of perihelion (in degrees)
+    ma: number; // Mean anomaly (in degrees)
+    diameter: number; // Diameter of the asteroid (in kilometers)
+    extent: string; // Extent of the asteroid (in kilometers, x, y, z)
+    rot_per: number; // Rotational period (in hours)
+    GM: number; // Gravitational parameter (in km^3/s^2)
+    n: number; // Mean motion (in degrees per day)
+    epoch: number; // Epoch time (in Julian Date)
+    moid: number; // Minimum Orbit Intersection Distance (in AU)1
+    per_y: number; // Orbital period (in years)
+    producer: string; // Name of the data producer
+}

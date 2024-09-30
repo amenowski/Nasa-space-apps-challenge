@@ -1,6 +1,5 @@
 import { CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
 import {
-    Group,
     Mesh,
     MeshStandardMaterial,
     SphereGeometry,
@@ -9,10 +8,13 @@ import {
 import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
 import CelestialBody from "./CelestialBody";
 import SolarSystem from "./SolarSystem";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import * as cheerio from "cheerio";
 
 export default class Asteroid extends CelestialBody {
+    public modelExist: boolean;
+    private modelUrl: string;
+
     constructor(
         system: SolarSystem,
         name: string,
@@ -33,12 +35,13 @@ export default class Asteroid extends CelestialBody {
             textureUrl,
             textureLoader
         );
+        this.modelExist = false;
+        this.modelUrl = "";
     }
 
     public async init(date: Date): Promise<void> {
-        const tex = this.textureLoader.load(this.textureUrl);
         const geo = new SphereGeometry(this.radius);
-        const mat = new MeshStandardMaterial({ color: 0x000000 });
+        const mat = new MeshStandardMaterial({ color: 0xfafafa });
         this.mesh = new Mesh(geo, mat);
         this.mesh.layers.set(4);
         this.group.layers.set(4);
@@ -48,7 +51,38 @@ export default class Asteroid extends CelestialBody {
         if (this.orbit) this.mesh.position.copy(this.orbit.setFromDate(date));
 
         const name = this.name.split(" ").join("-");
-        const data = await axios.get(`/model/asteroids/${name}`);
+        axios
+            .get(`/model/asteroids/${name}`)
+            .then((data) => {
+                this.modelExist = true;
+                this.getModelData(data);
+            })
+            .catch(() => {
+                this.modelExist = false;
+            });
+
+        this.group.add(this.mesh);
+        this.createLabel();
+        this.createIcon();
+    }
+
+    public loadModel(): void {
+        if (!this.modelExist) return;
+        const loader = new OBJLoader();
+        loader.load(`/model/${this.modelUrl}`, (obj) => {
+            for (let children of obj.children) {
+                if (children.type == "Mesh") {
+                    //@ts-expect-error
+                    this.mesh!.geometry.dispose();
+                    //@ts-expect-error
+                    this.mesh!.geometry = children.geometry;
+                }
+            }
+        });
+    }
+
+    private getModelData(data: AxiosResponse<any, any>): void {
+        if (!this.modelExist) return;
 
         const $ = cheerio.load(data.data);
         const models = $("#ast-down .downloads-wrap ul li");
@@ -59,32 +93,7 @@ export default class Asteroid extends CelestialBody {
             .last()
             .attr()!["href"];
 
-        const loader = new OBJLoader();
-
-        if (modelUrl) {
-            const objFileUrl = modelUrl.split("/").slice(3).join("/");
-
-            const modelData = await axios.get(`/model/${objFileUrl}`);
-            loader.load(`/model/${objFileUrl}`, (obj) => {
-                // this.group.add(obj);
-                // console.log(obj);
-                console.log(this.mesh);
-                // console.log(obj);
-
-                for (let children of obj.children) {
-                    if (children.type == "Mesh") {
-                        //@ts-expect-error
-                        this.mesh!.geometry.dispose();
-                        //@ts-expect-error
-                        this.mesh!.geometry = children.geometry;
-                    }
-                }
-            });
-            // console.log(modelData.data);
-        }
-        this.group.add(this.mesh);
-        this.createLabel();
-        this.createIcon();
+        this.modelUrl = modelUrl.split("/").slice(3).join("/");
     }
 
     protected createIcon(): void {
