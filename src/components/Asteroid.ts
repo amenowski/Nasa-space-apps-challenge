@@ -14,6 +14,7 @@ import * as cheerio from "cheerio";
 export default class Asteroid extends CelestialBody {
     public modelExist: boolean;
     private modelUrl: string;
+    private modelLoaded: boolean;
 
     constructor(
         system: SolarSystem,
@@ -36,6 +37,7 @@ export default class Asteroid extends CelestialBody {
             textureLoader
         );
         this.modelExist = false;
+        this.modelLoaded = false;
         this.modelUrl = "";
     }
 
@@ -49,25 +51,29 @@ export default class Asteroid extends CelestialBody {
         this.mesh.rotation.z = -this.obliquity * 0.0174532925;
 
         if (this.orbit) this.mesh.position.copy(this.orbit.setFromDate(date));
-
-        const name = this.name.split(" ").join("-");
-        axios
-            .get(`/model/asteroids/${name}`)
-            .then((data) => {
-                this.modelExist = true;
-                this.getModelData(data);
-            })
-            .catch(() => {
-                this.modelExist = false;
-            });
-
         this.group.add(this.mesh);
         this.createLabel();
         this.createIcon();
     }
 
     public loadModel(): void {
-        if (!this.modelExist) return;
+        if (this.modelLoaded) return;
+
+        if (!this.modelExist) {
+            const name = this.name.split(" ").join("-");
+            axios
+                .get(`/model/asteroids/${name}`)
+                .then((data) => {
+                    this.modelExist = true;
+                    this.getModelData(data);
+                })
+                .catch(() => {
+                    this.modelExist = false;
+                    this.setRandom3dModel();
+                });
+            return;
+        }
+
         const loader = new OBJLoader();
         loader.load(`/model/${this.modelUrl}`, (obj) => {
             for (let children of obj.children) {
@@ -76,24 +82,10 @@ export default class Asteroid extends CelestialBody {
                     this.mesh!.geometry.dispose();
                     //@ts-expect-error
                     this.mesh!.geometry = children.geometry;
+                    this.modelLoaded = true;
                 }
             }
         });
-    }
-
-    private getModelData(data: AxiosResponse<any, any>): void {
-        if (!this.modelExist) return;
-
-        const $ = cheerio.load(data.data);
-        const models = $("#ast-down .downloads-wrap ul li");
-
-        const modelUrl: string | undefined = models
-            .first()
-            .children("a")
-            .last()
-            .attr()!["href"];
-
-        this.modelUrl = modelUrl.split("/").slice(3).join("/");
     }
 
     protected createIcon(): void {
@@ -121,6 +113,43 @@ export default class Asteroid extends CelestialBody {
 
         this.htmlElements[1].addEventListener("pointerdown", () => {
             this.system.moveToBody(this);
+        });
+    }
+
+    private getModelData(data: AxiosResponse<any, any>): void {
+        if (!this.modelExist) return;
+
+        const $ = cheerio.load(data.data);
+        const models = $("#ast-down .downloads-wrap ul li");
+
+        const modelUrl: string | undefined = models
+            .first()
+            .children("a")
+            .last()
+            .attr()!["href"];
+
+        this.modelUrl = modelUrl.split("/").slice(3).join("/");
+        this.loadModel();
+    }
+
+    private setRandom3dModel(): void {
+        this.modelExist = true;
+        // 4 3 7 9
+        const randomNumber = Math.floor(Math.random() * 3);
+
+        this.modelUrl = `./src/assets/models/asteroid_model_${randomNumber}.obj`;
+
+        const loader = new OBJLoader();
+        loader.load(this.modelUrl, (obj) => {
+            for (let children of obj.children) {
+                if (children.type == "Mesh") {
+                    //@ts-expect-error
+                    this.mesh!.geometry.dispose();
+                    //@ts-expect-error
+                    this.mesh!.geometry = children.geometry;
+                    this.modelLoaded = true;
+                }
+            }
         });
     }
 }

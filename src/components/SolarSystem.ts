@@ -107,7 +107,6 @@ export default class SolarSystem {
             );
 
             if (celestialBody instanceof CelestialWithRing) {
-                // console.log("simea");
                 celestialBody.updateRing();
             }
         }

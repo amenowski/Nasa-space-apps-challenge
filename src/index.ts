@@ -26,9 +26,7 @@ mainScene.addGroup(solarSystem.group);
 // solarSystem.loadAsteroid("apophis");
 // solarSystem.loadAsteroid("icarus");
 // solarSystem.loadAsteroid("Geographos");
-// solarSystem.loadAsteroid("eros");
-
-// 504680 (2009 EO2)
+solarSystem.loadAsteroid("159504 (2000 WO67)");
 
 function animation() {
     solarSystem.update(clock.getDelta());
