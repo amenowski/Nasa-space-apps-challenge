@@ -149,7 +149,7 @@ export default class SolarSystem {
             asteroidData.diameter / 2,
             0,
             asteroidData.rot_per / 3600,
-            "#ffffff",
+            SETTINGS.ORBIT_COLOR,
             "./src/assets/textures/moon.jpg",
             this.textureLoader
         );
@@ -165,7 +165,7 @@ export default class SolarSystem {
             asteroidData.per_y,
             asteroidData.epoch,
             asteroid,
-            "#ffffff"
+            SETTINGS.ORBIT_COLOR
         );
         asteroid.setOrbit(orbit);
         this.celestialBodies.set(asteroid.name, asteroid);
@@ -213,9 +213,13 @@ export default class SolarSystem {
     }
 
     public moveToBody(object: UniverseObject): void {
+        let zoom = SETTINGS.ZOOM_TO_OBJECT;
+
         if (object instanceof Asteroid) {
             object.loadModel();
+            if (object.zoom > SETTINGS.ZOOM_TO_OBJECT) zoom = object.zoom;
         }
+
         this.selectedObject = object;
 
         const p = this.selectedObject.mesh!.position;
@@ -226,11 +230,7 @@ export default class SolarSystem {
         let startPosition = cam.position.clone();
         let endPosition = new Vector3()
             .copy(p)
-            .sub(
-                direction.multiplyScalar(
-                    this.selectedObject.radius * SETTINGS.ZOOM_TO_OBJECT
-                )
-            );
+            .sub(direction.multiplyScalar(this.selectedObject.radius * zoom));
 
         this.camera.controls.target = cameraTarget.clone();
         this.camera.controls.enabled = false;
@@ -388,6 +388,14 @@ export default class SolarSystem {
             if (!ad.diameter) continue;
             this.asteroids.set(ad.full_name, ad);
         }
+
+        data = await fetch("./src/assets/data/NEOc.json");
+        json = await data.json();
+
+        for (let ad of json) {
+            if (!ad.diameter) continue;
+            this.asteroids.set(ad.full_name, ad);
+        }
     }
 
     private followPlanet(): void {
@@ -402,7 +410,6 @@ export default class SolarSystem {
         let direction = new Vector3();
         const cam = this.camera.getCamera();
         cam.getWorldDirection(direction);
-
         let endPosition = new Vector3()
             .copy(this.selectedObject.mesh!.position)
             .sub(direction.multiplyScalar(SETTINGS.DISTANCE_TO_OBJECT));

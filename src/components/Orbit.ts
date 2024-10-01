@@ -143,6 +143,12 @@ class Orbit {
         this.unhoveredMaterial = new LineBasicMaterial({
             vertexColors: true,
             transparent: true,
+            opacity: 0.5,
+        });
+        this.hoveredMaterial = new LineBasicMaterial({
+            vertexColors: true,
+            transparent: true,
+            opacity: 1,
         });
 
         this.orbitLine.material = this.unhoveredMaterial;
@@ -162,8 +168,8 @@ class Orbit {
         let opacity: number = 0;
         while (offset < TAU + step) {
             points.push(this.calculatePosition(angle));
-            opacity = 1 - offset / TAU - 0.05;
-            colors.push(1, 1, 1, opacity);
+            opacity = 1 - offset / TAU - 0.1;
+            colors.push(this.color.r, this.color.g, this.color.b, opacity);
             angle = angle - step;
             if (angle < 0) angle += TAU;
             offset += step;
@@ -174,7 +180,6 @@ class Orbit {
         1;
 
         geo.setAttribute("color", new BufferAttribute(colorAttribute, 4));
-        // this.orbitLine.geometry.attributes.color.needsUpdate = true;
 
         this.orbitLine.geometry.dispose();
         this.orbitLine.geometry = geo;
@@ -200,7 +205,8 @@ class Orbit {
 
         const scale = 149597870.7 / SETTINGS.DISTANCE_SCALE;
         const theta = uA;
-        const sLR = a * Math.pow(1 - e, 2);
+        const sLR = a * (1 - Math.pow(e, 2));
+        // const sLR = a * Math.pow(1 - e, 2);
         const r = sLR / (1 + e * Math.cos(theta));
         const pos = new Vector3(0, 0, 0);
 

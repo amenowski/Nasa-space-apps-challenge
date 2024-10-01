@@ -1,9 +1,11 @@
 import { CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
 import {
+    Box3,
     Mesh,
     MeshStandardMaterial,
     SphereGeometry,
     TextureLoader,
+    Vector3,
 } from "three";
 import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
 import CelestialBody from "./CelestialBody";
@@ -12,9 +14,11 @@ import axios, { AxiosResponse } from "axios";
 import * as cheerio from "cheerio";
 import Orbit from "./Orbit";
 import { UnixToJulianDate } from "../utils/DateConverter";
+import { SETTINGS } from "../core/Settings";
 
 export default class Asteroid extends CelestialBody {
     public modelExist: boolean;
+    public zoom: number = SETTINGS.ZOOM_TO_OBJECT;
     private modelUrl: string;
     private modelLoaded: boolean;
 
@@ -89,6 +93,14 @@ export default class Asteroid extends CelestialBody {
                     //@ts-expect-error
                     this.mesh!.geometry = children.geometry;
                     this.modelLoaded = true;
+
+                    const box = new Box3().setFromObject(this.mesh!);
+                    const size = new Vector3();
+
+                    box.getSize(size);
+                    this.zoom = size.z;
+
+                    this.system.moveToBody(this);
                 }
             }
         });
@@ -130,6 +142,7 @@ export default class Asteroid extends CelestialBody {
         this.orbit = orbit;
         this.orbit.setAsteroidMaterial();
         this.orbit.visualize();
+
         this.group.add(this.orbit!.orbitLine);
     }
 
