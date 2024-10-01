@@ -136,7 +136,7 @@ export interface AsteroidData {
     neo: "Y" | "N"; // Whether it's a Near-Earth Object (NEO)
     pha: "Y" | "N"; // Whether it's a Potentially Hazardous Asteroid (PHA)
     a: number; // Semi-major axis (in astronomical units, AU)
-    e: number; // Eccentricity of the orbit
+    e: number | string; // Eccentricity of the orbit
     i: number; // Inclination of the orbit (in degrees)
     om: number; // Longitude of the ascending node (in degrees)
     w: number; // Argument of perihelion (in degrees)

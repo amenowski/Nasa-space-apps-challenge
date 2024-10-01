@@ -149,6 +149,10 @@ export default class CelestialBody {
             satellite.showAdditionalInfo();
     }
 
+    public getOrbit(): Orbit {
+        return this.orbit!;
+    }
+
     protected hideAdditionalInfo(): void {
         if (this.orbit) this.orbit.hide();
         if (this.label) this.label.element.style.opacity = "0";

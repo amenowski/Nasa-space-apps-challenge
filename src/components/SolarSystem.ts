@@ -155,10 +155,15 @@ export default class SolarSystem {
         );
 
         let longOfPeri = asteroidData.om + asteroidData.w;
+        let eccentricity = asteroidData.e;
+
+        if (typeof eccentricity == "string")
+            eccentricity = parseFloat(eccentricity);
+
         const orbit = new Orbit(
             asteroidData.ma * (Math.PI / 180),
             asteroidData.a,
-            asteroidData.e,
+            eccentricity,
             longOfPeri,
             asteroidData.i,
             asteroidData.om,
@@ -236,6 +241,8 @@ export default class SolarSystem {
         this.camera.controls.enabled = false;
         this.resetCam = false;
 
+        this.ui.showOrbitInfo(this.selectedObject);
+
         this.selectAnimation(startPosition, endPosition, cameraTarget);
     }
 
@@ -252,6 +259,7 @@ export default class SolarSystem {
         this.resetCam = true;
         this.camera.moveToDefaultPosition();
         this.ui.hideResetPosition();
+        this.ui.hideOrbitInfo();
         this.selectedObject = null;
     }
 

@@ -28,6 +28,7 @@ export default class Asteroid extends CelestialBody {
         radius: number,
         obliquity: number,
         sidRotPerSec: number,
+
         color: string,
         textureUrl: string,
         textureLoader: TextureLoader

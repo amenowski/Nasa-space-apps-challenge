@@ -23,6 +23,7 @@ class Orbit {
     public inclination: number;
     public longOfPeri: number;
     public ascendingNode: number;
+    public argPeri: number;
     public dataFrom: number;
     public epoch: number;
     public period: number; // in years
@@ -58,6 +59,7 @@ class Orbit {
         this.inclination = inclination * 0.0174532925; // convert to RAD
         this.longOfPeri = longOfPeri * 0.0174532925; // convert to RAD
         this.ascendingNode = ascentingNode * 0.0174532925; // convert to RAD
+        this.argPeri = 0;
 
         if (typeof dataFrom == "number") {
             this.dataFrom = dataFrom;
@@ -202,6 +204,7 @@ class Orbit {
         const aN = this.currentOrbitElements.ascendingNode;
         const i = this.currentOrbitElements.inclination;
         const pA = this.currentOrbitElements.longOfPeri - aN;
+        this.argPeri = pA;
 
         const scale = 149597870.7 / SETTINGS.DISTANCE_SCALE;
         const theta = uA;

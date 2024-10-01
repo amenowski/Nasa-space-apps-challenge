@@ -282,6 +282,12 @@ p {
     display: flex;
     flex-direction: column-reverse;
     overflow: hidden;
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+}
+
+.object-info.visible {
+    opacity: 1;
 }
 
 .object-info .main-info {
@@ -317,11 +323,23 @@ p {
     transform: rotate(180deg);
 }
 
+.object-info.extended .main-info .more-info svg {
+    transform: rotate(180deg);
+}
+
+.object-info.extended .main-info .more-info:hover svg {
+    transform: rotate(0deg);
+}
+
 .object-info .orbital-elements {
+    pointer-events: all;
     background-color: var(--bg-color);
     transform: translateY(100%);
     transition: all 200ms ease-in;
     padding: 0.5em 0;
+    overflow: auto;
+    height: auto;
+    max-height: 50vh;
 }
 
 .object-info .orbital-elements ul {
@@ -339,6 +357,10 @@ p {
     justify-content: space-between;
     align-items: center;
     color: var(--font-color);
+}
+
+.object-info .orbital-elements ul li .label {
+    font-weight: bold;
 }
 
 .object-info .orbital-elements ul li .value {

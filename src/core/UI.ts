@@ -1,4 +1,6 @@
+import CelestialBody from "../components/CelestialBody";
 import SolarSystem from "../components/SolarSystem";
+import OrbitInfo from "../UI/OrbitInfo";
 import SearchBar from "../UI/SearchBar";
 import TimeSlider from "../UI/TimeSlider";
 import { getMonthShortName } from "../utils/DateConverter";
@@ -10,6 +12,7 @@ export class UI {
     private moveToDefaultBtn: HTMLDivElement | null = null;
     private searchBar: SearchBar;
     private timeSlider: TimeSlider;
+    private orbitInfo: OrbitInfo;
     private solarSystem: SolarSystem;
 
     constructor(solarSystem: SolarSystem) {
@@ -27,6 +30,7 @@ export class UI {
 
         this.timeSlider = new TimeSlider();
         this.searchBar = new SearchBar(solarSystem);
+        this.orbitInfo = new OrbitInfo();
 
         this.setEventListeners();
         this.solarSystem = solarSystem;
@@ -69,9 +73,19 @@ export class UI {
         this.searchBar.displaySearchResult(results);
     }
 
+    public showOrbitInfo(object: CelestialBody): void {
+        this.orbitInfo.displayInfo(object);
+        this.orbitInfo.showContainer();
+    }
+
+    public hideOrbitInfo(): void {
+        this.orbitInfo.hideContainer();
+    }
+
     private setEventListeners(): void {
         this.timeSlider.setEventListeners();
         this.searchBar.setEventListeners();
+        this.orbitInfo.setEventListeners();
 
         if (this.liveBtn)
             this.liveBtn.addEventListener("click", () => {
