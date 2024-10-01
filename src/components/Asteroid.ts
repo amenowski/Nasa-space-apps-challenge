@@ -10,6 +10,8 @@ import CelestialBody from "./CelestialBody";
 import SolarSystem from "./SolarSystem";
 import axios, { AxiosResponse } from "axios";
 import * as cheerio from "cheerio";
+import Orbit from "./Orbit";
+import { UnixToJulianDate } from "../utils/DateConverter";
 
 export default class Asteroid extends CelestialBody {
     public modelExist: boolean;
@@ -50,7 +52,11 @@ export default class Asteroid extends CelestialBody {
         this.mesh.name = this.name;
         this.mesh.rotation.z = -this.obliquity * 0.0174532925;
 
-        if (this.orbit) this.mesh.position.copy(this.orbit.setFromDate(date));
+        if (this.orbit) {
+            this.mesh.position.copy(this.orbit.setFromDate(date));
+
+            this.group.add(this.orbit.orbitLine);
+        }
         this.group.add(this.mesh);
         this.createLabel();
         this.createIcon();
@@ -86,6 +92,45 @@ export default class Asteroid extends CelestialBody {
                 }
             }
         });
+    }
+
+    public updatePosition(
+        date: Date,
+        deltaTime: number,
+        daysPerSec: number
+    ): void {
+        this.rotateObject(date);
+        if (this.orbit) {
+            const currentDate = UnixToJulianDate(date);
+
+            this.meanAnomaly =
+                this.meanAnomaly + this.meanMotion * deltaTime * daysPerSec;
+            this.meanAnomaly = this.meanAnomaly % (Math.PI * 2);
+            this.orbit.setEpoch(currentDate);
+            this.mesh!.position.copy(
+                this.orbit.fromMeanAnomaly(this.meanAnomaly)
+            );
+            this.orbit.trace();
+            for (let [_, satellite] of this.satellites)
+                satellite.updatePosition(date, deltaTime, daysPerSec);
+        }
+    }
+
+    public setLivePosition(date: Date) {
+        if (this.mesh && this.orbit) {
+            this.orbit.setFromDate(date);
+
+            for (let [_, satellite] of this.satellites)
+                satellite.setLivePosition(date);
+        }
+    }
+
+    public setOrbit(orbit: Orbit): void {
+        // trace orbit
+        this.orbit = orbit;
+        this.orbit.setAsteroidMaterial();
+        this.orbit.visualize();
+        this.group.add(this.orbit!.orbitLine);
     }
 
     protected createIcon(): void {

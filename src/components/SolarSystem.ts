@@ -127,7 +127,10 @@ export default class SolarSystem {
         this.ui.displayResult(matches);
     }
 
-    public async loadAsteroid(asteroidName: string): Promise<void> {
+    public async loadAsteroid(
+        asteroidName: string,
+        move: boolean = true
+    ): Promise<void> {
         let matches: AsteroidData[] = [];
 
         for (let [key, ad] of this.asteroids) {
@@ -152,7 +155,6 @@ export default class SolarSystem {
         );
 
         let longOfPeri = asteroidData.om + asteroidData.w;
-        // period /= 365.25;
         const orbit = new Orbit(
             asteroidData.ma * (Math.PI / 180),
             asteroidData.a,
@@ -170,7 +172,7 @@ export default class SolarSystem {
         asteroid.init(this.currentDate);
         this.group.add(asteroid.group);
 
-        this.moveToBody(asteroid);
+        if (move) this.moveToBody(asteroid);
     }
 
     public shootRay(mouseCoords: Vector2): void {

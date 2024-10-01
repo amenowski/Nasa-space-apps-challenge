@@ -1,4 +1,11 @@
-import { Line, BufferGeometry, LineBasicMaterial, Vector3, Color } from "three";
+import {
+    Line,
+    BufferGeometry,
+    LineBasicMaterial,
+    Vector3,
+    Color,
+    BufferAttribute,
+} from "three";
 import CelestialObject from "./CelestialBody";
 import {
     calculateEccentricFromMean,
@@ -129,8 +136,48 @@ class Orbit {
         const geo = new BufferGeometry().setFromPoints(points);
 
         this.orbitLine = new Line(geo, this.unhoveredMaterial);
-
         if (origin) this.orbitLine.position.copy(origin);
+    }
+
+    public setAsteroidMaterial(): void {
+        this.unhoveredMaterial = new LineBasicMaterial({
+            vertexColors: true,
+            transparent: true,
+        });
+
+        this.orbitLine.material = this.unhoveredMaterial;
+    }
+
+    public trace(): void {
+        if (!this.orbitLine) return;
+
+        let startAngle = this.celestialObject.trueAnomaly;
+
+        let angle = startAngle;
+        const TAU = Math.PI * 2;
+        let offset = 0;
+        const step = 0.01745329252;
+        const colors: number[] = [];
+        let points: Vector3[] = [];
+        let opacity: number = 0;
+        while (offset < TAU + step) {
+            points.push(this.calculatePosition(angle));
+            opacity = 1 - offset / TAU - 0.05;
+            colors.push(1, 1, 1, opacity);
+            angle = angle - step;
+            if (angle < 0) angle += TAU;
+            offset += step;
+        }
+
+        const colorAttribute = new Float32Array(colors);
+        const geo = new BufferGeometry().setFromPoints(points);
+        1;
+
+        geo.setAttribute("color", new BufferAttribute(colorAttribute, 4));
+        // this.orbitLine.geometry.attributes.color.needsUpdate = true;
+
+        this.orbitLine.geometry.dispose();
+        this.orbitLine.geometry = geo;
     }
 
     public hovered(): void {

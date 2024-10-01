@@ -26,7 +26,7 @@ mainScene.addGroup(solarSystem.group);
 // solarSystem.loadAsteroid("apophis");
 // solarSystem.loadAsteroid("icarus");
 // solarSystem.loadAsteroid("Geographos");
-solarSystem.loadAsteroid("159504 (2000 WO67)");
+solarSystem.loadAsteroid("159504 (2000 WO67)", false);
 
 function animation() {
     solarSystem.update(clock.getDelta());
