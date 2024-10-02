@@ -151,3 +151,5 @@ export interface AsteroidData {
     per_y: number; // Orbital period (in years)
     producer: string; // Name of the data producer
 }
+
+export type AsteroidType = "NEO" | "PHA";

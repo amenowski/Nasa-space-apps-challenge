@@ -29,6 +29,15 @@ type UniverseObject = CelestialBody | CelestialWithRing;
 
 export default class SolarSystem {
     public group: Group;
+    public famousObjectsNames: string[] = [
+        "433 Eros (A898 PA)",
+        "2062 Aten (1976 AA)",
+        "1862 Apollo (1932 HA)",
+        "99942 Apophis (2004 MN4)",
+        "2P/Encke",
+        "96189 Pygmalion (1991 NT3)",
+        "101955 Bennu (1999 RQ36)",
+    ];
     private centralBody: Sun;
     private celestialBodies: Map<string, CelestialBody | CelestialWithRing>;
     private satellites: Map<string, Satellite>;
@@ -43,6 +52,7 @@ export default class SolarSystem {
     private isLive: boolean;
     private resetCam: boolean = true;
     private asteroids: Map<string, AsteroidData>;
+    private comests: Map<string, AsteroidData>;
     private phas: Map<string, AsteroidData>;
 
     constructor(scene: Scene, renderer: WebGLRenderer, camera: Camera) {
@@ -65,6 +75,7 @@ export default class SolarSystem {
         this.celestialBodies = new Map<string, CelestialBody>();
         this.satellites = new Map<string, Satellite>();
         this.asteroids = new Map<string, AsteroidData>();
+        this.comests = new Map<string, AsteroidData>();
         this.phas = new Map<string, AsteroidData>();
         this.currentDate = new Date();
         this.ui = new UI(this);
@@ -81,6 +92,7 @@ export default class SolarSystem {
         await this.initPlanets();
         await this.initSatellites();
         await this.loadAsteroidsData();
+        this.loadFamousObjects();
     }
 
     public update(deltaTime: number): void {
@@ -115,6 +127,7 @@ export default class SolarSystem {
     }
 
     public searchForObjects(input: string): void {
+        input = input.replace(/[{()}]/g, "");
         const regExp = new RegExp(`${input}`, "gi");
         let matches: string[] = [];
 
@@ -151,7 +164,8 @@ export default class SolarSystem {
             asteroidData.rot_per / 3600,
             SETTINGS.ORBIT_COLOR,
             "./src/assets/textures/moon.jpg",
-            this.textureLoader
+            this.textureLoader,
+            asteroidData.pha
         );
 
         let longOfPeri = asteroidData.om + asteroidData.w;
@@ -403,6 +417,13 @@ export default class SolarSystem {
         for (let ad of json) {
             if (!ad.diameter) continue;
             this.asteroids.set(ad.full_name, ad);
+            this.comests.set(ad.full_name, ad);
+        }
+    }
+
+    private async loadFamousObjects(): Promise<void> {
+        for (let name of this.famousObjectsNames) {
+            await this.loadAsteroid(name, false);
         }
     }
 

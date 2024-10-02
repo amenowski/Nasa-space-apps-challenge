@@ -15,10 +15,12 @@ import * as cheerio from "cheerio";
 import Orbit from "./Orbit";
 import { UnixToJulianDate } from "../utils/DateConverter";
 import { SETTINGS } from "../core/Settings";
+import { AsteroidType } from "../core/Types";
 
 export default class Asteroid extends CelestialBody {
     public modelExist: boolean;
     public zoom: number = SETTINGS.ZOOM_TO_OBJECT;
+    public type: AsteroidType;
     private modelUrl: string;
     private modelLoaded: boolean;
 
@@ -28,10 +30,10 @@ export default class Asteroid extends CelestialBody {
         radius: number,
         obliquity: number,
         sidRotPerSec: number,
-
         color: string,
         textureUrl: string,
-        textureLoader: TextureLoader
+        textureLoader: TextureLoader,
+        isPha: "Y" | "N"
     ) {
         super(
             system,
@@ -46,6 +48,9 @@ export default class Asteroid extends CelestialBody {
         this.modelExist = false;
         this.modelLoaded = false;
         this.modelUrl = "";
+        this.type = "NEO";
+
+        if (isPha == "Y") this.type = "PHA";
     }
 
     public async init(date: Date): Promise<void> {
@@ -131,8 +136,6 @@ export default class Asteroid extends CelestialBody {
 
     public updateRender(distFromCam: number, isFocused: boolean): void {
         let zoom = Math.max(this.radius, this.zoom);
-
-        console.log(zoom, this.zoom);
 
         if (distFromCam < zoom * 100) {
             this.hideAdditionalInfo();

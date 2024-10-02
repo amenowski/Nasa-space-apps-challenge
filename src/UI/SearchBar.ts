@@ -18,11 +18,21 @@ export default class SearchBar {
     }
 
     public setEventListeners(): void {
-        if (this.input)
+        if (this.input) {
             this.input.addEventListener("input", () => {
                 if (!this.input) return;
                 this.system.searchForObjects(this.input.value);
             });
+            this.input.addEventListener("focus", () => {
+                if (!this.input) return;
+                this.system.searchForObjects(this.input.value);
+            });
+
+            this.input.addEventListener("blur", () => {
+                if (!this.input) return;
+                this.clearResult();
+            });
+        }
     }
 
     public displaySearchResult(results: string[]): void {
@@ -30,7 +40,9 @@ export default class SearchBar {
         if (!this.resultContainer) return;
         this.clearResult();
 
-        if (this.input!.value == "") return;
+        if (this.input!.value == "") {
+            results = this.system.famousObjectsNames;
+        }
         for (let result of results) {
             let p = document.createElement("p");
             p.innerText = result;

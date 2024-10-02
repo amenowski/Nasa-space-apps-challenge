@@ -1,0 +1,648 @@
+{
+    "asteroids": [
+      {
+        "name": "433 Eros",
+        "description": "One of the first asteroids to be orbited by a spacecraft, Eros is classified as a near-Earth asteroid and has a shape resembling a peanut."
+      },
+      {
+        "name": "719 Albert",
+        "description": "An asteroid of the Apollo group, Albert has a moderately elliptical orbit and is known for its close encounters with Earth."
+      },
+      {
+        "name": "887 Alinda",
+        "description": "Alinda is a near-Earth asteroid with a unique orbit that brings it close to Earth's orbit, making it a potential target for future exploration."
+      },
+      {
+        "name": "1036 Ganymed",
+        "description": "One of the largest asteroids in the asteroid belt, Ganymed is classified as an S-type asteroid, indicating a rocky composition."
+      },
+      {
+        "name": "1221 Amor",
+        "description": "Amor is a significant near-Earth asteroid, named after the Roman god of love, and is classified as a member of the Amor group."
+      },
+      {
+        "name": "1566 Icarus",
+        "description": "Named after the Greek mythological figure, Icarus is notable for its highly eccentric orbit that brings it close to the sun."
+      },
+      {
+        "name": "1580 Betulia",
+        "description": "Betulia is a stony asteroid located in the asteroid belt and is known for its relatively small size."
+      },
+      {
+        "name": "1620 Geographos",
+        "description": "Geographos is a near-Earth asteroid with a distinctive elongated shape, making it a subject of interest for astronomers."
+      },
+      {
+        "name": "1627 Ivar",
+        "description": "Ivar is a relatively small asteroid in the main belt, with a stable orbit that does not bring it close to Earth."
+      },
+      {
+        "name": "1685 Toro",
+        "description": "Toro is a small asteroid that orbits the sun between Mars and Jupiter, classified as an S-type asteroid."
+      },
+      {
+        "name": "1862 Apollo",
+        "description": "An asteroid that gave its name to the Apollo group, consisting of near-Earth asteroids. It was one of the first to be discovered."
+      },
+      {
+        "name": "1863 Antinous",
+        "description": "Antinous is a relatively small asteroid named after the favorite of the Roman Emperor Hadrian."
+      },
+      {
+        "name": "1864 Daedalus",
+        "description": "Daedalus is a unique asteroid known for its orbit that takes it close to Earth, potentially making it a target for exploration."
+      },
+      {
+        "name": "1865 Cerberus",
+        "description": "Cerberus is a small asteroid named after the multi-headed dog from Greek mythology, reflecting its unique orbit."
+      },
+      {
+        "name": "1866 Sisyphus",
+        "description": "Named after the Greek mythological figure condemned to roll a boulder uphill, Sisyphus is a near-Earth asteroid."
+      },
+      {
+        "name": "1915 Quetzalcoatl",
+        "description": "This asteroid is named after the Mesoamerican deity and is part of the inner solar system."
+      },
+      {
+        "name": "1916 Boreas",
+        "description": "Boreas is named after the Greek god of the north wind and is categorized as a main-belt asteroid."
+      },
+      {
+        "name": "1917 Cuyo",
+        "description": "Cuyo is a small asteroid that orbits the sun in the asteroid belt and is classified as an S-type asteroid."
+      },
+      {
+        "name": "1943 Anteros",
+        "description": "Anteros is named after the Greek god of requited love, and it is classified as a near-Earth asteroid."
+      },
+      {
+        "name": "1980 Tezcatlipoca",
+        "description": "Tezcatlipoca is named after the Aztec god of the night sky and is a part of the inner solar system."
+      },
+      {
+        "name": "1981 Midas",
+        "description": "Midas is a small asteroid named after the mythological king known for his ability to turn everything to gold."
+      },
+      {
+        "name": "2059 Baboquivari",
+        "description": "Baboquivari is named after a mountain in Arizona, reflecting its cultural significance to the Tohono O'odham people."
+      },
+      {
+        "name": "2061 Anza",
+        "description": "Anza is named after Juan Bautista de Anza, a Spanish explorer, and is significant for its potential for future study."
+      },
+      {
+        "name": "2062 Aten",
+        "description": "Aten is a near-Earth asteroid known for its orbit that crosses Earth's path, making it an important subject for study."
+      },
+      {
+        "name": "2063 Bacchus",
+        "description": "Named after the Roman god of wine, Bacchus is an asteroid of interest for its composition and orbit."
+      },
+      {
+        "name": "2100 Ra-Shalom",
+        "description": "Ra-Shalom is named after the Egyptian sun god and reflects a blend of cultural heritage and astronomical study."
+      },
+      {
+        "name": "2101 Adonis",
+        "description": "This asteroid is named after the figure from mythology associated with beauty and desire."
+      },
+      {
+        "name": "2102 Tantalus",
+        "description": "Tantalus is named after the mythological figure who was punished by the gods, representing its elusive orbit."
+      },
+      {
+        "name": "2135 Aristaeus",
+        "description": "Aristaeus is named after the Greek god of agriculture and is classified as a main-belt asteroid."
+      },
+      {
+        "name": "2201 Oljato",
+        "description": "Oljato is named after a location in Arizona, reflecting its ties to Native American culture."
+      },
+      {
+        "name": "2202 Pele",
+        "description": "Pele is named after the Hawaiian goddess of volcanoes, symbolizing the dynamic nature of celestial bodies."
+      },
+      {
+        "name": "2212 Hephaistos",
+        "description": "Named after the Greek god of fire and metalworking, Hephaistos is a stony asteroid in the asteroid belt."
+      },
+      {
+        "name": "2329 Orthos",
+        "description": "Orthos is a relatively small asteroid with a stable orbit, contributing to our understanding of the asteroid belt."
+      },
+      {
+        "name": "2340 Hathor",
+        "description": "Hathor is named after the Egyptian goddess of love and joy and is of interest for its orbital characteristics."
+      },
+      {
+        "name": "2368 Beltrovata",
+        "description": "Beltrovata is a smaller asteroid that orbits in the asteroid belt, known for its unremarkable yet stable trajectory."
+      },
+      {
+        "name": "2608 Seneca",
+        "description": "Seneca is named after the Roman philosopher and dramatist, reflecting the intersection of culture and science."
+      },
+      {
+        "name": "3102 Krok",
+        "description": "Krok is a small asteroid in the main belt, contributing to the diversity of known celestial bodies."
+      },
+      {
+        "name": "3103 Eger",
+        "description": "Eger is a relatively small asteroid with an unremarkable orbit, but it is part of the important asteroid population."
+      },
+      {
+        "name": "3122 Florence",
+        "description": "Florence is a large near-Earth asteroid that is notable for its size and potential for exploration."
+      },
+      {
+        "name": "3199 Nefertiti",
+        "description": "Nefertiti is named after the famous Egyptian queen and represents the blend of culture and astronomy."
+      },
+      {
+        "name": "3200 Phaethon",
+        "description": "Phaethon is a unique asteroid known for its resemblance to a comet and its close proximity to Earth."
+      },
+      {
+        "name": "3271 Ul",
+        "description": "Ul is a small main-belt asteroid with a stable orbit and limited observational data."
+      },
+      {
+        "name": "3288 Seleucus",
+        "description": "Seleucus is a relatively small asteroid in the main belt, contributing to our understanding of asteroid composition."
+      },
+      {
+        "name": "3352 McAuliffe",
+        "description": "Named in honor of Christa McAuliffe, the teacher selected for the Challenger mission, this asteroid honors educational aspirations."
+      },
+      {
+        "name": "3360 Syrinx",
+        "description": "Syrinx is a small asteroid named after the nymph from Greek mythology, contributing to the mythological naming conventions in astronomy."
+      },
+      {
+        "name": "3361 Orpheus",
+        "description": "Orpheus is named after the mythological figure known for his musical abilities, reflecting the artistic ties of celestial naming."
+      },
+      {
+        "name": "3362 Khufu",
+        "description": "Khufu is named after the Egyptian pharaoh known for the Great Pyramid, symbolizing ancient achievements."
+      },
+      {
+        "name": "3551 Verenia",
+        "description": "Verenia is a lesser-known asteroid with limited observational data, contributing to the study of small celestial bodies."
+      },
+      {
+        "name": "3552 Don Quixote",
+        "description": "Named after the famous literary character, this asteroid reflects the influence of culture on scientific nomenclature."
+      },
+      {
+        "name": "3553 Mera",
+        "description": "Mera is a small asteroid in the asteroid belt with an orbit that keeps it relatively stable."
+      },
+      {
+        "name": "3554 Amun",
+        "description": "Amun is named after the ancient Egyptian god, highlighting the cultural significance of celestial naming."
+      },
+      {
+        "name": "3671 Dionysus",
+        "description": "Named after the Greek god of wine and revelry, Dionysus represents the intersection of mythology and astronomy."
+      },
+      {
+        "name": "3691 Bede",
+        "description": "Bede is named after the Anglo-Saxon monk and historian, emphasizing the importance of knowledge and education."
+      },
+      {
+        "name": "3752 Camillo",
+        "description": "Camillo is a small asteroid with limited observational data, adding to the diversity of known celestial objects."
+      },
+      {
+        "name": "3753 Cruithne",
+        "description": "Often referred to as Earth's second moon due to its unique orbit that co-orbital with Earth."
+      },
+      {
+        "name": "3757 Anagolay",
+        "description": "Anagolay is named after the Hawaiian goddess of lost things, reflecting its cultural significance."
+      },
+      {
+        "name": "3838 Epona",
+        "description": "Epona is named after the Celtic goddess of horses, symbolizing the ties between mythology and astronomy."
+      },
+      {
+        "name": "3908 Nyx",
+        "description": "Nyx is named after the Greek goddess of the night, emphasizing the dark and mysterious aspects of space."
+      },
+      {
+        "name": "3988 Huma",
+        "description": "Huma is named after a mythical bird in Persian mythology that brings good fortune."
+      },
+      {
+        "name": "4015 Wilson-Harrington",
+        "description": "This asteroid is named in honor of two astronomers, reflecting contributions to the field of astronomy."
+      },
+      {
+        "name": "4034 Vishnu",
+        "description": "Named after the Hindu god, Vishnu symbolizes preservation and is an important figure in Indian mythology."
+      },
+      {
+        "name": "4055 Magellan",
+        "description": "Magellan is named after the famous explorer Ferdinand Magellan, reflecting the spirit of discovery."
+      },
+      {
+        "name": "4179 Toutatis",
+        "description": "Toutatis is a large near-Earth asteroid known for its irregular shape and unique orbit."
+      },
+      {
+        "name": "4183 Cuno",
+        "description": "Cuno is a small asteroid that is part of the main asteroid belt with limited observational data."
+      },
+      {
+        "name": "4197 Morpheus",
+        "description": "Morpheus is named after the Greek god of dreams, symbolizing the mysteries of space and imagination."
+      },
+      {
+        "name": "4257 Ubasti",
+        "description": "Ubasti is named after the Egyptian goddess associated with cats, highlighting the blend of culture and astronomy."
+      },
+      {
+        "name": "4341 Poseidon",
+        "description": "Poseidon is named after the Greek god of the sea, reflecting the mythological influences in naming celestial bodies."
+      },
+      {
+        "name": "4401 Aditi",
+        "description": "Aditi is named after the Hindu goddess of the sky and space, emphasizing the cultural significance of astronomical nomenclature."
+      },
+      {
+        "name": "4450 Pan",
+        "description": "Pan is named after the Greek god of the wild, representing the connection between mythology and nature."
+      },
+      {
+        "name": "4486 Mithra",
+        "description": "Mithra is named after the ancient Persian god of light and truth, symbolizing enlightenment."
+      },
+      {
+        "name": "4487 Pocahontas",
+        "description": "Pocahontas is named after the famous Native American figure, honoring her historical significance."
+      },
+      {
+        "name": "4503 Cleobulus",
+        "description": "Cleobulus is a smaller asteroid in the asteroid belt, contributing to the variety of known celestial bodies."
+      },
+      {
+        "name": "4544 Xanthus",
+        "description": "Xanthus is a minor asteroid with limited observational data, reflecting the diverse population of asteroids."
+      },
+      {
+        "name": "4581 Asclepius",
+        "description": "Named after the Greek god of healing, Asclepius represents the blend of mythology and science."
+      },
+      {
+        "name": "4596 Unknown",
+        "description": "This asteroid has limited information available, reflecting the ongoing discoveries in astronomy."
+      },
+      {
+        "name": "4660 Nereus",
+        "description": "Nereus is classified as a near-Earth asteroid and is of interest for its potential for resource exploration."
+      },
+      {
+        "name": "4688 Unknown",
+        "description": "This asteroid remains relatively unknown, highlighting the need for further study in the field."
+      },
+      {
+        "name": "4769 Castalia",
+        "description": "Castalia is a main-belt asteroid known for its stable orbit and limited size."
+      },
+      {
+        "name": "4947 Ninkasi",
+        "description": "Ninkasi is named after the Sumerian goddess of beer, representing cultural significance in astronomy."
+      },
+      {
+        "name": "4953 Unknown",
+        "description": "Details about this asteroid are limited, emphasizing the ongoing discoveries in space."
+      },
+      {
+        "name": "4954 Eric",
+        "description": "Eric is a small asteroid with limited data available, contributing to the broader asteroid population."
+      },
+      {
+        "name": "4957 Brucemurray",
+        "description": "Named after the planetary scientist Bruce Murray, this asteroid honors contributions to planetary science."
+      },
+      {
+        "name": "5011 Ptah",
+        "description": "Ptah is named after the ancient Egyptian god of creation and craftsmanship, reflecting historical significance."
+      },
+      {
+        "name": "5131 Unknown",
+        "description": "This asteroid has limited information available, representing the mysteries still present in astronomy."
+      },
+      {
+        "name": "5143 Heracles",
+        "description": "Heracles is named after the legendary Greek hero known for his strength and adventures."
+      },
+      {
+        "name": "5189 Unknown",
+        "description": "Details about this asteroid are scarce, reflecting the vast number of objects in the solar system."
+      },
+      {
+        "name": "5324 Lyapunov",
+        "description": "Lyapunov is named after the Russian mathematician and represents the intersection of science and mathematics."
+      },
+      {
+        "name": "5332 Davidaguilar",
+        "description": "Davidaguilar is named in honor of contributions to education and astronomy."
+      },
+      {
+        "name": "5370 Taranis",
+        "description": "Taranis is named after the Celtic god of thunder, emphasizing the mythological themes in asteroid naming."
+      },
+      {
+        "name": "5381 Sekhmet",
+        "description": "Sekhmet is named after the Egyptian goddess of war and healing, reflecting the cultural significance of celestial names."
+      },
+      {
+        "name": "5496 Unknown",
+        "description": "Limited information is available for this asteroid, highlighting the ongoing exploration of the solar system."
+      },
+      {
+        "name": "5587 Unknown",
+        "description": "This asteroid remains relatively unknown, underscoring the need for further study in astronomy."
+      },
+      {
+        "name": "5590 Unknown",
+        "description": "Details about this asteroid are scarce, representing the vast diversity of asteroids."
+      },
+      {
+        "name": "5604 Unknown",
+        "description": "This asteroid has limited observational data, emphasizing the ongoing discoveries in space."
+      },
+      {
+        "name": "5620 Jasonwheeler",
+        "description": "Jasonwheeler is named in honor of contributions to astronomy and science."
+      },
+      {
+        "name": "5626 Melissabrucker",
+        "description": "This asteroid honors Melissa Brucker, reflecting the contributions of individuals in the field."
+      },
+      {
+        "name": "5645 Unknown",
+        "description": "Limited information is available for this asteroid, highlighting ongoing research in astronomy."
+      },
+      {
+        "name": "5646 Unknown",
+        "description": "This asteroid remains relatively unknown, reflecting the ongoing exploration of celestial bodies."
+      },
+      {
+        "name": "5653 Camarillo",
+        "description": "Camarillo is a small asteroid with limited observational data."
+      },
+      {
+        "name": "5660 Unknown",
+        "description": "Details about this asteroid are scarce, representing the diversity of objects in space."
+      },
+      {
+        "name": "5693 Unknown",
+        "description": "Limited information is available for this asteroid, emphasizing the need for ongoing study."
+      },
+      {
+        "name": "5731 Zeus",
+        "description": "Zeus is named after the king of the Greek gods, reflecting its cultural significance."
+      },
+      {
+        "name": "5751 Zao",
+        "description": "Zao is a small asteroid with limited observational data, contributing to the population of known asteroids."
+      },
+      {
+        "name": "5786 Talos",
+        "description": "Talos is named after the giant from Greek mythology, representing the mythological themes in astronomy."
+      },
+      {
+        "name": "5797 Bivoj",
+        "description": "Bivoj is a minor asteroid with limited data available, emphasizing the diversity of celestial objects."
+      },
+      {
+        "name": "5828 Unknown",
+        "description": "This asteroid has limited information available, reflecting the vast number of objects in the solar system."
+      },
+      {
+        "name": "5836 Unknown",
+        "description": "Details about this asteroid are scarce, highlighting the ongoing discoveries in space."
+      },
+      {
+        "name": "5863 Tara",
+        "description": "Tara is named after a figure from mythology, reflecting the cultural significance of celestial naming."
+      },
+      {
+        "name": "5869 Tanith",
+        "description": "Tanith is named after a goddess from ancient mythology, representing the blend of culture and astronomy."
+      },
+      {
+        "name": "5879 Almeria",
+        "description": "Almeria is a small asteroid in the asteroid belt with limited observational data."
+      },
+      {
+        "name": "6037 Unknown",
+        "description": "This asteroid remains relatively unknown, underscoring the need for further study in astronomy."
+      },
+      {
+        "name": "6047 Unknown",
+        "description": "Limited information is available for this asteroid, emphasizing the diversity of known celestial bodies."
+      },
+      {
+        "name": "6050 Miwablock",
+        "description": "Miwablock is named in honor of contributions to technology and science."
+      },
+      {
+        "name": "6053 Unknown",
+        "description": "Details about this asteroid are scarce, reflecting the ongoing exploration of celestial bodies."
+      },
+      {
+        "name": "6063 Jason",
+        "description": "Jason is named in honor of significant contributions to astronomy and education."
+      },
+      {
+        "name": "6178 Unknown",
+        "description": "This asteroid has limited observational data, representing the ongoing discoveries in space."
+      },
+      {
+        "name": "6239 Minos",
+        "description": "Minos is named after the legendary king of Crete, emphasizing the connection between mythology and astronomy."
+      },
+      {
+        "name": "6455 Unknown",
+        "description": "Limited information is available for this asteroid, highlighting the need for further study."
+      },
+      {
+        "name": "6456 Golombek",
+        "description": "Golombek is named after an individual in science, reflecting contributions to the field of astronomy."
+      },
+      {
+        "name": "6489 Golevka",
+        "description": "Golevka is a small asteroid with limited observational data, adding to the diversity of celestial objects."
+      },
+      {
+        "name": "6491 Unknown",
+        "description": "This asteroid remains relatively unknown, underscoring the vastness of the solar system."
+      },
+      {
+        "name": "6569 Ondaatje",
+        "description": "Ondaatje is named in honor of contributions to literature and the arts."
+      },
+      {
+        "name": "6611 Unknown",
+        "description": "Limited information is available for this asteroid, representing ongoing discoveries in astronomy."
+      },
+      {
+        "name": "7025 Unknown",
+        "description": "This asteroid has limited observational data, emphasizing the diversity of known celestial bodies."
+      },
+      {
+        "name": "7088 Ishtar",
+        "description": "Ishtar is named after the ancient goddess of love and war, representing cultural significance in naming celestial objects."
+      },
+      {
+        "name": "7092 Cadmus",
+        "description": "Cadmus is named after the mythological figure who founded Thebes, reflecting cultural influences in astronomy."
+      },
+      {
+        "name": "7236 Unknown",
+        "description": "This asteroid remains relatively unknown, highlighting the ongoing exploration of the solar system."
+      },
+      {
+        "name": "7335 Unknown",
+        "description": "Limited information is available for this asteroid, emphasizing the diversity of celestial objects."
+      },
+      {
+        "name": "7336 Saunders",
+        "description": "Saunders is named in honor of contributions to science and education."
+      },
+      {
+        "name": "7341 Unknown",
+        "description": "This asteroid has limited observational data, representing the ongoing discoveries in astronomy."
+      },
+      {
+        "name": "7350 Unknown",
+        "description": "Limited information is available for this asteroid, underscoring the vastness of the solar system."
+      },
+      {
+        "name": "7358 Oze",
+        "description": "Oze is a small asteroid with limited observational data, contributing to the variety of known celestial bodies."
+      },
+      {
+        "name": "7474 Unknown",
+        "description": "This asteroid remains relatively unknown, reflecting the ongoing exploration of celestial bodies."
+      },
+      {
+        "name": "7480 Norwan",
+        "description": "Norwan is named in honor of contributions to science and technology."
+      },
+      {
+        "name": "7482 Unknown",
+        "description": "Limited information is available for this asteroid, emphasizing the need for ongoing study."
+      },
+      {
+        "name": "7753 Unknown",
+        "description": "This asteroid remains relatively unknown, underscoring the ongoing discoveries in the solar system."
+      },
+      {
+        "name": "7822 Unknown",
+        "description": "Limited information is available for this asteroid, representing the diversity of known celestial bodies."
+      },
+      {
+        "name": "7839 Unknown",
+        "description": "This asteroid has limited observational data, emphasizing ongoing discoveries in astronomy."
+      },
+      {
+        "name": "7888 Unknown",
+        "description": "This asteroid remains relatively unknown, reflecting the vastness of the solar system."
+      },
+      {
+        "name": "7889 Unknown",
+        "description": "Limited information is available for this asteroid, highlighting the need for further study."
+      },
+      {
+        "name": "7977 Unknown",
+        "description": "This asteroid remains relatively unknown, underscoring ongoing discoveries in astronomy."
+      },
+      {
+        "name": "8013 Gordonmoore",
+        "description": "Gordonmoore is named in honor of significant contributions to technology and science."
+      },
+      {
+        "name": "8014 Unknown",
+        "description": "This asteroid has limited information available, representing ongoing discoveries in space."
+      },
+      {
+        "name": "8034 Akka",
+        "description": "Akka is named after a goddess in mythology, reflecting cultural significance in celestial naming."
+      },
+      {
+        "name": "8035 Unknown",
+        "description": "Limited information is available for this asteroid, emphasizing the diversity of celestial objects."
+      },
+      {
+        "name": "8037 Unknown",
+        "description": "This asteroid remains relatively unknown, highlighting the ongoing exploration of the solar system."
+      },
+      {
+        "name": "8176 Unknown",
+        "description": "This asteroid has limited observational data, representing the ongoing discoveries in astronomy."
+      },
+      {
+        "name": "8201 Unknown",
+        "description": "Limited information is available for this asteroid, emphasizing the vastness of the solar system."
+      },
+      {
+        "name": "8507 Unknown",
+        "description": "This asteroid remains relatively unknown, reflecting ongoing discoveries in astronomy."
+      },
+      {
+        "name": "8566 Unknown",
+        "description": "Limited information is available for this asteroid, underscoring the diversity of known celestial bodies."
+      },
+      {
+        "name": "8567 Unknown",
+        "description": "This asteroid remains relatively unknown, highlighting ongoing discoveries in space."
+      },
+      {
+        "name": "8709 Kadlu",
+        "description": "Kadlu is named after a figure in Inuit mythology, reflecting cultural significance in celestial naming."
+      },
+      {
+        "name": "9058 Unknown",
+        "description": "Limited information is available for this asteroid, emphasizing the need for further study."
+      },
+      {
+        "name": "9162 Kwiila",
+        "description": "Kwiila is named in honor of significant contributions to science and education."
+      },
+      {
+        "name": "9172 Abhramu",
+        "description": "Abhramu is a minor asteroid with limited observational data, contributing to the diversity of celestial objects."
+      },
+      {
+        "name": "9202 Unknown",
+        "description": "This asteroid remains relatively unknown, reflecting ongoing discoveries in astronomy."
+      },
+      {
+        "name": "9400 Unknown",
+        "description": "Limited information is available for this asteroid, underscoring the vastness of the solar system."
+      },
+      {
+        "name": "9856 Unknown",
+        "description": "This asteroid remains relatively unknown, highlighting the ongoing exploration of the solar system."
+      },
+      {
+        "name": "9950 ESA",
+        "description": "Named after the European Space Agency, this asteroid reflects the importance of international cooperation in space exploration."
+      },
+      {
+        "name": "10115 Unknown",
+        "description": "Limited information is available for this asteroid, emphasizing the diversity of celestial objects."
+      },
+      {
+        "name": "10145 Unknown",
+        "description": "This asteroid remains relatively unknown, highlighting ongoing discoveries in astronomy."
+      }
+    ]
+}

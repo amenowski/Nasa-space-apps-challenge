@@ -22,6 +22,7 @@ export default class CelestialBody {
     public group: Group;
     public meanMotion: number; // rad per day
     public meanAnomaly: number;
+    public type: string;
     protected textureUrl: string;
     protected orbit: Orbit | null = null;
     protected textureLoader: TextureLoader;
@@ -58,6 +59,7 @@ export default class CelestialBody {
         this.trueAnomaly = 0;
 
         this.color = new Color(color);
+        this.type = "Planet";
     }
 
     public init(date: Date): void {

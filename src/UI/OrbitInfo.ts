@@ -66,6 +66,7 @@ export default class OrbitInfo {
         this.numbers.get("period")!.innerText = orbitData.period.toPrecision(8);
         this.units.get("period")!.innerText = "y";
 
+        this.numbers.get("type")!.innerText = object.type;
         if (this.objectName) this.objectName.innerText = object.name;
     }
 

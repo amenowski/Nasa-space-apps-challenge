@@ -12,8 +12,10 @@ body {
     padding: 0;
     margin: 0;
     font-family: "Open Sans", sans-serif;
-    --border-color: #454553;
     --bg-color: #1c1c22;
+    --border-color: #454553;
+    --font-color: #686c7e;
+    --font-color-hover: #8f93a3;
 }
 
 p {
@@ -218,23 +220,22 @@ p {
 
 .search-bar {
     --bg-color-hover: #2a2a33;
-    --border-radius: 12px;
+    --border-radius: 4px;
     top: 2em;
     right: 2em;
     position: absolute;
     pointer-events: all;
     display: flex;
     flex-direction: column;
-    width: 12em;
+    width: 16em;
 }
 
 .search-bar .result {
+    overflow-x: hiddeng;
     background-color: var(--bg-color);
     border-bottom-left-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
     max-height: 40vh;
-    /* overflow: hidden; */
-    overflow-y: auto;
 }
 
 .search-bar .result p {
@@ -246,11 +247,13 @@ p {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: var(--font-color);
 }
 
 .search-bar .result p:hover {
     background-color: var(--bg-color-hover);
     cursor: pointer;
+    color: var(--font-color-hover);
 }
 
 .search-bar input {
@@ -260,19 +263,17 @@ p {
     height: 2em;
     padding: 1em 1em;
     font-size: 1em;
-    color: white;
+    color: var(--font-color);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
 }
 
-.search-bar input.result {
+.search-bar input .result {
     border-top-left-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
 }
 
 .object-info {
-    --font-color: rgb(104, 108, 126);
-    --font-color-hover: hsl(229, 10%, 60%);
     width: 20em;
     /* height: 20em; */
     grid-row-start: 3;
@@ -310,6 +311,10 @@ p {
 
 .object-info .main-info .object-name {
     user-select: none;
+    max-width: 30ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .object-info .main-info .more-info {
@@ -340,7 +345,8 @@ p {
 }
 
 .object-info .orbital-elements {
-    pointer-events: all;
+    pointer-events: none;
+    user-select: all;
     background-color: var(--bg-color);
     transform: translateY(100%);
     transition: all 200ms ease-in;
@@ -348,6 +354,10 @@ p {
     overflow: auto;
     height: auto;
     max-height: 50vh;
+}
+
+.object-info.visible .orbital-elements {
+    pointer-events: all;
 }
 
 .object-info .orbital-elements ul {
@@ -390,4 +400,10 @@ p {
 
 .object-info.extended .orbital-elements {
     transform: translateY(0);
+}
+
+.scroll {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--font-color) var(--bg-color);
 }

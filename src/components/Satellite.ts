@@ -34,6 +34,7 @@ export default class Satellite extends CelestialBody {
         );
 
         this.centerBody = centerBody;
+        this.type = "Satellite";
     }
 
     public init(date: Date): void {
