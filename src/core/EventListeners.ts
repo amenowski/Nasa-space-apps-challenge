@@ -29,6 +29,10 @@ export class EventListeners {
         this.camera.controls.addEventListener("change", () => {
             this.solarSystem.getDistancesToObjects();
         });
+
+        this.camera.controls.addEventListener("start", () => {
+            this.solarSystem.hideSearchBar();
+        });
     }
 
     private onResize() {

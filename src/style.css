@@ -16,6 +16,7 @@ body {
     --border-color: #454553;
     --font-color: #686c7e;
     --font-color-hover: #8f93a3;
+    --ui-opacity: 0.75;
 }
 
 p {
@@ -228,6 +229,8 @@ p {
     display: flex;
     flex-direction: column;
     width: 16em;
+    z-index: 10;
+    opacity: var(--ui-opacity);
 }
 
 .search-bar .result {
@@ -288,7 +291,7 @@ p {
 }
 
 .object-info.visible {
-    opacity: 1;
+    opacity: var(--ui-opacity);
 }
 
 .object-info .main-info {

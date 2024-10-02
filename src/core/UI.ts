@@ -100,6 +100,10 @@ export class UI {
             });
     }
 
+    public hideSearchBar(): void {
+        this.searchBar.clearResult();
+    }
+
     private live(): void {
         if (this.liveBtn) {
             this.liveBtn.classList.remove("no-live");

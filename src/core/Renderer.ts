@@ -14,9 +14,6 @@ export default class Renderer {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(window.devicePixelRatio);
 
-        // this.renderer.autoClear = false;
-        // this.renderer.setClearColor(0x000000, 0.0);
-
         this.cssRenderer.setSize(window.innerWidth, window.innerHeight);
 
         document.body.appendChild(this.cssRenderer.domElement);

@@ -285,6 +285,10 @@ export default class SolarSystem {
         this.centralBody.resize();
     }
 
+    public hideSearchBar(): void {
+        this.ui.hideSearchBar();
+    }
+
     private async initPlanets(): Promise<void> {
         const data = await fetch("./src/assets/data/SolarPlanets.json");
         const json: CelestialWithRingData[] | SolarPlanetData[] =

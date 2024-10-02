@@ -27,11 +27,6 @@ export default class SearchBar {
                 if (!this.input) return;
                 this.system.searchForObjects(this.input.value);
             });
-
-            this.input.addEventListener("blur", () => {
-                if (!this.input) return;
-                this.clearResult();
-            });
         }
     }
 
@@ -57,7 +52,7 @@ export default class SearchBar {
         }
     }
 
-    private clearResult(): void {
+    public clearResult(): void {
         while (this.resultContainer!.firstChild) {
             this.resultContainer!.removeChild(this.resultContainer!.lastChild!);
         }
