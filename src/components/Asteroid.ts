@@ -21,6 +21,7 @@ export default class Asteroid extends CelestialBody {
     public modelExist: boolean;
     public zoom: number = SETTINGS.ZOOM_TO_OBJECT;
     public type: AsteroidType;
+
     private modelUrl: string;
     private modelLoaded: boolean;
 
@@ -33,7 +34,8 @@ export default class Asteroid extends CelestialBody {
         color: string,
         textureUrl: string,
         textureLoader: TextureLoader,
-        isPha: "Y" | "N"
+        isPha: "Y" | "N",
+        layer: number
     ) {
         super(
             system,
@@ -43,7 +45,8 @@ export default class Asteroid extends CelestialBody {
             sidRotPerSec,
             color,
             textureUrl,
-            textureLoader
+            textureLoader,
+            layer
         );
         this.modelExist = false;
         this.modelLoaded = false;
@@ -57,8 +60,7 @@ export default class Asteroid extends CelestialBody {
         const geo = new SphereGeometry(this.radius);
         const mat = new MeshStandardMaterial({ color: 0xfafafa });
         this.mesh = new Mesh(geo, mat);
-        this.mesh.layers.set(4);
-        this.group.layers.set(4);
+        this.mesh.layers.set(this.layer);
         this.mesh.name = this.name;
         this.mesh.rotation.z = -this.obliquity * 0.0174532925;
 
@@ -135,6 +137,8 @@ export default class Asteroid extends CelestialBody {
     }
 
     public updateRender(distFromCam: number, isFocused: boolean): void {
+        if (this.hidden) return;
+
         let zoom = Math.max(this.radius, this.zoom);
 
         if (distFromCam < zoom * 100) {
@@ -182,7 +186,7 @@ export default class Asteroid extends CelestialBody {
 
         this.icon = new CSS2DObject(this.htmlElements[1]);
         this.icon.position.set(0, 0, 0);
-        this.icon.layers.set(0);
+        this.icon.layers.set(this.layer);
         this.mesh!.add(this.icon);
 
         this.htmlElements[1].addEventListener("mouseover", () => {

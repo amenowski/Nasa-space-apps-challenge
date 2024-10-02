@@ -35,6 +35,7 @@ class Orbit {
 
     private centuriesPast: number;
     private color: Color;
+    private layer: number;
 
     private unhoveredMaterial: LineBasicMaterial;
     private hoveredMaterial: LineBasicMaterial;
@@ -50,7 +51,8 @@ class Orbit {
         dataFrom: Date | number,
         celestialObject: CelestialObject,
         color: string,
-        changesPerCentury: orbitElements | null = null
+        changesPerCentury: orbitElements | null = null,
+        layer: number
     ) {
         this.meanAnomaly = meanAnomaly;
         this.celestialObject = celestialObject;
@@ -60,6 +62,7 @@ class Orbit {
         this.longOfPeri = longOfPeri * 0.0174532925; // convert to RAD
         this.ascendingNode = ascentingNode * 0.0174532925; // convert to RAD
         this.argPeri = 0;
+        this.layer = layer;
 
         if (typeof dataFrom == "number") {
             this.dataFrom = dataFrom;
@@ -70,6 +73,7 @@ class Orbit {
 
         this.changesPerCentury = changesPerCentury;
         this.orbitLine = new Line();
+
         this.period = period;
 
         this.currentOrbitElements = {
@@ -138,6 +142,7 @@ class Orbit {
         const geo = new BufferGeometry().setFromPoints(points);
 
         this.orbitLine = new Line(geo, this.unhoveredMaterial);
+        this.orbitLine.layers.set(this.layer);
         if (origin) this.orbitLine.position.copy(origin);
     }
 

@@ -51,7 +51,7 @@ class Sun {
 
         this.mesh = new Mesh(geo, mat);
         this.mesh.name = this.name;
-        this.mesh.layers.set(1);
+        this.mesh.layers.set(0);
 
         this.mesh.position.set(0, 0, 0);
         const light = new PointLight(0xffffff, 1, 0, 0);

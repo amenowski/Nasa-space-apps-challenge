@@ -8,4 +8,7 @@ export let SETTINGS = {
     CAMERA_MAX_DISTANCE: 10000000,
     DISTANCE_TO_OBJECT: 0,
     ORBIT_COLOR: "#eeeeee",
+    SUN_LAYER: 0,
+    PLANET_LAYER: 1,
+    ORBIT_LAYER: 2,
 };

@@ -168,7 +168,8 @@ export default class SolarSystem {
             SETTINGS.ORBIT_COLOR,
             "",
             this.textureLoader,
-            asteroidData.pha
+            asteroidData.pha,
+            SETTINGS.PLANET_LAYER
         );
 
         let longOfPeri = asteroidData.om + asteroidData.w;
@@ -187,7 +188,9 @@ export default class SolarSystem {
             asteroidData.per_y,
             asteroidData.epoch,
             asteroid,
-            SETTINGS.ORBIT_COLOR
+            SETTINGS.ORBIT_COLOR,
+            null,
+            SETTINGS.ORBIT_LAYER
         );
         asteroid.setOrbit(orbit);
         this.celestialBodies.set(asteroid.name, asteroid);
@@ -292,6 +295,19 @@ export default class SolarSystem {
         this.ui.hideSearchBar();
     }
 
+    public hideObjectsOfType(type: string): void {
+        if (type == "Satellite") {
+            for (let [_, object] of this.celestialBodies) {
+                object.hideSatellites();
+            }
+            return;
+        }
+
+        for (let [_, object] of this.celestialBodies) {
+            if (object.type == type) object.hide();
+        }
+    }
+
     private async initPlanets(): Promise<void> {
         const data = await fetch("./src/assets/data/SolarPlanets.json");
         const json: CelestialWithRingData[] | SolarPlanetData[] =
@@ -313,7 +329,8 @@ export default class SolarSystem {
                         objectData.ringEnd / SETTINGS.SIZE_SCALE,
                         objectData.textureUrl,
                         objectData.ringTexture,
-                        this.textureLoader
+                        this.textureLoader,
+                        SETTINGS.PLANET_LAYER
                     );
                 } else {
                     celestialObject = new CelestialBody(
@@ -324,7 +341,8 @@ export default class SolarSystem {
                         object.sidRotPerSec,
                         object.color,
                         object.textureUrl,
-                        this.textureLoader
+                        this.textureLoader,
+                        SETTINGS.PLANET_LAYER
                     );
                 }
 
@@ -343,7 +361,8 @@ export default class SolarSystem {
                     new Date(orbitData.dataFrom),
                     celestialObject,
                     object.color,
-                    orbitData.changesPerCentury
+                    orbitData.changesPerCentury,
+                    SETTINGS.ORBIT_LAYER
                 );
 
                 celestialObject.setOrbit(orbit);
@@ -371,7 +390,8 @@ export default class SolarSystem {
                 object.color,
                 object.textureUrl,
                 this.textureLoader,
-                this.celestialBodies.get(object.centerBody)!
+                this.celestialBodies.get(object.centerBody)!,
+                SETTINGS.PLANET_LAYER
             );
 
             this.satellites.set(satellite.name, satellite);
@@ -389,7 +409,8 @@ export default class SolarSystem {
                 new Date(orbitData.dataFrom),
                 satellite,
                 object.color,
-                null
+                null,
+                SETTINGS.ORBIT_LAYER
             );
 
             satellite.setOrbit(orbit);
@@ -475,7 +496,7 @@ export default class SolarSystem {
                     this.selectedObject.mesh!.position;
 
                 this.ui.showResetPosition();
-                this.selectedObject.showSatellites();
+                this.selectedObject.showSatellitesInfo();
             });
 
         this.targetTween = new Tween(cameraTarget)

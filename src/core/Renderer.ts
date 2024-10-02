@@ -1,4 +1,10 @@
-import { PerspectiveCamera, Scene, WebGLRenderer } from "three";
+import {
+    ACESFilmicToneMapping,
+    PerspectiveCamera,
+    Scene,
+    SRGBColorSpace,
+    WebGLRenderer,
+} from "three";
 import { CSS2DRenderer } from "three/addons/renderers/CSS2DRenderer.js";
 
 export default class Renderer {
@@ -13,6 +19,10 @@ export default class Renderer {
 
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(window.devicePixelRatio);
+
+        this.renderer.outputColorSpace = SRGBColorSpace;
+        this.renderer.toneMapping = ACESFilmicToneMapping;
+        this.renderer.toneMappingExposure = 1;
 
         this.cssRenderer.setSize(window.innerWidth, window.innerHeight);
 

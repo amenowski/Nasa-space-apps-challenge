@@ -20,7 +20,8 @@ export default class Satellite extends CelestialBody {
         color: string,
         textureUrl: string,
         textureLoader: TextureLoader,
-        centerBody: CelestialBody
+        centerBody: CelestialBody,
+        layer: number
     ) {
         super(
             system,
@@ -30,7 +31,8 @@ export default class Satellite extends CelestialBody {
             sidRotPerSec,
             color,
             textureUrl,
-            textureLoader
+            textureLoader,
+            layer
         );
 
         this.centerBody = centerBody;
@@ -44,8 +46,8 @@ export default class Satellite extends CelestialBody {
         const geo = new SphereGeometry(this.radius);
         const mat = new MeshStandardMaterial({ map: tex });
         this.mesh = new Mesh(geo, mat);
-        this.mesh.layers.set(3);
-        this.group.layers.set(3);
+        this.mesh.layers.set(2);
+
         this.mesh.name = this.name;
         this.mesh.rotation.z = -this.obliquity * 0.0174532925;
 
@@ -75,8 +77,6 @@ export default class Satellite extends CelestialBody {
         daysPerSec: number
     ): void {
         this.rotateObject(date);
-
-        // if (this.name == "Europa") console.log(this.label!.visible);
         if (this.orbit) {
             this.meanAnomaly =
                 this.meanAnomaly + this.meanMotion * deltaTime * daysPerSec;
@@ -99,6 +99,9 @@ export default class Satellite extends CelestialBody {
     }
 
     public showAdditionalInfo(): void {
+        // if (this.type == "Satellite") console.log("show");
+        if (this.hidden) return;
+
         if (this.label) this.label.visible = true;
         if (this.icon) this.icon.visible = true;
         if (this.orbit?.orbitLine) this.orbit.orbitLine.visible = true;

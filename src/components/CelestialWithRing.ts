@@ -26,7 +26,8 @@ export default class CelestialWithRing extends CelestialObject {
         ringEnd: number,
         textureUrl: string,
         ringTexture: string,
-        textureLoader: TextureLoader
+        textureLoader: TextureLoader,
+        layer: number
     ) {
         super(
             system,
@@ -36,7 +37,8 @@ export default class CelestialWithRing extends CelestialObject {
             sidRotPerSec,
             color,
             textureUrl,
-            textureLoader
+            textureLoader,
+            layer
         );
         this.ringTextureUrl = ringTexture;
         this.ringStart = ringStart;

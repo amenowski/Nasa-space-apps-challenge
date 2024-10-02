@@ -23,6 +23,7 @@ export default class CelestialBody {
     public meanMotion: number; // rad per day
     public meanAnomaly: number;
     public type: string;
+    public hidden: boolean;
     protected textureUrl: string;
     protected orbit: Orbit | null = null;
     protected textureLoader: TextureLoader;
@@ -33,6 +34,7 @@ export default class CelestialBody {
     protected htmlElements: HTMLDivElement[] = new Array<HTMLDivElement>(2);
     protected obliquity: number;
     protected sidRotPerSec: number;
+    protected layer: number;
 
     constructor(
         system: SolarSystem,
@@ -42,7 +44,8 @@ export default class CelestialBody {
         sidRotPerSec: number,
         color: string,
         textureUrl: string,
-        textureLoader: TextureLoader
+        textureLoader: TextureLoader,
+        layer: number
     ) {
         this.group = new Group();
 
@@ -60,6 +63,8 @@ export default class CelestialBody {
 
         this.color = new Color(color);
         this.type = "Planet";
+        this.layer = layer;
+        this.hidden = false;
     }
 
     public init(date: Date): void {
@@ -67,8 +72,7 @@ export default class CelestialBody {
         const geo = new SphereGeometry(this.radius);
         const mat = new MeshStandardMaterial({ map: tex });
         this.mesh = new Mesh(geo, mat);
-        this.mesh.layers.set(0);
-        this.group.layers.set(0);
+        this.mesh.layers.set(this.layer);
         this.mesh.name = this.name;
         this.mesh.rotation.z = -this.obliquity * 0.0174532925;
 
@@ -123,6 +127,8 @@ export default class CelestialBody {
     }
 
     public updateRender(distFromCam: number, isFocused: boolean): void {
+        if (this.hidden) return;
+
         if (distFromCam < this.radius * 100) {
             this.hideAdditionalInfo();
         } else {
@@ -146,9 +152,31 @@ export default class CelestialBody {
         if (satellite.mesh) this.group.add(satellite.group);
     }
 
-    public showSatellites(): void {
+    public showSatellitesInfo(): void {
         for (let [_, satellite] of this.satellites)
             satellite.showAdditionalInfo();
+    }
+
+    public show(): void {
+        this.hidden = false;
+
+        if (this.mesh) this.mesh.visible = true;
+
+        if (this.orbit) this.orbit.show();
+    }
+
+    public hide(): void {
+        this.hidden = true;
+
+        if (this.mesh) this.mesh.visible = false;
+
+        if (this.orbit) this.orbit.hide();
+    }
+
+    public hideSatellites(): void {
+        for (let [_, satellite] of this.satellites) {
+            satellite.hide();
+        }
     }
 
     public getOrbit(): Orbit {
@@ -178,7 +206,7 @@ export default class CelestialBody {
 
         this.label = new CSS2DObject(this.htmlElements[0]);
         this.label.position.set(0, 0, 0);
-        this.label.layers.set(0);
+        this.label.layers.set(this.layer);
         this.mesh!.add(this.label);
     }
 
@@ -193,7 +221,7 @@ export default class CelestialBody {
 
         this.icon = new CSS2DObject(this.htmlElements[1]);
         this.icon.position.set(0, 0, 0);
-        this.icon.layers.set(0);
+        this.icon.layers.set(this.layer);
         this.mesh!.add(this.icon);
 
         this.htmlElements[1].addEventListener("mouseover", () => {
