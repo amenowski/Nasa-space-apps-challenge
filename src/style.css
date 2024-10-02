@@ -246,7 +246,8 @@ p {
     margin: 0;
     transition: background-color 200ms ease;
     font-size: 0.8rem;
-    max-width: 30ch;
+    /* max-width: 30ch; */
+    width: 100%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

@@ -28,7 +28,7 @@ function animation() {
 
     renderer.render(mainScene.getScene(), camera.getCamera());
 
-    solarSystem.renderSun();
+    // solarSystem.renderSun();
 
     camera.update();
     requestAnimationFrame(animation);

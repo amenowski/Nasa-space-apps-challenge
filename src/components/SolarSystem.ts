@@ -3,6 +3,7 @@ import Orbit from "./Orbit";
 import CelestialBody from "./CelestialBody";
 import CelestialWithRing from "./CelestialWithRing";
 import {
+    CubeTextureLoader,
     Group,
     Raycaster,
     Scene,
@@ -56,6 +57,7 @@ export default class SolarSystem {
     private phas: Map<string, AsteroidData>;
 
     constructor(scene: Scene, renderer: WebGLRenderer, camera: Camera) {
+        this.textureLoader = new TextureLoader();
         this.camera = camera;
         this.group = new Group();
         this.group.layers.set(0);
@@ -69,6 +71,8 @@ export default class SolarSystem {
             "./src/assets/textures/sun.jpg"
         );
 
+        this.createSkybox(scene);
+
         this.centralBody.init();
         scene.add(this.centralBody.mesh);
 
@@ -79,7 +83,6 @@ export default class SolarSystem {
         this.phas = new Map<string, AsteroidData>();
         this.currentDate = new Date();
         this.ui = new UI(this);
-        this.textureLoader = new TextureLoader();
         this.raycaster = new Raycaster();
         this.selectedObject = null;
 
@@ -163,7 +166,7 @@ export default class SolarSystem {
             0,
             asteroidData.rot_per / 3600,
             SETTINGS.ORBIT_COLOR,
-            "./src/assets/textures/moon.jpg",
+            "",
             this.textureLoader,
             asteroidData.pha
         );
@@ -490,5 +493,19 @@ export default class SolarSystem {
             })
             .start()
             .chain(this.zoomTween);
+    }
+
+    private createSkybox(scene: Scene): void {
+        const loader = new CubeTextureLoader();
+        const texture = loader.load([
+            "./src/assets/textures/skybox/skybox_px.png",
+            "./src/assets/textures/skybox/skybox_nx.png",
+            "./src/assets/textures/skybox/skybox_py.png",
+            "./src/assets/textures/skybox/skybox_ny.png",
+            "./src/assets/textures/skybox/skybox_pz.png",
+            "./src/assets/textures/skybox/skybox_nz.png",
+        ]);
+
+        scene.background = texture;
     }
 }

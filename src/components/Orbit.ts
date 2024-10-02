@@ -171,6 +171,7 @@ class Orbit {
         while (offset < TAU + step) {
             points.push(this.calculatePosition(angle));
             opacity = 1 - offset / TAU - 0.1;
+            if (opacity < 0) opacity = 0;
             colors.push(this.color.r, this.color.g, this.color.b, opacity);
             angle = angle - step;
             if (angle < 0) angle += TAU;
