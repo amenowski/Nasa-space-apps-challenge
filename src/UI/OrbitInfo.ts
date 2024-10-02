@@ -16,9 +16,7 @@ export default class OrbitInfo {
         this.elementsContainer = document.querySelector(
             ".UI .orbital-elements"
         );
-        this.moreInfoBtn = this.mainContainer.querySelector(
-            ".main-info .more-info"
-        );
+        this.moreInfoBtn = this.mainContainer.querySelector(".main-info");
 
         this.objectName = this.mainContainer.querySelector(
             ".main-info .object-name"
@@ -36,7 +34,6 @@ export default class OrbitInfo {
 
     public displayInfo(object: CelestialBody): void {
         const orbitData = object.getOrbit();
-        console.log(this.numbers);
 
         this.numbers.get("semiMajor")!.innerText =
             typeof orbitData.semiMajorAxis == "string"

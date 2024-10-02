@@ -297,10 +297,19 @@ p {
     display: flex;
     justify-content: space-between;
     z-index: 2;
+    cursor: pointer;
 }
 
 .object-info.extended .main-info {
     border-top: 1px solid var(--border-color);
+}
+
+.object-info .main-info {
+    pointer-events: all;
+}
+
+.object-info .main-info .object-name {
+    user-select: none;
 }
 
 .object-info .main-info .more-info {
@@ -311,14 +320,13 @@ p {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    pointer-events: all;
 }
 
 .object-info .main-info .more-info svg {
     transition: transform 200ms ease;
 }
 
-.object-info .main-info .more-info:hover svg {
+.object-info .main-info:hover .more-info svg {
     fill: var(--font-color-hover);
     transform: rotate(180deg);
 }
@@ -327,7 +335,7 @@ p {
     transform: rotate(180deg);
 }
 
-.object-info.extended .main-info .more-info:hover svg {
+.object-info.extended .main-info:hover .more-info svg {
     transform: rotate(0deg);
 }
 

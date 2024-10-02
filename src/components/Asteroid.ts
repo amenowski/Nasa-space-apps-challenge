@@ -129,6 +129,28 @@ export default class Asteroid extends CelestialBody {
         }
     }
 
+    public updateRender(distFromCam: number, isFocused: boolean): void {
+        let zoom = Math.max(this.radius, this.zoom);
+
+        console.log(zoom, this.zoom);
+
+        if (distFromCam < zoom * 100) {
+            this.hideAdditionalInfo();
+        } else {
+            this.showAdditionalInfo();
+
+            if (isFocused) {
+                for (let [_, satellite] of this.satellites) {
+                    satellite.showAdditionalInfo();
+                }
+            } else {
+                for (let [_, satellite] of this.satellites) {
+                    satellite.hideAdditionalInfo();
+                }
+            }
+        }
+    }
+
     public setLivePosition(date: Date) {
         if (this.mesh && this.orbit) {
             this.orbit.setFromDate(date);
