@@ -444,3 +444,76 @@ p {
   background-color: var(--bg-color-hover);
   cursor: pointer;
 }
+/***********************/
+/*        CREDITS      */
+/***********************/
+.credits-container {
+  display: none;
+  pointer-events: all;
+  position: absolute;
+  flex-direction: column;
+  z-index: 99999;
+  width: 100%;
+  height: 100vh;
+  padding: 24px;
+  border-radius: 9px;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  background-color: var(--bg-color);
+}
+.credits-actions {
+  width: 100%;
+}
+.credits-btn--close {
+  font-size: 18px;
+}
+.credits-btn--open {
+}
+.credits-container.visible {
+  display: flex;
+}
+.credits-content-container {
+  height: 100vh;
+  perspective: 400px;
+  overflow: hidden;
+}
+
+.credits-content {
+  font-size: 1.5rem;
+  position: relative;
+  top: 100vh;
+  width: 80%;
+  margin: 0 auto;
+  text-align: justify;
+  transform-origin: 50% 100%;
+  transform: rotateX(20deg);
+  animation: scroll 40s linear infinite;
+}
+
+.credits-title {
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.title h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+/* Animation */
+@keyframes scroll {
+  0% {
+    top: 100vh;
+  }
+  100% {
+    top: -95vh;
+  }
+}
+
+/***********************/
+/*       REUSABLE      */
+/***********************/
+.visible {
+  display: flex;
+}
