@@ -25,6 +25,7 @@ import TWEEN, { Tween } from "@tweenjs/tween.js";
 import Satellite from "./Satellite";
 
 import Asteroid from "./Asteroid";
+import { loadInfo } from "../utils/info";
 
 type UniverseObject = CelestialBody | CelestialWithRing;
 
@@ -147,6 +148,11 @@ export default class SolarSystem {
         asteroidName: string,
         move: boolean = true
     ): Promise<void> {
+        if (this.celestialBodies.has(asteroidName)) {
+            this.moveToBody(this.celestialBodies.get(asteroidName)!);
+            return;
+        }
+
         let matches: AsteroidData[] = [];
 
         for (let [key, ad] of this.asteroids) {
@@ -239,6 +245,15 @@ export default class SolarSystem {
 
     public moveToBody(object: UniverseObject): void {
         let zoom = SETTINGS.ZOOM_TO_OBJECT;
+        this.ui.hideAdditionalInfo();
+        loadInfo(object).then((res) => {
+            if (res.description == "") {
+                this.ui.hideInfoButton();
+                return;
+            }
+
+            this.ui.showAdditionalInfo(res.description);
+        });
 
         if (object instanceof Asteroid) {
             object.loadModel();
@@ -280,6 +295,7 @@ export default class SolarSystem {
         this.camera.moveToDefaultPosition();
         this.ui.hideResetPosition();
         this.ui.hideOrbitInfo();
+        this.ui.hideInfoButton();
         this.selectedObject = null;
     }
 

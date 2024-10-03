@@ -1,0 +1,158 @@
+[
+  {
+    "name": "1566 Icarus",
+    "description": "Named after the Greek mythological character. It's a near-Earth asteroid with an unusually small perihelion distance, bringing it closer to the Sun than Mercury at its closest approach."
+  },
+  {
+    "name": "1862 Apollo",
+    "description": "The namesake of the Apollo group of Near-Earth asteroids. Discovered in 1932, it was lost and not recovered until 1973."
+  },
+  {
+    "name": "3200 Phaethon",
+    "description": "An unusual asteroid that is the parent body of the Geminid meteor shower. It behaves like a comet and is sometimes called a 'rock comet'."
+  },
+  {
+    "name": "4179 Toutatis",
+    "description": "An elongated, irregularly shaped asteroid that rotates in a complex tumbling motion. It has made close approaches to Earth and been studied by radar."
+  },
+  {
+    "name": "4660 Nereus",
+    "description": "A small near-Earth asteroid frequently visited by spacecraft. It's considered a potentially profitable target for asteroid mining due to its accessibility."
+  },
+  {
+    "name": "25143 Itokawa",
+    "description": "The first asteroid from which samples were captured and returned to Earth, by the Japanese spacecraft Hayabusa in 2010."
+  },
+  {
+    "name": "29075 (1950 DA)",
+    "description": "Once notable for having the highest known probability of impacting Earth, though the potential impact would not occur until 2880. Further observations have since reduced this probability."
+  },
+  {
+    "name": "65803 Didymos",
+    "description": "A binary asteroid system. Its moonlet, Dimorphos, was the target of NASA's DART mission to test asteroid deflection techniques."
+  },
+  {
+    "name": "99942 Apophis",
+    "description": "Once considered one of the most hazardous asteroids, but recent observations have ruled out an impact for at least 100 years. It will make an extremely close approach to Earth in 2029."
+  },
+  {
+    "name": "101955 Bennu",
+    "description": "Target of NASA's OSIRIS-REx mission, which collected samples from its surface in 2020 for return to Earth in 2023."
+  },
+  {
+    "name": "162173 Ryugu",
+    "description": "Explored by the Japanese Hayabusa2 mission, which returned samples to Earth in 2020, revealing insights about the early solar system."
+  },
+  {
+    "name": "163899 (2003 SD220)",
+    "description": "An elongated, Earth-crossing asteroid that has been studied using planetary radar during its close approaches."
+  },
+  {
+    "name": "175706 (1996 FG3)",
+    "description": "A binary asteroid system that has been considered as a potential target for space missions due to its accessibility."
+  },
+  {
+    "name": "231937 (2001 FO32)",
+    "description": "One of the fastest known near-Earth asteroids, with a highly eccentric orbit."
+  },
+  {
+    "name": "308635 (2005 YU55)",
+    "description": "Made a notably close approach to Earth in 2011, passing inside the orbit of the Moon."
+  },
+  {
+    "name": "341843 (2008 EV5)",
+    "description": "A target of interest for asteroid redirect and sample return mission concepts due to its slow rotation and accessibility."
+  },
+  {
+    "name": "367789 (2011 AG5)",
+    "description": "Once considered a potentially hazardous asteroid, but further observations ruled out any impact risk for at least the next century."
+  },
+  {
+    "name": "419624 (2010 SO16)",
+    "description": "Has an orbit that makes it a quasi-satellite of Earth, following our planet in its orbit around the Sun."
+  },
+  {
+    "name": "506074 Svarog",
+    "description": "Named after a Slavic deity. It's a crosser of Mars' orbit and has an eccentric, highly inclined orbit."
+  },
+  {
+    "name": "3122 Florence",
+    "description": "One of the largest near-Earth asteroids, about 4.5 km in diameter. Radar observations during its 2017 close approach revealed it has two small moons."
+  },
+  {
+    "name": "7335 (1989 JA)",
+    "description": "A potentially hazardous asteroid about 1.8 km in diameter. It makes relatively close approaches to Earth and has been a target of radar observations."
+  },
+  {
+    "name": "1620 Geographos",
+    "description": "An elongated near-Earth asteroid about 5 km long. Its unusually elongated shape, revealed by radar observations, makes it a subject of interest for studying asteroid formation."
+  },
+  {
+    "name": "3361 Orpheus",
+    "description": "A near-Earth asteroid about 300 meters in diameter, named after the mythical Greek musician. Its orbit brings it close to Earth, Venus, and Mercury."
+  },
+  {
+    "name": "4769 Castalia",
+    "description": "A notably bifurcated (two-lobed) near-Earth asteroid about 1.8 km long. Its shape, revealed by radar observations, suggests it might be a contact binary."
+  },
+  {
+    "name": "5604 (1992 FE)",
+    "description": "A near-Earth asteroid about 0.5-1 km in diameter. It's in a dynamically unstable orbit that could lead to an impact with a terrestrial planet or ejection from the inner Solar System in the distant future."
+  },
+  {
+    "name": "66391 Moshup",
+    "description": "Formerly known as 1999 KW4, this is a binary asteroid system. The primary is about 1.3 km in diameter, with a 0.36 km satellite. The system has been studied extensively with radar."
+  },
+  {
+    "name": "1981 Midas",
+    "description": "An Apollo asteroid discovered in 1973. It has an eccentric orbit that brings it from beyond Mars to within Earth's orbit."
+  },
+  {
+    "name": "2101 Adonis",
+    "description": "One of the earlier discovered near-Earth asteroids, known for its eccentric orbit that crosses the orbits of Venus, Earth, and Mars."
+  },
+  {
+    "name": "2201 Oljato",
+    "description": "An asteroid with unusual spectral properties that suggest it might be an extinct comet nucleus."
+  },
+  {
+    "name": "3671 Dionysus",
+    "description": "A near-Earth asteroid with an orbit that crosses those of Venus, Earth, and Mars. It's estimated to be about 1-2 km in diameter."
+  },
+  {
+    "name": "4015 Wilson-Harrington",
+    "description": "An unusual object classified as both an asteroid and a comet. It showed cometary activity when first discovered but has appeared asteroid-like in subsequent observations."
+  },
+  {
+    "name": "4183 Cuno",
+    "description": "A potentially hazardous asteroid that crosses the orbits of Mars and Earth. It's estimated to be about 3 km in diameter."
+  },
+  {
+    "name": "4486 Mithra",
+    "description": "A Mars-crossing asteroid with an unusual shape. Radar observations suggest it might be a contact binary or have a very irregular shape."
+  },
+  {
+    "name": "6489 Golevka",
+    "description": "A small near-Earth asteroid notable for being the first asteroid on which the Yarkovsky effect was measured, helping to refine orbit predictions for potentially hazardous asteroids."
+  },
+  {
+    "name": "11500 Tomaiyowit",
+    "description": "A main-belt asteroid named after the Luiseño Native American word for the Milky Way. Not much is known about its physical properties."
+  },
+  {
+    "name": "14827 Hypnos",
+    "description": "A near-Earth asteroid with an unusual orbit that brings it close to Earth and Venus. Its spectral properties suggest it might be related to comets."
+  },
+  {
+    "name": "35396 (1997 XF11)",
+    "description": "Once thought to pose a significant impact threat to Earth in 2028, but further observations ruled this out. It exemplifies the importance of follow-up observations for near-Earth objects."
+  },
+  {
+    "name": "52768 (1998 OR2)",
+    "description": "A large potentially hazardous asteroid that made a close approach to Earth in April 2020, allowing for detailed radar studies of its shape and surface features."
+  },
+  {
+    "name": "85989 (1999 JD6)",
+    "description": "A binary asteroid system discovered through radar observations. The primary body is about 1.8 km in diameter."
+  }
+]

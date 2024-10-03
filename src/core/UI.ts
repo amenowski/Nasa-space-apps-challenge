@@ -1,5 +1,6 @@
 import CelestialBody from "../components/CelestialBody";
 import SolarSystem from "../components/SolarSystem";
+import AdditionalInfo from "../UI/AdditionalInfo";
 import OrbitInfo from "../UI/OrbitInfo";
 import SearchBar from "../UI/SearchBar";
 import TimeSlider from "../UI/TimeSlider";
@@ -14,6 +15,7 @@ export class UI {
     private timeSlider: TimeSlider;
     private orbitInfo: OrbitInfo;
     private solarSystem: SolarSystem;
+    private additionalInfo: AdditionalInfo;
 
     constructor(solarSystem: SolarSystem) {
         this.clock = document.querySelector<HTMLDivElement>(
@@ -31,6 +33,7 @@ export class UI {
         this.timeSlider = new TimeSlider();
         this.searchBar = new SearchBar(solarSystem);
         this.orbitInfo = new OrbitInfo();
+        this.additionalInfo = new AdditionalInfo();
 
         this.setEventListeners();
         this.solarSystem = solarSystem;
@@ -49,6 +52,18 @@ export class UI {
         if (this.liveBtn) {
             this.liveBtn.classList.add("no-live");
         }
+    }
+
+    public showAdditionalInfo(description: string): void {
+        this.additionalInfo.show(description);
+    }
+
+    public hideAdditionalInfo(): void {
+        this.additionalInfo.hide();
+    }
+
+    public hideInfoButton(): void {
+        this.additionalInfo.hideAll();
     }
 
     public updateTimelineInfo(date: Date): void {
@@ -86,6 +101,7 @@ export class UI {
         this.timeSlider.setEventListeners();
         this.searchBar.setEventListeners();
         this.orbitInfo.setEventListeners();
+        this.additionalInfo.setEventListeners();
 
         if (this.liveBtn)
             this.liveBtn.addEventListener("click", () => {

@@ -1,313 +1,310 @@
-{
-    "comets": [
-      {
+[
+    {
         "name": "1P/Halley",
         "description": "Halley's Comet is one of the most famous comets, visible from Earth every 76 years. It was last seen in 1986 and is known for its bright tail and historical significance in various cultures."
-      },
-      {
+    },
+    {
         "name": "2P/Encke",
         "description": "Encke's Comet has the shortest orbital period of any known comet, approximately 3.3 years. It is notable for its periodic appearances and the bright trail it leaves in the sky."
-      },
-      {
+    },
+    {
         "name": "3D/Biela",
         "description": "Biela's Comet was known for its two components that split apart in the 19th century, becoming one of the first comets observed to break up."
-      },
-      {
+    },
+    {
         "name": "5D/Brorsen",
         "description": "Brorsen's Comet is a periodic comet that orbits the Sun every 5.5 years and is known for its bright appearance during perihelion."
-      },
-      {
+    },
+    {
         "name": "7P/Pons-Winnecke",
         "description": "Pons-Winnecke is a periodic comet with an orbital period of about 6.4 years, and it was last observed in 2020."
-      },
-      {
+    },
+    {
         "name": "8P/Tuttle",
         "description": "Tuttle's Comet has an orbital period of approximately 13.5 years and is known for its bright nucleus and prominent tail."
-      },
-      {
+    },
+    {
         "name": "12P/Pons-Brooks",
         "description": "This comet has an orbital period of about 71 years and is notable for its historical appearances and observations."
-      },
-      {
+    },
+    {
         "name": "13P/Olbers",
         "description": "Olbers' Comet has an orbital period of around 71 years and is named after the German astronomer Heinrich Wilhelm Olbers."
-      },
-      {
+    },
+    {
         "name": "15P/Finlay",
         "description": "Finlay's Comet has an orbital period of approximately 6.5 years and is notable for its bright appearance during its returns."
-      },
-      {
+    },
+    {
         "name": "18D/Perrine-Mrkos",
         "description": "This comet is a periodic one with a relatively short orbital period and has been observed multiple times since its discovery."
-      },
-      {
+    },
+    {
         "name": "20D/Westphal",
         "description": "Westphal's Comet is a periodic comet that has been observed and studied for its distinctive features."
-      },
-      {
+    },
+    {
         "name": "21P/Giacobini-Zinner",
         "description": "This comet is the parent body of the Draconid meteor shower and has an orbital period of about 6.6 years."
-      },
-      {
+    },
+    {
         "name": "23P/Brorsen-Metcalf",
         "description": "Brorsen-Metcalf is a periodic comet with a period of around 6.4 years, known for its bright and spectacular displays."
-      },
-      {
+    },
+    {
         "name": "24P/Schaumasse",
         "description": "Schaumasse's Comet is a periodic comet that was last observed in 2021, with an orbital period of approximately 6.5 years."
-      },
-      {
+    },
+    {
         "name": "26P/Grigg-Skjellerup",
         "description": "Grigg-Skjellerup is a periodic comet that orbits the Sun every 5.3 years and is known for its bright nucleus."
-      },
-      {
+    },
+    {
         "name": "27P/Crommelin",
         "description": "Crommelin's Comet is a periodic comet with an orbital period of about 6.5 years and has been observed multiple times."
-      },
-      {
+    },
+    {
         "name": "34D/Gale",
         "description": "Gale's Comet is known for its periodic returns and its historical significance in comet studies."
-      },
-      {
+    },
+    {
         "name": "35P/Herschel-Rigollet",
         "description": "This periodic comet has an orbital period of approximately 6.1 years and is notable for its close approaches to Earth."
-      },
-      {
+    },
+    {
         "name": "41P/Tuttle-Giacobini-Kresak",
         "description": "This comet has an orbital period of around 5.4 years and is associated with several meteor showers."
-      },
-      {
+    },
+    {
         "name": "45P/Honda-Mrkos-Pajdusakova",
         "description": "This periodic comet has an orbital period of about 5.3 years and was observed in 2017 during a close approach."
-      },
-      {
+    },
+    {
         "name": "46P/Wirtanen",
         "description": "Wirtanen's Comet is known for its close approach to Earth in 2018, providing a spectacular view for astronomers and skywatchers."
-      },
-      {
+    },
+    {
         "name": "55P/Tempel-Tuttle",
         "description": "This comet is the parent of the Leonid meteor shower and has an orbital period of approximately 33 years."
-      },
-      {
+    },
+    {
         "name": "66P/du Toit",
         "description": "Du Toit's Comet is a periodic comet that has been observed for its bright nucleus and distinct tail."
-      },
-      {
+    },
+    {
         "name": "67P/Churyumov-Gerasimenko",
         "description": "This comet was visited by the European Space Agency's Rosetta mission, which studied its surface and produced the first-ever images of a comet's surface closely."
-      },
-      {
+    },
+    {
         "name": "72P/Denning-Fujikawa",
         "description": "Denning-Fujikawa is a periodic comet with an orbital period of about 6.8 years, noted for its bright appearances."
-      },
-      {
+    },
+    {
         "name": "73P/Schwassmann-Wachmann 3",
         "description": "This comet is a complex periodic comet that has fragmented into multiple pieces, which are observed separately."
-      },
-      {
+    },
+    {
         "name": "79P/du Toit-Hartley",
         "description": "This periodic comet has an orbital period of about 7.6 years and has been observed multiple times."
-      },
-      {
+    },
+    {
         "name": "85D/Boethin",
         "description": "Boethin's Comet is a periodic comet that has been observed for its bright displays and historical significance."
-      },
-      {
+    },
+    {
         "name": "96P/Machholz 1",
         "description": "Machholz 1 is known for its close approaches to Earth and has been observed frequently since its discovery."
-      },
-      {
+    },
+    {
         "name": "103P/Hartley 2",
         "description": "Hartley 2 was visited by the Deep Impact spacecraft in 2010, which provided valuable data about its composition."
-      },
-      {
+    },
+    {
         "name": "104P/Kowal 2",
         "description": "This periodic comet is known for its bright appearance during its returns to the inner solar system."
-      },
-      {
+    },
+    {
         "name": "109P/Swift-Tuttle",
         "description": "Swift-Tuttle is the parent body of the Perseid meteor shower. Its large size and long orbital period make it a significant object of study for astronomers."
-      },
-      {
+    },
+    {
         "name": "122P/de Vico",
         "description": "De Vico's Comet is known for its periodic appearances and was observed frequently in the 19th century."
-      },
-      {
+    },
+    {
         "name": "141P/Machholz 2",
         "description": "This periodic comet has a complex orbital path and has been observed for its bright displays."
-      },
-      {
+    },
+    {
         "name": "157P/Tritton",
         "description": "Tritton's Comet is known for its periodic returns and has been observed multiple times."
-      },
-      {
+    },
+    {
         "name": "161P/Hartley-IRAS",
         "description": "This comet is named after astronomers and is known for its periodic appearances."
-      },
-      {
+    },
+    {
         "name": "162P/Siding Spring",
         "description": "Siding Spring is notable for its close approach to Mars in 2014, where it was observed by multiple missions."
-      },
-      {
+    },
+    {
         "name": "169P/NEAT",
         "description": "NEAT's Comet has been observed for its bright appearances and periodic returns."
-      },
-      {
+    },
+    {
         "name": "177P/Barnard",
         "description": "Barnard's Comet is known for its historical significance and has been observed for many years."
-      },
-      {
+    },
+    {
         "name": "181P/Shoemaker-Levy 6",
         "description": "This periodic comet has been observed multiple times and is known for its bright tail."
-      },
-      {
+    },
+    {
         "name": "182P/LONEOS",
         "description": "LONEOS is a periodic comet with a well-defined orbit and has been observed for its bright displays."
-      },
-      {
+    },
+    {
         "name": "185P/Petriew",
         "description": "This periodic comet has been noted for its appearances and has a relatively short orbital period."
-      },
-      {
+    },
+    {
         "name": "189P/NEAT",
         "description": "This periodic comet has been observed frequently for its bright tail and distinctive features."
-      },
-      {
+    },
+    {
         "name": "197P/LINEAR",
         "description": "LINEAR's Comet is known for its periodic returns and bright appearances."
-      },
-      {
+    },
+    {
         "name": "206P/Barnard-Boattini",
         "description": "This periodic comet has been observed for its distinct features and bright tail."
-      },
-      {
+    },
+    {
         "name": "207P/NEAT",
         "description": "NEAT's Comet is known for its periodic returns and has been studied for its brightness."
-      },
-      {
+    },
+    {
         "name": "209P/LINEAR",
         "description": "This periodic comet has a short orbital period and has been observed multiple times."
-      },
-      {
+    },
+    {
         "name": "210P/Christensen",
         "description": "Christensen's Comet is a periodic comet that has been noted for its bright displays."
-      },
-      {
+    },
+    {
         "name": "217P/LINEAR",
         "description": "This comet has been observed for its periodic returns and distinctive features."
-      },
-      {
+    },
+    {
         "name": "222P/LINEAR",
         "description": "LINEAR's Comet has a relatively short orbital period and has been observed multiple times."
-      },
-      {
+    },
+    {
         "name": "249P/LINEAR",
         "description": "This periodic comet is known for its appearances and has a short orbital period."
-      },
-      {
+    },
+    {
         "name": "252P/LINEAR",
         "description": "LINEAR's Comet is known for its bright tail and periodic returns."
-      },
-      {
+    },
+    {
         "name": "255P/Levy",
         "description": "This periodic comet has been observed for its bright appearances and well-defined orbit."
-      },
-      {
+    },
+    {
         "name": "262P/McNaught-Russell",
         "description": "This comet is known for its periodic returns and has been studied for its distinct features."
-      },
-      {
+    },
+    {
         "name": "263P/Gibbs",
         "description": "Gibbs' Comet is a periodic comet that has been observed multiple times for its brightness."
-      },
-      {
+    },
+    {
         "name": "273P/Pons-Gambart",
         "description": "This periodic comet is known for its well-defined orbit and bright displays."
-      },
-      {
+    },
+    {
         "name": "289P/Blanpain",
         "description": "Blanpain's Comet is a periodic comet with a relatively short orbital period."
-      },
-      {
+    },
+    {
         "name": "294P/LINEAR",
         "description": "LINEAR's Comet has been noted for its periodic appearances and distinct features."
-      },
-      {
+    },
+    {
         "name": "300P/Catalina",
         "description": "This periodic comet has been observed for its bright tail and has a well-defined orbit."
-      },
-      {
+    },
+    {
         "name": "306P/LINEAR",
         "description": "LINEAR's Comet is known for its periodic returns and has been observed multiple times."
-      },
-      {
+    },
+    {
         "name": "317P/WISE",
         "description": "This periodic comet has a well-defined orbit and is known for its bright appearances."
-      },
-      {
+    },
+    {
         "name": "319P/Catalina-McNaught",
         "description": "This comet is a periodic one known for its bright displays and well-defined orbit."
-      },
-      {
+    },
+    {
         "name": "320P/McNaught",
         "description": "McNaught's Comet is a periodic comet known for its bright appearances."
-      },
-      {
+    },
+    {
         "name": "321P/SOHO",
         "description": "SOHO's Comet is known for its periodic returns and has been observed multiple times."
-      },
-      {
+    },
+    {
         "name": "322P/SOHO",
         "description": "This periodic comet has been studied for its brightness and distinct features."
-      },
-      {
+    },
+    {
         "name": "323P/SOHO",
         "description": "SOHO's Comet has been observed multiple times for its periodic returns and brightness."
-      },
-      {
+    },
+    {
         "name": "325P/Yang-Gao",
         "description": "This periodic comet is known for its bright displays and well-defined orbit."
-      },
-      {
+    },
+    {
         "name": "333P/LINEAR",
         "description": "LINEAR's Comet is known for its periodic returns and has been studied for its brightness."
-      },
-      {
+    },
+    {
         "name": "342P/SOHO",
         "description": "SOHO's Comet has been observed for its bright tail and periodic returns."
-      },
-      {
+    },
+    {
         "name": "364P/PANSTARRS",
         "description": "This periodic comet is known for its distinct features and bright appearances."
-      },
-      {
+    },
+    {
         "name": "384P/Kowalski",
         "description": "Kowalski's Comet is a periodic comet that has been observed for its bright displays."
-      },
-      {
+    },
+    {
         "name": "387P/Boattini",
         "description": "Boattini's Comet is a periodic one known for its brightness and well-defined orbit."
-      },
-      {
+    },
+    {
         "name": "405P/Lemmon",
         "description": "Lemmon's Comet is known for its periodic returns and has been observed multiple times."
-      },
-      {
+    },
+    {
         "name": "414P/STEREO",
         "description": "STEREO's Comet has been studied for its periodic appearances and distinct features."
-      },
-      {
+    },
+    {
         "name": "460P/PANSTARRS",
         "description": "This periodic comet is known for its bright displays and well-defined orbit."
-      },
-      {
+    },
+    {
         "name": "463P/NEOWISE",
         "description": "NEOWISE's Comet is known for its bright appearances and periodic returns."
-      },
-      {
+    },
+    {
         "name": "479P/Elenin",
         "description": "Elenin's Comet gained attention due to its close approach to Earth and has been observed for its brightness."
-      }
-    ]
-  }
-  
+    }
+]
