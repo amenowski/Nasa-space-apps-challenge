@@ -225,7 +225,7 @@ export default class Asteroid extends CelestialBody {
         // 4 3 7 9
         const randomNumber = Math.floor(Math.random() * 3);
 
-        this.modelUrl = `./src/assets/models/asteroid_model_${randomNumber}.obj`;
+        this.modelUrl = `/assets/models/asteroid_model_${randomNumber}.obj`;
 
         const loader = new OBJLoader();
         loader.load(this.modelUrl, (obj) => {

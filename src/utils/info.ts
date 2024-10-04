@@ -35,7 +35,7 @@ export async function loadInfo(object: CelestialBody): Promise<infoRespond> {
 async function loadPlanetInfo(name: string): Promise<infoRespond> {
     let description = "";
     let type = "Planet";
-    const data = await fetch("./src/assets/data/planets_info.json");
+    const data = await fetch("/assets/data/planets_info.json");
     const json: AdditionalInfo[] = await data.json();
 
     for (let info of json) {
@@ -50,7 +50,7 @@ async function loadPlanetInfo(name: string): Promise<infoRespond> {
 async function loadPHAinfo(name: string): Promise<infoRespond> {
     let description = "";
     let type = "Asteroid (PHA)";
-    const data = await fetch("./src/assets/data/pha_info.json");
+    const data = await fetch("/assets/data/pha_info.json");
     const json: AdditionalInfo[] = await data.json();
 
     const patterns = name.split("(").map((item) => item.trim());
@@ -69,7 +69,7 @@ async function loadPHAinfo(name: string): Promise<infoRespond> {
 async function loadNEOinfo(name: string): Promise<infoRespond> {
     let description = "";
     let type = "Asteroid (NEO)";
-    const data = await fetch("./src/assets/data/neo_info.json");
+    const data = await fetch("/assets/data/neo_info.json");
     const json: AdditionalInfo[] = await data.json();
 
     const patterns = name.split("(").map((item) => item.trim());
@@ -87,7 +87,7 @@ async function loadNEOinfo(name: string): Promise<infoRespond> {
 async function loadCometinfo(name: string): Promise<infoRespond> {
     let description = "";
     let type = "Asteroid (NEO)";
-    const data = await fetch("./src/assets/data/comets_info.json");
+    const data = await fetch("/assets/data/comets_info.json");
     const json: AdditionalInfo[] = await data.json();
 
     const patterns = name.split("(").map((item) => item.trim());
