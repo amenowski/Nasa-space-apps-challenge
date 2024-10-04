@@ -9,17 +9,16 @@
 }
 
 body {
-
-    padding: 0;
-    margin: 0;
-    font-family: "Open Sans", sans-serif;
-    --bg-color: #1c1c22;
-    --border-color: #454553;
-    --font-color: #797d8f;
-    --font-color-hover: #8f93a3;
-    --ui-opacity: 0.75;
-    --bg-color-hover: #2a2a33;
-    --border-radius: 8px;
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  --bg-color: #1c1c22;
+  --border-color: #454553;
+  --font-color: #797d8f;
+  --font-color-hover: #8f93a3;
+  --ui-opacity: 0.75;
+  --bg-color-hover: #2a2a33;
+  --border-radius: 8px;
 }
 
 p {
@@ -223,15 +222,15 @@ p {
 }
 
 .search-bar {
-    top: 2em;
-    right: 2em;
-    position: absolute;
-    pointer-events: all;
-    display: flex;
-    flex-direction: column;
-    width: 16em;
-    z-index: 10;
-    opacity: var(--ui-opacity);
+  top: 2em;
+  right: 2em;
+  position: absolute;
+  pointer-events: all;
+  display: flex;
+  flex-direction: column;
+  width: 16em;
+  z-index: 10;
+  opacity: var(--ui-opacity);
 }
 
 .search-bar .result {
@@ -315,12 +314,12 @@ p {
 }
 
 .object-info .main-info .object-name {
-    user-select: none;
-    max-width: 30ch;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-weight: bold;
+  user-select: none;
+  max-width: 30ch;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: bold;
 }
 
 .object-info .main-info .more-info {
@@ -514,6 +513,89 @@ p {
 }
 
 /***********************/
+/*        LAYER        */
+/***********************/
+.layer {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  z-index: 50;
+  pointer-events: all;
+  width: 200px;
+  height: 250px;
+  background-color: rgba(28, 28, 34, 0.5);
+  padding: 0px 15px;
+  border-radius: 9px;
+  user-select: none;
+  transition: transform 0.1s ease-out;
+}
+.layer-heading {
+  text-align: center;
+}
+.layer-btn--close {
+  padding: 0.5em 0.75em;
+  font-size: 14px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+.layer-checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+.layer-checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: var(--bg-color-hover);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.layer-checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.layer-checkbox-container .checkmark:after {
+  left: 8px;
+  top: 5px;
+  width: 5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.layer-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0;
+}
+
+/***********************/
 /*       REUSABLE      */
 /***********************/
 .visible {
@@ -521,107 +603,107 @@ p {
 }
 
 .additional-info {
-    grid-column-start: 1;
-    grid-row-start: 2;
-    max-width: 60ch;
-    transition: opacity 200ms ease-in;
+  grid-column-start: 1;
+  grid-row-start: 2;
+  max-width: 60ch;
+  transition: opacity 200ms ease-in;
 }
 
 .additional-info.extended .info {
-    opacity: var(--ui-opacity);
+  opacity: var(--ui-opacity);
 }
 
 .additional-info .info {
-    opacity: 0;
-    pointer-events: none;
-    user-select: none;
-    background-color: var(--bg-color);
-    font-size: 1em;
-    padding: 1em;
-    transition: opacity 200ms ease-in;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  background-color: var(--bg-color);
+  font-size: 1em;
+  padding: 1em;
+  transition: opacity 200ms ease-in;
 }
 
 .additional-info .info .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--font-color-hover);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--font-color-hover);
 }
 
 .additional-info .info .header svg {
-    width: 42px;
-    height: 42px;
+  width: 42px;
+  height: 42px;
 }
 
 .additional-info .info .header .hide-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: all;
-    transition: all 300ms ease;
-    opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: all;
+  transition: all 300ms ease;
+  opacity: 0.8;
 }
 
 .additional-info .info .header .hide-btn:hover {
-    cursor: pointer;
-    opacity: 1;
-    transform: rotate(-26deg);
+  cursor: pointer;
+  opacity: 1;
+  transform: rotate(-26deg);
 }
 
 .additional-info .info .header .title {
-    display: flex;
-    gap: 1em;
+  display: flex;
+  gap: 1em;
 }
 
 .additional-info.extended .btn {
-    opacity: 0;
-    pointer-events: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .additional-info .info p {
-    pointer-events: all;
-    color: var(--font-color);
-    font-size: 1em;
-    font-weight: 300;
-    line-height: 1.5em;
-    padding: 1rem;
-    max-height: 20vh;
-    overflow: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+  pointer-events: all;
+  color: var(--font-color);
+  font-size: 1em;
+  font-weight: 300;
+  line-height: 1.5em;
+  padding: 1rem;
+  max-height: 20vh;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .additional-info .btn {
-    --size: 3em;
-    pointer-events: all;
-    background-color: var(--bg-color);
-    padding: 0.75em;
-    width: var(--size);
-    height: var(--size);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: var(--border-radius);
-    opacity: var(--ui-opacity);
-    cursor: pointer;
-    color: var(--font-color);
-    position: absolute;
+  --size: 3em;
+  pointer-events: all;
+  background-color: var(--bg-color);
+  padding: 0.75em;
+  width: var(--size);
+  height: var(--size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius);
+  opacity: var(--ui-opacity);
+  cursor: pointer;
+  color: var(--font-color);
+  position: absolute;
 }
 
 .additional-info .btn svg {
-    width: var(--size);
-    height: var(--size);
+  width: var(--size);
+  height: var(--size);
 }
 
 .additional-info .btn:hover {
-    background-color: var(--bg-color-hover);
+  background-color: var(--bg-color-hover);
 }
 
 .additional-info.hidden {
-    opacity: 0;
-    pointer-events: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .additional-info.hidden .info p {
-    pointer-events: none;
+  pointer-events: none;
 }
