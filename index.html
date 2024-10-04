@@ -1,24 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>ZST Asteroids viewer</title>
-        <link rel="icon" type="image/x-icon" href="/asteroid-icon.svg" />
-
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-            rel="stylesheet"
-        />
-        <link rel="stylesheet" href="./src/style.css" />
-    </head>
-    <body>
-        <div class="UI">
-            <div class="move-to-default">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+    <base href="." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <div class="UI">
+           <div class="move-to-default">
                 <img src="/left-arrow.svg" alt="" /> View all asteroids
             </div>
+      <div class="credits-container">
+        <div class="credits-actions">
+          <button class="btn credits-btn--close">X</button>
+        </div>
+
+        <div class="credits-content-container">
+          <div class="credits-content">
+            <div class="credits-title">
+              <h1>TWÓRCY PROJEKTU</h1>
+
+       
+            <p>ZAJEBISTY PROJEKT MAMY NAJAK</p>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Recusandae eligendi quaerat quod, optio nesciunt autem quidem
+              laborum labore impedit tempore officiis voluptates illum minima,
+              vel aliquam quia voluptate at distinctio?
+            </p>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Recusandae eligendi quaerat quod, optio nesciunt autem quidem
+              laborum labore impedit tempore officiis voluptates illum minima,
+              vel aliquam quia voluptate at distinctio?
+            </p>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Recusandae eligendi quaerat quod, optio nesciunt autem quidem
+              laborum labore impedit tempore officiis voluptates illum minima,
+              vel aliquam quia voluptate at distinctio?
+            </p>
+            Add more content here if you want
+          </div>
+        </div>
+      </div>
+      <div class="move-to-default">
+        <img src="/left-arrow.svg" alt="" /> View all asteroids
+      </div>
+
 
             <div class="additional-info hidden extended">
                 <div class="btn">
@@ -62,9 +99,8 @@
             <div class="search-bar">
                 <input type="text" placeholder="Search for space objects" />
 
-                <div class="result scroll"></div>
-            </div>
-
+        <div class="result scroll"></div>
+      </div>
             <div class="object-info extended">
                 <div class="main-info">
                     <p class="object-name"></p>
@@ -136,54 +172,54 @@
                 </div>
             </div>
 
-            <div class="additional-buttons">
-                <div class="btn credits">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            fill="currentColor"
-                            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8"
-                        />
-                    </svg>
-                    <p>credits</p>
-                </div>
-                <div class="btn layers">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            fill="currentColor"
-                            d="m6 8l6 3l6-3l-6-3zm6.489-4.884l7.993 4.076c.486.248.661.81.391 1.257a.97.97 0 0 1-.39.359l-7.994 4.076a1.09 1.09 0 0 1-.978 0L3.518 8.808c-.486-.248-.661-.81-.391-1.257a.97.97 0 0 1 .39-.359l7.994-4.076c.304-.155.674-.155.978 0m0 13.766a1.07 1.07 0 0 1-.978 0l-7.993-4.147c-.486-.252-.661-.824-.391-1.278a1 1 0 0 1 .39-.365a.82.82 0 0 1 .755 0l7.24 3.755c.303.158.673.158.977 0l7.239-3.755a.82.82 0 0 1 .754 0c.486.252.661.824.391 1.278a1 1 0 0 1-.39.365zm0 4a1.07 1.07 0 0 1-.978 0l-7.993-4.147c-.486-.252-.661-.824-.391-1.278a1 1 0 0 1 .39-.365a.82.82 0 0 1 .755 0l7.24 3.755c.303.158.673.158.977 0l7.239-3.755a.82.82 0 0 1 .754 0c.486.252.661.824.391 1.278a1 1 0 0 1-.39.365z"
-                        />
-                    </svg>
+      <div class="additional-buttons">
+        <button class="btn credits-btn--open">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1em"
+            height="1em"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8"
+            />
+          </svg>
+          <p>credits</p>
+        </button>
+        <button class="btn layers">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1em"
+            height="1em"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="m6 8l6 3l6-3l-6-3zm6.489-4.884l7.993 4.076c.486.248.661.81.391 1.257a.97.97 0 0 1-.39.359l-7.994 4.076a1.09 1.09 0 0 1-.978 0L3.518 8.808c-.486-.248-.661-.81-.391-1.257a.97.97 0 0 1 .39-.359l7.994-4.076c.304-.155.674-.155.978 0m0 13.766a1.07 1.07 0 0 1-.978 0l-7.993-4.147c-.486-.252-.661-.824-.391-1.278a1 1 0 0 1 .39-.365a.82.82 0 0 1 .755 0l7.24 3.755c.303.158.673.158.977 0l7.239-3.755a.82.82 0 0 1 .754 0c.486.252.661.824.391 1.278a1 1 0 0 1-.39.365zm0 4a1.07 1.07 0 0 1-.978 0l-7.993-4.147c-.486-.252-.661-.824-.391-1.278a1 1 0 0 1 .39-.365a.82.82 0 0 1 .755 0l7.24 3.755c.303.158.673.158.977 0l7.239-3.755a.82.82 0 0 1 .754 0c.486.252.661.824.391 1.278a1 1 0 0 1-.39.365z"
+            />
+          </svg>
 
-                    <p>layers</p>
-                </div>
-            </div>
+          <p>layers</p>
+        </button>
+      </div>
 
-            <div class="time-slider">
-                <div class="info">
-                    <div class="live-btn">
-                        <div class="circle"></div>
-                        <p>LIVE</p>
-                    </div>
-                    <div class="date"></div>
-                    <div class="clock"></div>
-                </div>
-
-                <div class="slider">
-                    <div class="drag"></div>
-                </div>
-                <div class="simulation-speed">real-time</div>
-            </div>
+      <div class="time-slider">
+        <div class="info">
+          <div class="live-btn">
+            <div class="circle"></div>
+            <p>LIVE</p>
+          </div>
+          <div class="date"></div>
+          <div class="clock"></div>
         </div>
-        <script type="module" src="/src/index.ts"></script>
-    </body>
+
+        <div class="slider">
+          <div class="drag"></div>
+        </div>
+        <div class="simulation-speed">real-time</div>
+      </div>
+    </div>
+    <script type="module" src="/src/index.ts"></script>
+  </body>
 </html>

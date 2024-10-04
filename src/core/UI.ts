@@ -1,6 +1,10 @@
 import CelestialBody from "../components/CelestialBody";
 import SolarSystem from "../components/SolarSystem";
+
+import Credits from "../UI/Credits";
+
 import AdditionalInfo from "../UI/AdditionalInfo";
+
 import OrbitInfo from "../UI/OrbitInfo";
 import SearchBar from "../UI/SearchBar";
 import TimeSlider from "../UI/TimeSlider";
@@ -16,6 +20,7 @@ export class UI {
     private orbitInfo: OrbitInfo;
     private solarSystem: SolarSystem;
     private additionalInfo: AdditionalInfo;
+    private credits: Credits;
 
     constructor(solarSystem: SolarSystem) {
         this.clock = document.querySelector<HTMLDivElement>(
@@ -34,6 +39,7 @@ export class UI {
         this.searchBar = new SearchBar(solarSystem);
         this.orbitInfo = new OrbitInfo();
         this.additionalInfo = new AdditionalInfo();
+
 
         this.setEventListeners();
         this.solarSystem = solarSystem;
@@ -102,6 +108,7 @@ export class UI {
         this.searchBar.setEventListeners();
         this.orbitInfo.setEventListeners();
         this.additionalInfo.setEventListeners();
+        this.credits.setEventListeners();
 
         if (this.liveBtn)
             this.liveBtn.addEventListener("click", () => {
@@ -125,4 +132,5 @@ export class UI {
             this.liveBtn.classList.remove("no-live");
         }
     }
+  }
 }
