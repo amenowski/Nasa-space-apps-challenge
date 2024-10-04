@@ -4,7 +4,7 @@
         "name": "Mercury",
         "radius": 2439,
         "color": "#837D7D",
-        "textureUrl": "./src/assets/textures/mercury.jpg",
+        "textureUrl": "/assets/textures/mercury.jpg",
         "obliquity": 2.04,
         "sidRotPerSec": 0.00000124001,
         "orbit": {
@@ -30,7 +30,7 @@
         "name": "Venus",
         "radius": 6051.8,
         "color": "#AE681B",
-        "textureUrl": "./src/assets/textures/Venus.jpg",
+        "textureUrl": "/assets/textures/Venus.jpg",
         "obliquity": 177.36,
         "sidRotPerSec": -0.00000029924,
         "orbit": {
@@ -56,7 +56,7 @@
         "name": "Earth",
         "radius": 6371,
         "color": "#4A8BD5",
-        "textureUrl": "./src/assets/textures/earth.jpg",
+        "textureUrl": "/assets/textures/earth.jpg",
         "obliquity": 23.439,
         "sidRotPerSec": 0.00007292115,
         "orbit": {
@@ -83,7 +83,7 @@
         "name": "Mars",
         "radius": 3389.5,
         "color": "#CF5D38",
-        "textureUrl": "./src/assets/textures/mars.jpg",
+        "textureUrl": "/assets/textures/mars.jpg",
         "obliquity": 25.19,
         "sidRotPerSec": 0.0000708822,
         "orbit": {
@@ -109,7 +109,7 @@
         "name": "Jupiter",
         "radius": 69911,
         "color": "#DCBA9B",
-        "textureUrl": "./src/assets/textures/jupiter.jpg",
+        "textureUrl": "/assets/textures/jupiter.jpg",
         "obliquity": 3.13,
         "sidRotPerSec": 0.00017585,
         "orbit": {
@@ -136,8 +136,8 @@
         "name": "Saturn",
         "radius": 58232,
         "color": "#BCA77F",
-        "textureUrl": "./src/assets/textures/saturn.jpg",
-        "ringTexture": "./src/assets/textures/saturn_ring.png",
+        "textureUrl": "/assets/textures/saturn.jpg",
+        "ringTexture": "/assets/textures/saturn_ring.png",
         "ringStart": 74500,
         "ringEnd": 149268,
         "obliquity": 26.73,
@@ -165,7 +165,7 @@
         "name": "Uranus",
         "radius": 25362,
         "color": "#4768FA",
-        "textureUrl": "./src/assets/textures/uranus.jpg",
+        "textureUrl": "/assets/textures/uranus.jpg",
         "obliquity": 97.77,
         "sidRotPerSec": -0.000101237,
         "orbit": {
@@ -191,7 +191,7 @@
         "name": "Neptune",
         "radius": 24622,
         "color": "#71A6FF",
-        "textureUrl": "./src/assets/textures/neptune.jpg",
+        "textureUrl": "/assets/textures/neptune.jpg",
         "obliquity": 28.32,
         "sidRotPerSec": 0.000108338,
         "orbit": {

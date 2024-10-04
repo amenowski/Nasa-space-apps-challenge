@@ -69,7 +69,7 @@ export default class SolarSystem {
             camera.getCamera(),
             "Sun",
             696340 / SETTINGS.SUN_SCALE,
-            "./src/assets/textures/sun.jpg"
+            "/assets/textures/sun.jpg"
         );
 
         this.createSkybox(scene);
@@ -325,7 +325,7 @@ export default class SolarSystem {
     }
 
     private async initPlanets(): Promise<void> {
-        const data = await fetch("./src/assets/data/SolarPlanets.json");
+        const data = await fetch("/assets/data/SolarPlanets.json");
         const json: CelestialWithRingData[] | SolarPlanetData[] =
             await data.json();
         let celestialObject: CelestialBody | CelestialWithRing | null = null;
@@ -392,7 +392,7 @@ export default class SolarSystem {
     }
 
     private async initSatellites(): Promise<void> {
-        const data = await fetch("./src/assets/data/CommonSatellites.json");
+        const data = await fetch("/assets/data/CommonSatellites.json");
         const json: SatellitesData[] = await data.json();
 
         for (let object of json) {
@@ -437,7 +437,7 @@ export default class SolarSystem {
     }
 
     private async loadAsteroidsData(): Promise<void> {
-        let data = await fetch("./src/assets/data/PHA.json");
+        let data = await fetch("/assets/data/PHA.json");
         let json: AsteroidData[] = await data.json();
 
         for (let ad of json) {
@@ -447,7 +447,7 @@ export default class SolarSystem {
             this.phas.set(ad.full_name, ad);
         }
 
-        data = await fetch("./src/assets/data/NEO.json");
+        data = await fetch("/assets/data/NEO.json");
         json = await data.json();
 
         for (let ad of json) {
@@ -455,7 +455,7 @@ export default class SolarSystem {
             this.asteroids.set(ad.full_name, ad);
         }
 
-        data = await fetch("./src/assets/data/NEOc.json");
+        data = await fetch("/assets/data/NEOc.json");
         json = await data.json();
 
         for (let ad of json) {
@@ -535,12 +535,12 @@ export default class SolarSystem {
     private createSkybox(scene: Scene): void {
         const loader = new CubeTextureLoader();
         const texture = loader.load([
-            "./src/assets/textures/skybox/skybox_px.png",
-            "./src/assets/textures/skybox/skybox_nx.png",
-            "./src/assets/textures/skybox/skybox_py.png",
-            "./src/assets/textures/skybox/skybox_ny.png",
-            "./src/assets/textures/skybox/skybox_pz.png",
-            "./src/assets/textures/skybox/skybox_nz.png",
+            "/assets/textures/skybox/skybox_px.png",
+            "/assets/textures/skybox/skybox_nx.png",
+            "/assets/textures/skybox/skybox_py.png",
+            "/assets/textures/skybox/skybox_ny.png",
+            "/assets/textures/skybox/skybox_pz.png",
+            "/assets/textures/skybox/skybox_nz.png",
         ]);
 
         scene.background = texture;
