@@ -1,41 +1,55 @@
-{
-    "Mercury": {
+[
+    {
+        "name": "Mercury",
         "description": "The smallest planet in our solar system and nearest to the Sun, Mercury is only slightly larger than Earth's Moon. From the surface of Mercury, the Sun would appear more than three times as large as it does when viewed from Earth, and the sunlight would be as much as seven times brighter."
     },
-    "Venus": {
+    {
+        "name": "Venus",
         "description": "Venus is the second planet from the Sun, and our closest planetary neighbor. It's the hottest planet in our solar system, and is sometimes called Earth's twin."
     },
-    "Earth": {
-        "description": "Earth - our home planet is the third planet from the Sun, and the fifth largest planet. It's the only place we know of inhabited by living things. While Earth is only the fifth largest planet in the solar system, it is the only world in our solar system with liquid water on the surface. Just slightly larger than nearby Venus, Earth is the biggest of the four planets closest to the Sun, all of which are made of rock and metal." 
+    {
+        "name": "Earth",
+        "description": "Earth - our home planet is the third planet from the Sun, and the fifth largest planet. It's the only place we know of inhabited by living things. While Earth is only the fifth largest planet in the solar system, it is the only world in our solar system with liquid water on the surface. Just slightly larger than nearby Venus, Earth is the biggest of the four planets closest to the Sun, all of which are made of rock and metal."
     },
-    "Mars": {
+    {
+        "name": "Mars",
         "description": "Mars - the fourth planet from the Sun is a dusty, cold, desert world with a very thin atmosphere. This dynamic planet has seasons, polar ice caps, extinct volcanoes, canyons and weather."
     },
-    "Jupiter": {
-        "description": "Jupiter is a world of extremes. It's the largest planet in our solar system  if it were a hollow shell, 1,000 Earths could fit inside. It's also the oldest planet, forming from the dust and gases left over from the Sun's formation 4.6 billion years ago. But it has the shortest day in the solar system, taking only 10.5 hours to spin around once on its axis."
+    {
+        "name": "Jupiter",
+        "description": "Jupiter is a world of extremes. It's the largest planet in our solar system if it were a hollow shell, 1,000 Earths could fit inside. It's also the oldest planet, forming from the dust and gases left over from the Sun's formation 4.6 billion years ago. But it has the shortest day in the solar system, taking only 10.5 hours to spin around once on its axis."
     },
-    "Saturn": {
+    {
+        "name": "Saturn",
         "description": "Saturn is the sixth planet from the Sun, and the second-largest planet in our solar system. Like fellow gas giant Jupiter, Saturn is a massive ball made mostly of hydrogen and helium. Saturn is not the only planet to have rings, but none are as spectacular or as complex as Saturn's. Saturn also has dozens of moons."
     },
-    "Uranus": {
+    {
+        "name": "Uranus",
         "description": "Uranus is the seventh planet from the Sun, and it has the third largest diameter of planets in our solar system. Uranus appears to spin sideways. Uranus is a very cold and windy world. The ice giant is surrounded by 13 faint rings and 28 small moons. Uranus rotates at a nearly 90-degree angle from the plane of its orbit. This unique tilt makes Uranus appear to spin sideways, orbiting the Sun like a rolling ball."
     },
-    "Neptune": {
+    {
+        "name": "Neptune",
         "description": "Dark, cold, and whipped by supersonic winds, ice giant Neptune is more than 30 times as far from the Sun as Earth. Neptune is the only planet in our solar system not visible to the naked eye. In 2011 Neptune completed its first 165-year orbit since its discovery in 1846."
     },
-    "Ceres": {
+    {
+        "name": "Ceres",
         "description": "Dwarf planet Ceres is the largest object in the asteroid belt between Mars and Jupiter, and it's the only dwarf planet located in the inner solar system. It was the first member of the asteroid belt to be discovered when Giuseppe Piazzi spotted it in 1801. When NASA's Dawn arrived in 2015, Ceres became the first dwarf planet to receive a visit from a spacecraft."
     },
-    "Pluto": {
+    {
+        "name": "Pluto",
         "description": "Pluto is a complex and mysterious world with mountains, valleys, plains, craters, and glaciers. It is located in the distant Kuiper Belt. Discovered in 1930, Pluto was long considered our solar system's ninth planet. But after the discovery of similar worlds deeper in the Kuiper Belt, Pluto was reclassified as a dwarf planet in 2006 by the International Astronomical Union."
     },
-    "Haumea": {
+    {
+        "name": "Haumea",
         "description": "Dwarf planet Haumea was originally designated 2003 EL61 (and nicknamed Santa by one discovery team). Haumea is located in the Kuiper Belt, a doughnut-shaped region of icy bodies beyond the orbit of Neptune. Haumea is an oval-shaped dwarf planet that is one of the fastest rotating large objects in our solar system. The fast spin distorts Haumea's shape, making this dwarf planet look like a football."
     },
-    "Makemake": {
-        "description": "Dwarf planet Makemake along with Pluto, Haumea, and Eris  is located in the Kuiper Belt, a donut-shaped region of icy bodies beyond the orbit of Neptune. Makemake is slightly smaller than Pluto, and is the second-brightest object in the Kuiper Belt as seen from Earth while Pluto is the brightest. It takes about 305 Earth years for this dwarf planet to make one trip around the Sun."
+    {
+        "name": "Makemake",
+        "description": "Dwarf planet Makemake along with Pluto, Haumea, and Eris is located in the Kuiper Belt, a donut-shaped region of icy bodies beyond the orbit of Neptune. Makemake is slightly smaller than Pluto, and is the second-brightest object in the Kuiper Belt as seen from Earth while Pluto is the brightest. It takes about 305 Earth years for this dwarf planet to make one trip around the Sun."
     },
-    "Eris": {
-        "description": "Eris is one of largest the dwarf planets in our solar system. It's about the same size as Pluto, but it's three times farther from the Sun. The discovery of Eris helped trigger a debate in the scientific community that led to the International Astronomical Union's decision in 2006 to clarify the definition of a planet. Pluto, Eris, and other similar objects are now classified as dwarf planets."
+    {
+        "name": "Eris",
+        "description": "Eris is one of the largest dwarf planets in our solar system. It's about the same size as Pluto, but it's three times farther from the Sun. The discovery of Eris helped trigger a debate in the scientific community that led to the International Astronomical Union's decision in 2006 to clarify the definition of a planet. Pluto, Eris, and other similar objects are now classified as dwarf planets."
     }
-}
+]
+

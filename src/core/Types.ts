@@ -153,3 +153,8 @@ export interface AsteroidData {
 }
 
 export type AsteroidType = "NEO" | "PHA";
+
+export interface AdditionalInfo {
+    name: string;
+    description: string;
+}

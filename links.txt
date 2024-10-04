@@ -1,0 +1,8 @@
+3d models - https://astro.troja.mff.cuni.cz/projects/damit/
+3d models - https://3d-asteroids.space/
+data about planets - https://in-the-sky.org/
+data about orbit elements - https://ssd.jpl.nasa.gov/
+textures - https://www.solarsystemscope.com/textures/
+textures - https://www.deviantart.com/ducn156 
+textures - https://planet-texture-maps.fandom.com
+icons from - iconify
