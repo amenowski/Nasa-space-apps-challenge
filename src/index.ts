@@ -19,9 +19,12 @@ new EventListeners(renderer, camera, solarSystem);
 
 mainScene.init();
 
-await solarSystem.init();
+solarSystem.init().then(() => {
+    mainScene.addGroup(solarSystem.group);
 
-mainScene.addGroup(solarSystem.group);
+    clock.start();
+    animation();
+});
 
 function animation() {
     solarSystem.update(clock.getDelta());
@@ -33,6 +36,3 @@ function animation() {
     camera.update();
     requestAnimationFrame(animation);
 }
-
-clock.start();
-animation();
