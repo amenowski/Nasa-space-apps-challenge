@@ -39,7 +39,7 @@ export class UI {
         this.searchBar = new SearchBar(solarSystem);
         this.orbitInfo = new OrbitInfo();
         this.additionalInfo = new AdditionalInfo();
-
+        this.credits = new Credits();
 
         this.setEventListeners();
         this.solarSystem = solarSystem;
@@ -132,5 +132,4 @@ export class UI {
             this.liveBtn.classList.remove("no-live");
         }
     }
-  }
 }
