@@ -11,6 +11,7 @@ import TimeSlider from "../UI/TimeSlider";
 import { getMonthShortName } from "../utils/DateConverter";
 import DraggableElement from "../UI/DraggableElement";
 import Layers from "../UI/Layers";
+import Warning from "../UI/Warning";
 
 export class UI {
     private date: HTMLDivElement | null = null;
@@ -25,6 +26,7 @@ export class UI {
     private credits: Credits;
     private draggableElement: DraggableElement;
     private layers: Layers;
+    private warning: Warning;
 
     constructor(solarSystem: SolarSystem) {
         this.clock = document.querySelector<HTMLDivElement>(
@@ -46,7 +48,9 @@ export class UI {
         this.credits = new Credits();
         this.layers = new Layers(solarSystem);
         this.draggableElement = new DraggableElement(".layer");
+        this.warning = new Warning();
 
+        this.warning.showWarning("Earth");
         this.setEventListeners();
         this.solarSystem = solarSystem;
     }

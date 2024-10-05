@@ -617,7 +617,6 @@ p {
     margin-bottom: 12px;
 }
 
-
 /***********************/
 /*       REUSABLE      */
 /***********************/
@@ -729,4 +728,52 @@ p {
 
 .additional-info.hidden .info p {
     pointer-events: none;
+}
+
+/***********************/
+/*        WARNING      */
+/***********************/
+@keyframes border-pulsate {
+    0% {
+        border-color: rgba(255, 0, 0, 1);
+    }
+    50% {
+        border-color: rgba(255, 0, 0, 0);
+    }
+    100% {
+        border-color: rgba(255, 0, 0, 1);
+    }
+}
+.warning-container {
+    position: absolute;
+    z-index: 99999;
+    pointer-events: all;
+    top: 18%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    width: 30rem;
+    height: 10rem;
+    border-radius: 9px;
+    padding: 5px 20px;
+    background-color: var(--bg-color);
+    background-size: 400% 400%;
+    border: 2px solid black;
+    animation: border-pulsate 0.5s infinite;
+}
+.warning-header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.warning-btn--close {
+    position: absolute;
+    padding: 0.5em 0.75em;
+    right: 0;
+}
+.warning-text {
+    text-align: center;
+}
+.warning-heading {
+    text-align: center;
 }
