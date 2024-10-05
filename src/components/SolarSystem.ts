@@ -311,19 +311,6 @@ export default class SolarSystem {
         this.ui.hideSearchBar();
     }
 
-    public hideObjectsOfType(type: string): void {
-        if (type == "Satellite") {
-            for (let [_, object] of this.celestialBodies) {
-                object.hideSatellites();
-            }
-            return;
-        }
-
-        for (let [_, object] of this.celestialBodies) {
-            if (object.type == type) object.hide();
-        }
-    }
-
     public showObjectsOfType(type: string): void {
         if (type == "Satellite") {
             for (let [_, object] of this.celestialBodies) {
@@ -341,6 +328,43 @@ export default class SolarSystem {
             .position.distanceTo(this.selectedObject!.mesh!.position);
 
         this.selectedObject?.updateRender(dist, true);
+    }
+
+    public hideObjectsOfType(type: string): void {
+        if (type == "Satellite") {
+            for (let [_, object] of this.celestialBodies) {
+                object.hideSatellites();
+            }
+            return;
+        }
+
+        for (let [_, object] of this.celestialBodies) {
+            if (object.type == type) object.hide();
+        }
+    }
+
+    public showOrbit(): void {
+        this.camera.getCamera().layers.enable(SETTINGS.ORBIT_LAYER);
+    }
+
+    public hideOrbit(): void {
+        this.camera.getCamera().layers.disable(SETTINGS.ORBIT_LAYER);
+    }
+
+    public showLabel(): void {
+        this.camera.getCamera().layers.enable(SETTINGS.LABEL_LAYER);
+    }
+
+    public hideLabel(): void {
+        this.camera.getCamera().layers.disable(SETTINGS.LABEL_LAYER);
+    }
+
+    public showIcon(): void {
+        this.camera.getCamera().layers.enable(SETTINGS.ICON_LAYER);
+    }
+
+    public hideIcon(): void {
+        this.camera.getCamera().layers.disable(SETTINGS.ICON_LAYER);
     }
 
     private async initPlanets(): Promise<void> {

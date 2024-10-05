@@ -12,6 +12,7 @@ import { CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
 import { UnixToJulianDate } from "../utils/DateConverter";
 import SolarSystem from "./SolarSystem";
 import Satellite from "./Satellite";
+import { SETTINGS } from "../core/Settings";
 
 export default class CelestialBody {
     public name: string;
@@ -212,7 +213,7 @@ export default class CelestialBody {
 
         this.label = new CSS2DObject(this.htmlElements[0]);
         this.label.position.set(0, 0, 0);
-        this.label.layers.set(this.layer);
+        this.label.layers.set(SETTINGS.LABEL_LAYER);
         this.mesh!.add(this.label);
     }
 
@@ -227,7 +228,7 @@ export default class CelestialBody {
 
         this.icon = new CSS2DObject(this.htmlElements[1]);
         this.icon.position.set(0, 0, 0);
-        this.icon.layers.set(this.layer);
+        this.icon.layers.set(SETTINGS.ICON_LAYER);
         this.mesh!.add(this.icon);
 
         this.htmlElements[1].addEventListener("mouseover", () => {

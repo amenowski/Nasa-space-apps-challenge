@@ -1,709 +1,703 @@
 *,
 *::after,
 *::before {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 :root {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 body {
-  padding: 0;
-  margin: 0;
-  font-family: "Open Sans", sans-serif;
-  --bg-color: #1c1c22;
-  --border-color: #454553;
-  --font-color: #797d8f;
-  --font-color-hover: #8f93a3;
-  --ui-opacity: 0.75;
-  --bg-color-hover: #2a2a33;
-  --border-radius: 8px;
+    padding: 0;
+    margin: 0;
+    font-family: "Open Sans", sans-serif;
+    --bg-color: #1c1c22;
+    --border-color: #454553;
+    --font-color: #797d8f;
+    --font-color-hover: #8f93a3;
+    --ui-opacity: 0.75;
+    --bg-color-hover: #2a2a33;
+    --border-radius: 8px;
 }
 
 p {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .UI {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  color: white;
-  pointer-events: none;
-  padding: 3em;
-  z-index: 9999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: white;
+    pointer-events: none;
+    padding: 3em;
+    z-index: 9999;
 
-  display: grid;
+    display: grid;
 
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  /* background-color: blue; */
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
 .time-slider {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  grid-row-start: 3;
-  grid-column-start: 2;
-  /* background-color: blue; */
-  justify-content: end;
-  align-items: center;
-  justify-self: center;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    grid-row-start: 3;
+    grid-column-start: 2;
+    justify-content: end;
+    align-items: center;
+    justify-self: center;
+    width: 100%;
 }
 
 .time-slider .slider {
-  pointer-events: all;
-  background-color: rgba(255, 255, 255, 0.7);
-  width: 20em;
-  height: 0.25em;
-  display: flex;
-  align-items: center;
-  position: relative;
-  justify-content: center;
-  border-radius: 16px;
+    pointer-events: all;
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 20em;
+    height: 0.25em;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+    border-radius: 16px;
 }
 
 .time-slider .slider .drag {
-  --offset: 0px;
-  position: absolute;
-  background: no-repeat 50%/100% url(/clock.svg);
-  height: 1.5em;
-  width: 1.5em;
-  cursor: grabbing;
-  left: calc(var(--offset) + 50%);
-  transform: translateX(-50%);
-  transition: all 50ms ease;
+    --offset: 0px;
+    position: absolute;
+    background: no-repeat 50%/100% url(/clock.svg);
+    height: 1.5em;
+    width: 1.5em;
+    cursor: grabbing;
+    left: calc(var(--offset) + 50%);
+    transform: translateX(-50%);
+    transition: all 50ms ease;
 }
 
 .time-slider .info {
-  width: 100%;
-  display: flex;
-  gap: 1em;
-  font-weight: bold;
-  justify-content: center;
-  align-items: center;
-  gap: 2em;
-  text-transform: uppercase;
-  user-select: none;
+    width: 100%;
+    display: flex;
+    gap: 1em;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    text-transform: uppercase;
+    user-select: none;
 }
 
 .time-slider .info .date {
-  width: 12ch;
+    width: 12ch;
 }
 
 .time-slider .info .live-btn {
-  border: 2px solid white;
-  padding: 1em 1.25em;
-  border-radius: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5em;
-  max-height: 2rem;
-  pointer-events: all;
-  /* opacity: 0.7; */
-  transition: border 200ms ease;
+    border: 2px solid white;
+    padding: 1em 1.25em;
+    border-radius: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    max-height: 2rem;
+    pointer-events: all;
+    transition: border 200ms ease;
 }
 .time-slider .info .live-btn:hover {
-  opacity: 1;
-  border: 2px solid red;
-  cursor: pointer;
+    opacity: 1;
+    border: 2px solid red;
+    cursor: pointer;
 }
 
 .time-slider .info .live-btn p {
-  font-size: 0.75em;
-  font-weight: bold;
-  letter-spacing: 0.3ch;
+    font-size: 0.75em;
+    font-weight: bold;
+    letter-spacing: 0.3ch;
 }
 
 .time-slider .info .live-btn .circle {
-  width: 0.5em;
-  height: 0.5em;
-  border-radius: 100%;
-  background-color: red;
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 100%;
+    background-color: red;
 }
 
 .time-slider .info .live-btn.no-live .circle {
-  background-color: gray;
+    background-color: gray;
 }
 
 .time-slider .simulation-speed {
-  user-select: none;
-  transition: opacity 400ms ease-in;
-  font-size: 0.75em;
-  font-weight: bold;
-  letter-spacing: 0.2ch;
-  text-transform: uppercase;
-  opacity: 0;
+    user-select: none;
+    transition: opacity 400ms ease-in;
+    font-size: 0.75em;
+    font-weight: bold;
+    letter-spacing: 0.2ch;
+    text-transform: uppercase;
+    opacity: 0;
 }
 
 .planet-label {
-  color: var(--color);
-  font-family: sans-serif;
-  padding: 2px;
-  background: transparent;
-  top: -1em;
-  opacity: 0.5;
-  transition: top 200ms ease;
+    color: var(--color);
+    font-family: sans-serif;
+    padding: 2px;
+    background: transparent;
+    top: -1em;
+    opacity: 0.5;
+    transition: top 200ms ease;
 }
 
 .planet-icon {
-  background-color: var(--color);
-  opacity: 0.8;
-  width: 10px;
-  height: 10px;
-  border-radius: 100%;
+    background-color: var(--color);
+    opacity: 0.8;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
 }
 
 .planet-label.hovered,
 .planet-icon.hovered,
 .asteroid-icon.hovered {
-  opacity: 1 !important;
-  cursor: pointer;
-  font-weight: bold;
+    opacity: 1 !important;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .planet-label.hovered {
-  top: -1.25em;
+    top: -1.25em;
 }
 
 .asteroid-icon {
-  width: 1em;
-  height: 1em;
-  opacity: 0.5;
+    width: 1em;
+    height: 1em;
+    opacity: 0.5;
 }
 
 .asteroid-icon img {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .move-to-default {
-  pointer-events: all;
-  grid-row-start: 1;
-  grid-column-start: 1;
-  align-self: self-start;
-  justify-self: start;
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  font-size: 1rem;
-  text-transform: uppercase;
-  font-weight: bold;
-  opacity: 0;
-  transition: opacity 200ms ease-in;
-  user-select: none;
+    pointer-events: all;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    align-self: self-start;
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 200ms ease-in;
+    user-select: none;
 }
 
 .move-to-default.show {
-  opacity: 0.5;
+    opacity: 0.5;
 }
 
 .move-to-default img {
-  width: 1.5em;
-  aspect-ratio: 1;
-  transition: transform 300ms ease;
+    width: 1.5em;
+    aspect-ratio: 1;
+    transition: transform 300ms ease;
 }
 
 .move-to-default.show:hover {
-  cursor: pointer;
-  opacity: 1;
+    cursor: pointer;
+    opacity: 1;
 }
 
 .move-to-default:hover img {
-  transform: translateX(-20%);
+    transform: translateX(-20%);
 }
 
 .search-bar {
-  top: 2em;
-  right: 2em;
-  position: absolute;
-  pointer-events: all;
-  display: flex;
-  flex-direction: column;
-  width: 16em;
-  z-index: 10;
-  opacity: var(--ui-opacity);
+    top: 2em;
+    right: 2em;
+    position: absolute;
+    pointer-events: all;
+    display: flex;
+    flex-direction: column;
+    width: 16em;
+    z-index: 10;
+    opacity: var(--ui-opacity);
 }
 
 .search-bar .result {
-  overflow-x: hiddeng;
-  background-color: var(--bg-color);
-  border-bottom-left-radius: var(--border-radius);
-  border-bottom-right-radius: var(--border-radius);
-  max-height: 40vh;
+    overflow-x: hiddeng;
+    background-color: var(--bg-color);
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    max-height: 40vh;
 }
 
 .search-bar .result p {
-  padding: 1em 1em;
-  margin: 0;
-  transition: background-color 200ms ease;
-  font-size: 0.8rem;
-  /* max-width: 30ch; */
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: var(--font-color);
+    padding: 1em 1em;
+    margin: 0;
+    transition: background-color 200ms ease;
+    font-size: 0.8rem;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--font-color);
 }
 
 .search-bar .result p:hover {
-  background-color: var(--bg-color-hover);
-  cursor: pointer;
-  color: var(--font-color-hover);
+    background-color: var(--bg-color-hover);
+    cursor: pointer;
+    color: var(--font-color-hover);
 }
 
 .search-bar input {
-  outline: none;
-  border: none;
-  background-color: var(--bg-color);
-  height: 2em;
-  padding: 1em 1em;
-  font-size: 1em;
-  color: var(--font-color);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
+    outline: none;
+    border: none;
+    background-color: var(--bg-color);
+    height: 2em;
+    padding: 1em 1em;
+    font-size: 1em;
+    color: var(--font-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
 }
 
 .search-bar input .result {
-  border-top-left-radius: var(--border-radius);
-  border-top-right-radius: var(--border-radius);
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
 }
 
 .object-info {
-  width: 20em;
-  /* height: 20em; */
-  grid-row-start: 3;
-  grid-column-start: 3;
-  justify-self: end;
-  align-self: flex-end;
-  display: flex;
-  flex-direction: column-reverse;
-  overflow: hidden;
-  opacity: 0;
-  transition: opacity 200ms ease-out;
+    width: 20em;
+    grid-row-start: 3;
+    grid-column-start: 3;
+    justify-self: end;
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column-reverse;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 200ms ease-out;
 }
 
 .object-info.visible {
-  opacity: var(--ui-opacity);
+    opacity: var(--ui-opacity);
 }
 
 .object-info .main-info {
-  color: var(--font-color);
-  background-color: var(--bg-color);
-  padding: 1em;
-  display: flex;
-  justify-content: space-between;
-  z-index: 2;
-  cursor: pointer;
+    color: var(--font-color);
+    background-color: var(--bg-color);
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
+    cursor: pointer;
 }
 
 .object-info.extended .main-info {
-  border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
 }
 
 .object-info .main-info {
-  pointer-events: all;
+    pointer-events: all;
 }
 
 .object-info .main-info .object-name {
-  user-select: none;
-  max-width: 30ch;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-weight: bold;
+    user-select: none;
+    max-width: 30ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: bold;
 }
 
 .object-info .main-info .more-info {
-  fill: var(--font-color);
-  width: 1.25em;
-  padding: 0.12em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+    fill: var(--font-color);
+    width: 1.25em;
+    padding: 0.12em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 
 .object-info .main-info .more-info svg {
-  transition: transform 200ms ease;
+    transition: transform 200ms ease;
 }
 
 .object-info .main-info:hover .more-info svg {
-  fill: var(--font-color-hover);
-  transform: rotate(180deg);
+    fill: var(--font-color-hover);
+    transform: rotate(180deg);
 }
 
 .object-info.extended .main-info .more-info svg {
-  transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 
 .object-info.extended .main-info:hover .more-info svg {
-  transform: rotate(0deg);
+    transform: rotate(0deg);
 }
 
 .object-info .orbital-elements {
-  pointer-events: none;
-  user-select: all;
-  background-color: var(--bg-color);
-  transform: translateY(100%);
-  transition: all 200ms ease-in;
-  padding: 0.5em 0;
-  overflow: auto;
-  height: auto;
-  max-height: 50vh;
+    pointer-events: none;
+    user-select: all;
+    background-color: var(--bg-color);
+    transform: translateY(100%);
+    transition: all 200ms ease-in;
+    padding: 0.5em 0;
+    overflow: auto;
+    height: auto;
+    max-height: 50vh;
 }
 
 .object-info.visible .orbital-elements {
-  pointer-events: all;
+    pointer-events: all;
 }
 
 .object-info .orbital-elements ul {
-  list-style: none;
-  margin: 0;
-  padding: 1em;
-  display: flex;
-  flex-direction: column;
-  font-size: 0.9rem;
-  gap: 3em;
+    list-style: none;
+    margin: 0;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+    gap: 3em;
 }
 
 .object-info .orbital-elements ul li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--font-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--font-color);
 }
 
 .object-info .orbital-elements ul li .label {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .object-info .orbital-elements ul li .value {
-  display: flex;
-  gap: 1em;
-  align-items: end;
+    display: flex;
+    gap: 1em;
+    align-items: end;
 }
 
 .object-info .orbital-elements ul li .value .number {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 .object-info .orbital-elements ul li .value .unit {
-  text-align: end;
-  width: 5ch;
-  font-size: 0.75em;
+    text-align: end;
+    width: 5ch;
+    font-size: 0.75em;
 }
 
 .object-info.extended .orbital-elements {
-  transform: translateY(0);
+    transform: translateY(0);
 }
 
 .scroll {
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--font-color) var(--bg-color);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--font-color) var(--bg-color);
 }
 
 .additional-buttons {
-  grid-column-start: 1;
-  grid-row-start: 3;
-  align-self: flex-end;
+    grid-column-start: 1;
+    grid-row-start: 3;
+    align-self: flex-end;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
 }
 
 .btn {
-  display: flex;
-  align-items: center;
-  border: none;
-  gap: 0.5em;
-  color: var(--font-color);
-  background-color: var(--bg-color);
-  padding: 0.75em 1em;
-  opacity: var(--ui-opacity);
-  border-radius: 8px;
+    display: flex;
+    align-items: center;
+    border: none;
+    gap: 0.5em;
+    color: var(--font-color);
+    background-color: var(--bg-color);
+    padding: 0.75em 1em;
+    opacity: var(--ui-opacity);
+    border-radius: 8px;
 
-  pointer-events: all;
-  user-select: none;
-  font-size: 16px;
+    pointer-events: all;
+    user-select: none;
+    font-size: 16px;
 }
 
 .btn:hover {
-  color: var(--font-color-hover);
-  background-color: var(--bg-color-hover);
-  cursor: pointer;
+    color: var(--font-color-hover);
+    background-color: var(--bg-color-hover);
+    cursor: pointer;
 }
 /***********************/
 /*        CREDITS      */
 /***********************/
 .credits-container {
-  display: none;
-  pointer-events: all;
-  position: absolute;
-  flex-direction: column;
-  z-index: 99999;
-  width: 100%;
-  height: 100vh;
-  padding: 24px;
-  border-radius: 9px;
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%);
-  background-color: var(--bg-color);
+    display: none;
+    pointer-events: all;
+    position: absolute;
+    flex-direction: column;
+    z-index: 99999;
+    width: 100%;
+    height: 100vh;
+    padding: 24px;
+    border-radius: 9px;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    background-color: var(--bg-color);
 }
 .credits-actions {
-  width: 100%;
+    width: 100%;
 }
 .credits-btn--close {
-  font-size: 18px;
+    font-size: 18px;
 }
 .credits-btn--open {
 }
 .credits-container.visible {
-  display: flex;
+    display: flex;
 }
 .credits-content-container {
-  height: 100vh;
-  perspective: 400px;
-  overflow: hidden;
+    height: 100vh;
+    perspective: 400px;
+    overflow: hidden;
 }
 
 .credits-content {
-  font-size: 1.5rem;
-  position: relative;
-  top: 100vh;
-  width: 80%;
-  margin: 0 auto;
-  text-align: justify;
-  transform-origin: 50% 100%;
-  transform: rotateX(20deg);
-  animation: scroll 40s linear infinite;
+    font-size: 1.5rem;
+    position: relative;
+    top: 100vh;
+    width: 80%;
+    margin: 0 auto;
+    text-align: justify;
+    transform-origin: 50% 100%;
+    transform: rotateX(20deg);
+    animation: scroll 40s linear infinite;
 }
 
 .credits-title {
-  text-align: center;
-  margin-bottom: 100px;
+    text-align: center;
+    margin-bottom: 100px;
 }
 
 .title h1 {
-  font-size: 3rem;
-  margin: 0;
+    font-size: 3rem;
+    margin: 0;
 }
 
 /* Animation */
 @keyframes scroll {
-  0% {
-    top: 100vh;
-  }
-  100% {
-    top: -95vh;
-  }
+    0% {
+        top: 100vh;
+    }
+    100% {
+        top: -95vh;
+    }
 }
 
 /***********************/
 /*        LAYER        */
 /***********************/
 .layer {
-  display: none;
-  flex-direction: column;
-  position: absolute;
-  z-index: 50;
-  pointer-events: all;
-  width: 200px;
-  height: 250px;
-  background-color: rgba(28, 28, 34, 0.5);
-  padding: 0px 15px;
-  border-radius: 9px;
-  user-select: none;
-  transition: transform 0.1s ease-out;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    z-index: 50;
+    pointer-events: all;
+    background-color: rgba(28, 28, 34, 0.5);
+    /* padding: 0 2em; */
+    border-radius: 9px;
+    user-select: none;
+    transition: transform 0.1s ease-out;
 }
 .layer-heading {
-  text-align: center;
+    text-align: center;
 }
 .layer-btn--close {
-  padding: 0.5em 0.75em;
-  font-size: 14px;
-  position: absolute;
-  top: 8px;
-  right: 8px;
+    padding: 0.5em 0.75em;
+    font-size: 14px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
 }
 .layer-checkbox-container {
-  display: block;
-  position: relative;
-  padding-left: 30px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  user-select: none;
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    user-select: none;
+    width: 10em;
 }
 .layer-checkbox-container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
 }
 .checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 20px;
-  width: 20px;
-  background-color: var(--bg-color-hover);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: var(--bg-color-hover);
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
+    content: "";
+    position: absolute;
+    display: none;
 }
 
 /* Show the checkmark when checked */
 .layer-checkbox-container input:checked ~ .checkmark:after {
-  display: block;
+    display: block;
 }
 
 /* Style the checkmark/indicator */
 .layer-checkbox-container .checkmark:after {
-  left: 8px;
-  top: 5px;
-  width: 5px;
-  height: 9px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
+    left: 8px;
+    bottom: 5px;
+    width: 5px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 .layer-list {
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5em 1em;
 }
 
 /***********************/
 /*       REUSABLE      */
 /***********************/
 .visible {
-  display: flex;
+    display: flex;
 }
 
 .additional-info {
-  grid-column-start: 1;
-  grid-row-start: 2;
-  max-width: 60ch;
-  transition: opacity 200ms ease-in;
+    grid-column-start: 1;
+    grid-row-start: 2;
+    max-width: 60ch;
+    transition: opacity 200ms ease-in;
 }
 
 .additional-info.extended .info {
-  opacity: var(--ui-opacity);
+    opacity: var(--ui-opacity);
 }
 
 .additional-info .info {
-  opacity: 0;
-  pointer-events: none;
-  user-select: none;
-  background-color: var(--bg-color);
-  font-size: 1em;
-  padding: 1em;
-  transition: opacity 200ms ease-in;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+    background-color: var(--bg-color);
+    font-size: 1em;
+    padding: 1em;
+    transition: opacity 200ms ease-in;
 }
 
 .additional-info .info .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--font-color-hover);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--font-color-hover);
 }
 
 .additional-info .info .header svg {
-  width: 42px;
-  height: 42px;
+    width: 42px;
+    height: 42px;
 }
 
 .additional-info .info .header .hide-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: all;
-  transition: all 300ms ease;
-  opacity: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: all;
+    transition: all 300ms ease;
+    opacity: 0.8;
 }
 
 .additional-info .info .header .hide-btn:hover {
-  cursor: pointer;
-  opacity: 1;
-  transform: rotate(-26deg);
+    cursor: pointer;
+    opacity: 1;
+    transform: rotate(-26deg);
 }
 
 .additional-info .info .header .title {
-  display: flex;
-  gap: 1em;
+    display: flex;
+    gap: 1em;
 }
 
 .additional-info.extended .btn {
-  opacity: 0;
-  pointer-events: none;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .additional-info .info p {
-  pointer-events: all;
-  color: var(--font-color);
-  font-size: 1em;
-  font-weight: 300;
-  line-height: 1.5em;
-  padding: 1rem;
-  max-height: 20vh;
-  overflow: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+    pointer-events: all;
+    color: var(--font-color);
+    font-size: 1em;
+    font-weight: 300;
+    line-height: 1.5em;
+    padding: 1rem;
+    max-height: 20vh;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .additional-info .btn {
-  --size: 3em;
-  pointer-events: all;
-  background-color: var(--bg-color);
-  padding: 0.75em;
-  width: var(--size);
-  height: var(--size);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: var(--border-radius);
-  opacity: var(--ui-opacity);
-  cursor: pointer;
-  color: var(--font-color);
-  position: absolute;
+    --size: 3em;
+    pointer-events: all;
+    background-color: var(--bg-color);
+    padding: 0.75em;
+    width: var(--size);
+    height: var(--size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--border-radius);
+    opacity: var(--ui-opacity);
+    cursor: pointer;
+    color: var(--font-color);
+    position: absolute;
 }
 
 .additional-info .btn svg {
-  width: var(--size);
-  height: var(--size);
+    width: var(--size);
+    height: var(--size);
 }
 
 .additional-info .btn:hover {
-  background-color: var(--bg-color-hover);
+    background-color: var(--bg-color-hover);
 }
 
 .additional-info.hidden {
-  opacity: 0;
-  pointer-events: none;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .additional-info.hidden .info p {
-  pointer-events: none;
+    pointer-events: none;
 }

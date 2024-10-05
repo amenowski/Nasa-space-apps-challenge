@@ -6,8 +6,6 @@ export default class Layers {
     private closeLayersBtn: HTMLElement | null = null;
     private system: SolarSystem;
 
-    //checkboxes
-
     constructor(system: SolarSystem) {
         this.parentElement = document.querySelector(".layer");
 
@@ -46,6 +44,15 @@ export default class Layers {
         const phaCB =
             this.parentElement.querySelector<HTMLInputElement>("#PHA");
 
+        const orbitCB =
+            this.parentElement.querySelector<HTMLInputElement>("#orbits");
+
+        const labelCB =
+            this.parentElement.querySelector<HTMLInputElement>("#labels");
+
+        const iconCB =
+            this.parentElement.querySelector<HTMLInputElement>("#icons");
+
         planetCB!.addEventListener("change", () => {
             planetCB?.checked
                 ? this.system.showObjectsOfType("Planet")
@@ -68,6 +75,22 @@ export default class Layers {
             phaCB?.checked
                 ? this.system.showObjectsOfType("PHA")
                 : this.system.hideObjectsOfType("PHA");
+        });
+
+        orbitCB!.addEventListener("change", () => {
+            orbitCB?.checked
+                ? this.system.showOrbit()
+                : this.system.hideOrbit();
+        });
+
+        labelCB!.addEventListener("change", () => {
+            labelCB?.checked
+                ? this.system.showLabel()
+                : this.system.hideLabel();
+        });
+
+        iconCB!.addEventListener("change", () => {
+            iconCB?.checked ? this.system.showIcon() : this.system.hideIcon();
         });
     }
 }

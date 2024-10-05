@@ -11,4 +11,6 @@ export let SETTINGS = {
     SUN_LAYER: 0,
     PLANET_LAYER: 1,
     ORBIT_LAYER: 2,
+    LABEL_LAYER: 3,
+    ICON_LAYER: 4,
 };
