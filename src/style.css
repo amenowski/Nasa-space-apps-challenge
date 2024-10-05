@@ -412,7 +412,6 @@ p {
     grid-column-start: 1;
     grid-row-start: 3;
     align-self: flex-end;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -429,7 +428,7 @@ p {
     padding: 0.75em 1em;
     opacity: var(--ui-opacity);
     border-radius: 8px;
-
+    transition: background-color 200ms ease, color 200ms ease-in;
     pointer-events: all;
     user-select: none;
     font-size: 16px;
@@ -458,12 +457,15 @@ p {
     transform: translate(50%, -50%);
     background-color: var(--bg-color);
 }
+
 .credits-actions {
     width: 100%;
 }
+
 .credits-btn--close {
     font-size: 18px;
 }
+
 .credits-btn--open {
 }
 .credits-container.visible {
@@ -517,21 +519,29 @@ p {
     z-index: 50;
     pointer-events: all;
     background-color: rgba(28, 28, 34, 0.5);
-    /* padding: 0 2em; */
     border-radius: 9px;
     user-select: none;
     transition: transform 0.1s ease-out;
+    width: 15em;
 }
+
+.layer-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .layer-heading {
     text-align: center;
 }
+
 .layer-btn--close {
     padding: 0.5em 0.75em;
     font-size: 14px;
     position: absolute;
-    top: 8px;
-    right: 8px;
+    right: 1em;
 }
+
 .layer-checkbox-container {
     display: block;
     position: relative;
@@ -539,8 +549,11 @@ p {
     margin-bottom: 12px;
     cursor: pointer;
     user-select: none;
-    width: 10em;
+    width: 100%;
+    color: var(--font-color);
+    transition: 150ms color ease-in-out;
 }
+
 .layer-checkbox-container input {
     position: absolute;
     opacity: 0;
@@ -548,6 +561,11 @@ p {
     height: 0;
     width: 0;
 }
+
+.layer-checkbox-container:hover {
+    color: var(--font-color-hover);
+}
+
 .checkmark {
     position: absolute;
     top: 0;
@@ -555,6 +573,7 @@ p {
     height: 20px;
     width: 20px;
     background-color: var(--bg-color-hover);
+    border-radius: 4px;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -575,7 +594,7 @@ p {
     bottom: 5px;
     width: 5px;
     height: 9px;
-    border: solid white;
+    border: solid var(--font-color-hover);
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
