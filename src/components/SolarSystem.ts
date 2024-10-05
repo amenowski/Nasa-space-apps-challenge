@@ -324,6 +324,25 @@ export default class SolarSystem {
         }
     }
 
+    public showObjectsOfType(type: string): void {
+        if (type == "Satellite") {
+            for (let [_, object] of this.celestialBodies) {
+                object.showSatellites();
+            }
+            return;
+        }
+
+        for (let [_, object] of this.celestialBodies) {
+            if (object.type == type) object.show();
+        }
+
+        const dist = this.camera
+            .getCamera()
+            .position.distanceTo(this.selectedObject!.mesh!.position);
+
+        this.selectedObject?.updateRender(dist, true);
+    }
+
     private async initPlanets(): Promise<void> {
         const data = await fetch("/assets/data/SolarPlanets.json");
         const json: CelestialWithRingData[] | SolarPlanetData[] =

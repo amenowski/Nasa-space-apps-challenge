@@ -179,6 +179,12 @@ export default class CelestialBody {
         }
     }
 
+    public showSatellites(): void {
+        for (let [_, satellite] of this.satellites) {
+            satellite.show();
+        }
+    }
+
     public getOrbit(): Orbit {
         return this.orbit!;
     }

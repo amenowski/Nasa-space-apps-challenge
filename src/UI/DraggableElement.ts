@@ -44,7 +44,7 @@ export default class DraggableElement {
             requestAnimationFrame(() => {
                 if (this._element) {
                     this._element.style.transform = `translate(${x}px, ${y}px)`;
-                    this._element.style.transition = "transform 0.1s ease";
+                    this._element.style.transition = "transform 0.1s linear";
                 }
             });
         }

@@ -38,8 +38,6 @@ export default class Camera {
         );
         this.camera.position.copy(this.defaultPosition);
 
-        // this.moveToDefaultPosition();
-
         this.controls.maxDistance = SETTINGS.CAMERA_MAX_DISTANCE;
 
         scene.add(this.camera);

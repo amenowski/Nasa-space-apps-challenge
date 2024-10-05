@@ -44,7 +44,7 @@ export class UI {
         this.orbitInfo = new OrbitInfo();
         this.additionalInfo = new AdditionalInfo();
         this.credits = new Credits();
-        this.layers = new Layers();
+        this.layers = new Layers(solarSystem);
         this.draggableElement = new DraggableElement(".layer");
 
         this.setEventListeners();
