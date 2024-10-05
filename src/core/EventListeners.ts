@@ -33,6 +33,12 @@ export class EventListeners {
         this.camera.controls.addEventListener("start", () => {
             this.solarSystem.hideSearchBar();
         });
+
+        window.addEventListener("keydown", (e) => {
+            if(e.keyCode == 32) {
+                this.camera.controls.autoRotate = !this.camera.controls.autoRotate
+            }
+        })
     }
 
     private onResize() {

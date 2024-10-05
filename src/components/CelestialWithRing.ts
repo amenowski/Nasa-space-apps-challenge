@@ -53,7 +53,6 @@ export default class CelestialWithRing extends CelestialObject {
         });
 
         this.mesh = new Mesh(geo, mat);
-        // this.mesh.layers.enableAll();
         this.mesh.layers.set(0);
         this.mesh.name = this.name;
         this.mesh.rotation.z = -this.obliquity * 0.0174532925;

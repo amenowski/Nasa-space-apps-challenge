@@ -26,6 +26,7 @@ export default class Camera {
         );
         this.controls.enableDamping = true;
         this.controls.enablePan = false;
+        // this.controls.autoRotate = true;
 
         this.aspect = window.innerWidth / window.innerHeight;
         this.camera.aspect = this.aspect;
@@ -39,6 +40,11 @@ export default class Camera {
         this.camera.position.copy(this.defaultPosition);
 
         this.controls.maxDistance = SETTINGS.CAMERA_MAX_DISTANCE;
+
+        // this.controls.keys = {LEFT: 'ArrowLeft', RIGHT: "ArrowRight", UP: 'ArrowUp', BOTTOM: 'ArrowDown' }
+
+
+        // this.controls.listenToKeyEvents(window)
 
         scene.add(this.camera);
     }
