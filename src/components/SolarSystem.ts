@@ -26,6 +26,7 @@ import Satellite from "./Satellite";
 
 import Asteroid from "./Asteroid";
 import { loadInfo } from "../utils/info";
+import PHA from "./PHA";
 
 type UniverseObject = CelestialBody | CelestialWithRing;
 
@@ -35,13 +36,14 @@ export default class SolarSystem {
         "433 Eros (A898 PA)",
         "2062 Aten (1976 AA)",
         "1862 Apollo (1932 HA)",
-        "99942 Apophis (2004 MN4)",
+        // "99942 Apophis (2004 MN4)",
         "2P/Encke",
         "96189 Pygmalion (1991 NT3)",
         "101955 Bennu (1999 RQ36)",
     ];
     private centralBody: Sun;
     private celestialBodies: Map<string, CelestialBody | CelestialWithRing>;
+    private phaBodies: Map<string, PHA>;
     private satellites: Map<string, Satellite>;
     private currentDate: Date;
     private ui: UI;
@@ -56,12 +58,16 @@ export default class SolarSystem {
     private asteroids: Map<string, AsteroidData>;
     private comests: Map<string, AsteroidData>;
     private phas: Map<string, AsteroidData>;
+    private renderedPHA: number;
+    private renderPHA: boolean;
 
     constructor(scene: Scene, renderer: WebGLRenderer, camera: Camera) {
         this.textureLoader = new TextureLoader();
         this.camera = camera;
+        this.renderPHA = false;
         this.group = new Group();
         this.group.layers.set(0);
+        this.renderedPHA  = 0;
         // create sun
         this.centralBody = new Sun(
             scene,
@@ -82,6 +88,7 @@ export default class SolarSystem {
         this.asteroids = new Map<string, AsteroidData>();
         this.comests = new Map<string, AsteroidData>();
         this.phas = new Map<string, AsteroidData>();
+        this.phaBodies = new Map<string, PHA>()
         this.currentDate = new Date();
         this.ui = new UI(this);
         this.raycaster = new Raycaster();
@@ -96,10 +103,14 @@ export default class SolarSystem {
         await this.initPlanets();
         await this.initSatellites();
         await this.loadAsteroidsData();
+        await this.loadPHA();
         this.loadFamousObjects();
+        this.hideObjectsOfType("PHA")
     }
 
     public update(deltaTime: number): void {
+        this.renderedPHA = 0;
+        
         this.currentDate = new Date(
             this.currentDate.getTime() +
                 1000 * SETTINGS.simulationSpeed * deltaTime
@@ -127,6 +138,18 @@ export default class SolarSystem {
             }
         }
 
+        for(let [_, phaBody] of this.phaBodies) {
+            phaBody.updatePosition(this.currentDate, deltaTime, SETTINGS.simulationSpeed / 86400)
+        }
+
+        const earthPos = this.celestialBodies.get("Earth")!.mesh!.position
+
+        if(this.renderPHA) {
+                    for(let [_, pha] of this.phaBodies) {
+                        pha.calcDistanceToEarth(earthPos, this.renderedPHA)
+                    }
+        }
+ 
         this.followPlanet();
     }
 
@@ -319,22 +342,38 @@ export default class SolarSystem {
             return;
         }
 
+        if(type=="PHA") {
+            this.renderPHA =true;
+            for(let [_, pha] of this.phaBodies) {
+                pha.show();
+            }
+        }
+        
         for (let [_, object] of this.celestialBodies) {
             if (object.type == type) object.show();
         }
-
+        
         const dist = this.camera
-            .getCamera()
-            .position.distanceTo(this.selectedObject!.mesh!.position);
-
+        .getCamera()
+        .position.distanceTo(this.selectedObject!.mesh!.position);
+        
         this.selectedObject?.updateRender(dist, true);
     }
-
+    
     public hideObjectsOfType(type: string): void {
         if (type == "Satellite") {
             for (let [_, object] of this.celestialBodies) {
                 object.hideSatellites();
             }
+            return;
+        }
+        
+        if(type=="PHA") {
+            this.renderPHA =false;
+            for(let [_, pha] of this.phaBodies) {
+                pha.hide();
+            }
+
             return;
         }
 
@@ -365,6 +404,37 @@ export default class SolarSystem {
 
     public hideIcon(): void {
         this.camera.getCamera().layers.disable(SETTINGS.ICON_LAYER);
+    }
+
+    private async loadPHA(): Promise<void> {
+        for(let [_, data] of this.phas) {
+            let pha = new PHA(this, data.full_name, data.diameter / 2, 0, data.rot_per / 3600, SETTINGS.ORBIT_COLOR, "", this.textureLoader)
+            let longOfPeri = data.om + data.w;
+            let eccentricity = data.e;
+
+            if (typeof eccentricity == "string")
+                eccentricity = parseFloat(eccentricity);
+
+            const orbit = new Orbit(
+                data.ma * (Math.PI / 180),
+                data.a,
+                eccentricity,
+                longOfPeri,
+                data.i,
+                data.om,
+                data.per_y,
+                data.epoch,
+                pha,
+                SETTINGS.ORBIT_COLOR,
+                null,
+                SETTINGS.ORBIT_LAYER
+            );
+
+            pha.setOrbit(orbit);
+            this.phaBodies.set(pha.name, pha)
+            pha.init(this.currentDate)
+            this.group.add(pha.group)
+        }
     }
 
     private async initPlanets(): Promise<void> {

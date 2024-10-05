@@ -13,4 +13,6 @@ export let SETTINGS = {
     ORBIT_LAYER: 2,
     LABEL_LAYER: 3,
     ICON_LAYER: 4,
+    PHA_THRESHOLD: 0.5,
+    PHA_MAX_RENDER: 5,
 };
