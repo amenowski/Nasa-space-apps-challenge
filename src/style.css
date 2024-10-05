@@ -593,8 +593,8 @@ p {
 
 /* Style the checkmark/indicator */
 .layer-checkbox-container .checkmark:after {
-    left: 8px;
-    bottom: 5px;
+    left: 7.5px;
+    bottom: 6px;
     width: 5px;
     height: 9px;
     border: solid var(--font-color-hover);
