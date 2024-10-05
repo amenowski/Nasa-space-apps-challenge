@@ -8,6 +8,7 @@ import {
 import CelestialObject from "./CelestialBody";
 import { PlanetRingGeometry } from "../utils/PlanetRingGeometry";
 import SolarSystem from "./SolarSystem";
+import { SETTINGS } from "../core/Settings";
 
 export default class CelestialWithRing extends CelestialObject {
     private ring: Mesh | null = null;
@@ -53,12 +54,12 @@ export default class CelestialWithRing extends CelestialObject {
         });
 
         this.mesh = new Mesh(geo, mat);
-        this.mesh.layers.set(0);
+        this.mesh.layers.set(SETTINGS.PLANET_LAYER);
         this.mesh.name = this.name;
         this.mesh.rotation.z = -this.obliquity * 0.0174532925;
 
         this.group.add(this.mesh);
-        this.group.layers.set(0);
+        this.group.layers.set(SETTINGS.PLANET_LAYER);
 
         this.createRing();
         this.createLabel();
@@ -82,7 +83,7 @@ export default class CelestialWithRing extends CelestialObject {
             opacity: 0.87,
         });
         this.ring = new Mesh(geo, mat);
-        this.ring.layers.set(0);
+        this.ring.layers.set(SETTINGS.PLANET_LAYER);
 
         if (this.mesh) {
             this.group.add(this.ring);

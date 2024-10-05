@@ -533,6 +533,8 @@ p {
 
 .layer-heading {
     text-align: center;
+    color: var(--font-color);
+    font-size: 0.8em;
 }
 
 .layer-btn--close {
@@ -551,6 +553,7 @@ p {
     user-select: none;
     width: 100%;
     color: var(--font-color);
+    font-size: 0.85em;
     transition: 150ms color ease-in-out;
 }
 
@@ -600,13 +603,20 @@ p {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
 .layer-list {
     list-style-type: none;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
     padding: 0.5em 1em;
 }
+
+.layer-list .line {
+    background-color: var(--border-color);
+    height: 2px;
+    margin-bottom: 12px;
+}
+
 
 /***********************/
 /*       REUSABLE      */

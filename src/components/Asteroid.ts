@@ -186,7 +186,7 @@ export default class Asteroid extends CelestialBody {
 
         this.icon = new CSS2DObject(this.htmlElements[1]);
         this.icon.position.set(0, 0, 0);
-        this.icon.layers.set(this.layer);
+        this.icon.layers.set(SETTINGS.ICON_LAYER);
         this.mesh!.add(this.icon);
 
         this.htmlElements[1].addEventListener("mouseover", () => {
