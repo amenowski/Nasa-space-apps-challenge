@@ -19,6 +19,7 @@ body {
     --ui-opacity: 0.75;
     --bg-color-hover: #2a2a33;
     --border-radius: 8px;
+    background-color: black;
 }
 
 p {

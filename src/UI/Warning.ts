@@ -1,14 +1,23 @@
+import SolarSystem from "../components/SolarSystem";
+
 export default class Warning {
     private mainContainer: HTMLDivElement | null = null;
+    private system: SolarSystem;
 
-    constructor() {
+    constructor(system: SolarSystem) {
         this.mainContainer = document.querySelector(".UI");
         this.detectClickOutside();
+        this.system = system;
     }
 
     showWarning(name: string): void {
         const warningElement = this.createWarningElement(name);
         this.mainContainer!.appendChild(warningElement);
+
+        setTimeout(() => {    
+            this.removeWarning(warningElement)
+            this.system.resetClosePHA()
+        }, 3000);
     }
 
     createWarningElement(name: string): HTMLDivElement {

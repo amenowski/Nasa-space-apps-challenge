@@ -48,9 +48,8 @@ export class UI {
         this.credits = new Credits();
         this.layers = new Layers(solarSystem);
         this.draggableElement = new DraggableElement(".layer");
-        this.warning = new Warning();
+        this.warning = new Warning(solarSystem);
 
-        this.warning.showWarning("Earth");
         this.setEventListeners();
         this.solarSystem = solarSystem;
     }
@@ -68,6 +67,11 @@ export class UI {
         if (this.liveBtn) {
             this.liveBtn.classList.add("no-live");
         }
+    }
+
+    public showWarning(name: string): void {
+        console.log(name)
+        this.warning.showWarning(name)
     }
 
     public showAdditionalInfo(description: string): void {

@@ -60,6 +60,9 @@ export default class SolarSystem {
     private phas: Map<string, AsteroidData>;
     private renderedPHA: number;
     private renderPHA: boolean;
+    private alertShowed: boolean;
+    private closePHA: PHA | null = null;
+    private latestClosePha: PHA | null = null;
 
     constructor(scene: Scene, renderer: WebGLRenderer, camera: Camera) {
         this.textureLoader = new TextureLoader();
@@ -68,6 +71,7 @@ export default class SolarSystem {
         this.group = new Group();
         this.group.layers.set(0);
         this.renderedPHA  = 0;
+        this.alertShowed = false;
         // create sun
         this.centralBody = new Sun(
             scene,
@@ -93,6 +97,7 @@ export default class SolarSystem {
         this.ui = new UI(this);
         this.raycaster = new Raycaster();
         this.selectedObject = null;
+        this.closePHA = null;
 
         this.ui.updateTimelineInfo(this.currentDate);
 
@@ -146,11 +151,28 @@ export default class SolarSystem {
 
         if(this.renderPHA) {
                     for(let [_, pha] of this.phaBodies) {
-                        if(pha.calcDistanceToEarth(earthPos, this.renderedPHA)) this.renderedPHA++;
+                        if(pha.calcDistanceToEarth(earthPos, this.renderedPHA)) {
+                            if(!this.closePHA) {
+                                this.closePHA = pha;
+                                if(this.latestClosePha != this.closePHA) {
+                                    this.closePHA = pha;
+                                    this.alertShowed = true;
+                                    this.ui.showWarning(this.closePHA.name)
+                                    this.latestClosePha = pha;
+                                }
+                            }
+                            pha.show();
+                            this.renderedPHA++;
+                        }
                     }
         }
  
         this.followPlanet();
+    }
+
+    public hideWarning(): void {
+        this.closePHA = null;
+
     }
 
     public searchForObjects(input: string): void {
@@ -320,6 +342,8 @@ export default class SolarSystem {
         this.ui.hideOrbitInfo();
         this.ui.hideInfoButton();
         this.selectedObject = null;
+        this.closePHA = null;
+        this.latestClosePha = null;
     }
 
     public renderSun(): void {
@@ -382,6 +406,10 @@ export default class SolarSystem {
         for (let [_, object] of this.celestialBodies) {
             if (object.type == type) object.hide();
         }
+    }
+
+    public resetClosePHA(): void {
+        this.closePHA = null;
     }
 
     public showOrbit(): void {
