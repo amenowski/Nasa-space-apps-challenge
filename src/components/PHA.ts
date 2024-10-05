@@ -5,7 +5,6 @@ import { SETTINGS } from "../core/Settings";
 
 export default class PHA extends Asteroid{
     public distanceToEarth: number;
-    private visible: boolean;
     constructor(
         system: SolarSystem,
         name: string,
@@ -18,7 +17,7 @@ export default class PHA extends Asteroid{
     ) {
         super(system, name, radius, obliquity, sidRotPerSec, color, textureUrl, textureLoader,"Y",  SETTINGS.PLANET_LAYER );
         this.distanceToEarth = 0;
-        this.visible = false;
+        
     }
 
     public async  init(date: Date): Promise<void> {
@@ -40,8 +39,10 @@ export default class PHA extends Asteroid{
         this.createIcon();
     }
     
-    public calcDistanceToEarth(earthPos: Vector3, rendered: number): void {
-        if(!this.mesh || rendered > SETTINGS.PHA_MAX_RENDER) return;
+    public calcDistanceToEarth(earthPos: Vector3, rendered: number): boolean {
+
+
+        if(!this.mesh || rendered > SETTINGS.PHA_MAX_RENDER) return false;
         // 99942 Apophis (2004 MN4)
         this.distanceToEarth = earthPos.distanceTo(this.mesh.position) / 149597870.7;
         this.distanceToEarth *= SETTINGS.DISTANCE_SCALE
@@ -53,10 +54,13 @@ export default class PHA extends Asteroid{
             this.group.visible = true;
             rendered++;
             this.orbit?.show()
-        } else {
+
+            return true;
+        } 
             this.group.visible = false;
             this.orbit?.hide()
-        }
+
+            return false;
             // console.log(this.distanceToEarth, this.name) 
     }
 }

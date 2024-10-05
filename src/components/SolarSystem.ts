@@ -146,7 +146,7 @@ export default class SolarSystem {
 
         if(this.renderPHA) {
                     for(let [_, pha] of this.phaBodies) {
-                        pha.calcDistanceToEarth(earthPos, this.renderedPHA)
+                        if(pha.calcDistanceToEarth(earthPos, this.renderedPHA)) this.renderedPHA++;
                     }
         }
  
@@ -352,6 +352,8 @@ export default class SolarSystem {
         for (let [_, object] of this.celestialBodies) {
             if (object.type == type) object.show();
         }
+
+        if(!this.selectedObject) return;
         
         const dist = this.camera
         .getCamera()
