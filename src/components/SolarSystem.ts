@@ -27,6 +27,7 @@ import Satellite from "./Satellite";
 import Asteroid from "./Asteroid";
 import { loadInfo } from "../utils/info";
 import PHA from "./PHA";
+import Comet from "./Comet";
 
 type UniverseObject = CelestialBody | CelestialWithRing;
 
@@ -213,18 +214,35 @@ export default class SolarSystem {
 
         if (!asteroidData) return;
 
-        const asteroid = new Asteroid(
-            this,
-            asteroidData.full_name,
-            asteroidData.diameter / 2,
-            0,
-            asteroidData.rot_per / 3600,
-            SETTINGS.ORBIT_COLOR,
-            "",
-            this.textureLoader,
-            asteroidData.pha,
-            SETTINGS.PLANET_LAYER
-        );
+        let object;
+
+        if(this.comests.has(asteroidData.full_name)) {
+            object = new Comet(
+                this,
+                asteroidData.full_name,
+                asteroidData.diameter / 2,
+                0,
+                asteroidData.rot_per / 3600,
+                SETTINGS.ORBIT_COLOR,
+                "",
+                this.textureLoader,
+                asteroidData.pha,
+                SETTINGS.PLANET_LAYER
+            );
+        } else {
+            object = new Asteroid(
+                this,
+                asteroidData.full_name,
+                asteroidData.diameter / 2,
+                0,
+                asteroidData.rot_per / 3600,
+                SETTINGS.ORBIT_COLOR,
+                "",
+                this.textureLoader,
+                asteroidData.pha,
+                SETTINGS.PLANET_LAYER
+            );
+        }
 
         let longOfPeri = asteroidData.om + asteroidData.w;
         let eccentricity = asteroidData.e;
@@ -241,17 +259,17 @@ export default class SolarSystem {
             asteroidData.om,
             asteroidData.per_y,
             asteroidData.epoch,
-            asteroid,
+            object,
             SETTINGS.ORBIT_COLOR,
             null,
             SETTINGS.ORBIT_LAYER
         );
-        asteroid.setOrbit(orbit);
-        this.celestialBodies.set(asteroid.name, asteroid);
-        asteroid.init(this.currentDate);
-        this.group.add(asteroid.group);
+        object.setOrbit(orbit);
+        this.celestialBodies.set(object.name, object);
+        object.init(this.currentDate);
+        this.group.add(object.group);
 
-        if (move) this.moveToBody(asteroid);
+        if (move) this.moveToBody(object);
     }
 
     public shootRay(mouseCoords: Vector2): void {
