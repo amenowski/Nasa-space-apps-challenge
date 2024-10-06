@@ -783,7 +783,7 @@ p {
 }
 
 .warning-text.users {
-    margin-top: 1.5em;
+    margin-top: 0.5em;
     color: var(--font-color);
     opacity: 0.6;
 }
