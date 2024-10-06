@@ -14,10 +14,10 @@ export default class Warning {
         const warningElement = this.createWarningElement(name);
         this.mainContainer!.appendChild(warningElement);
 
-        setTimeout(() => {    
-            this.removeWarning(warningElement)
-            this.system.resetClosePHA()
-        }, 3000);
+        // setTimeout(() => {    
+            // this.removeWarning(warningElement)
+            // this.system.resetClosePHA()
+        // }, 3000);
     }
 
     createWarningElement(name: string): HTMLDivElement {

@@ -149,6 +149,7 @@ export default class SolarSystem {
 
         const earthPos = this.celestialBodies.get("Earth")!.mesh!.position
         if(this.renderPHA) {
+            
                     for(let [_, pha] of this.phaBodies) {
                         if(pha.calcDistanceToEarth(earthPos, this.renderedPHA)) {
                             if(!this.closePHA) {
@@ -328,21 +329,28 @@ export default class SolarSystem {
     public setLiveDate(): void {
         this.currentDate = new Date();
         this.isLive = true;
-
+        this.selectedObject = null;
+        this.closePHA = null;
+        this.latestClosePha = null;
+        this.alertShowed = false;
         for (let [_, celestialBody] of this.celestialBodies) {
             celestialBody.setLivePosition(this.currentDate);
         }
+
+        for (let [_, phaBody] of this.phaBodies) {
+            phaBody.setLivePosition(this.currentDate);
+        }
+
+        
     }
 
     public resetCamPosition(): void {
         this.resetCam = true;
+      
         this.camera.moveToDefaultPosition();
         this.ui.hideResetPosition();
         this.ui.hideOrbitInfo();
         this.ui.hideInfoButton();
-        this.selectedObject = null;
-        this.closePHA = null;
-        this.latestClosePha = null;
     }
 
     public renderSun(): void {
