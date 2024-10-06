@@ -39,10 +39,10 @@ export default class PHA extends Asteroid{
         this.createIcon();
     }
     
-    public calcDistanceToEarth(earthPos: Vector3, rendered: number): boolean {
+    public calcDistanceToEarth(earthPos: Vector3): boolean {
 
 
-        if(!this.mesh || rendered > SETTINGS.PHA_MAX_RENDER) return false;
+        if(!this.mesh) return false;
         // 99942 Apophis (2004 MN4)
         this.distanceToEarth = earthPos.distanceTo(this.mesh.position) / 149597870.7;
         this.distanceToEarth *= SETTINGS.DISTANCE_SCALE
@@ -52,7 +52,6 @@ export default class PHA extends Asteroid{
 
         if(this.distanceToEarth < SETTINGS.PHA_THRESHOLD) {
             this.group.visible = true;
-            rendered++;
             this.orbit?.show()
 
             return true;

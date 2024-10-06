@@ -149,16 +149,19 @@ export default class SolarSystem {
 
         const earthPos = this.celestialBodies.get("Earth")!.mesh!.position
         if(this.renderPHA) {
-            
                     for(let [_, pha] of this.phaBodies) {
-                        if(pha.calcDistanceToEarth(earthPos, this.renderedPHA)) {
+                        if(pha.calcDistanceToEarth(earthPos)) {
+                            // console.log(this.closePHA)
+
                             if(!this.closePHA) {
-                                this.closePHA = pha;
-                                if(this.latestClosePha != this.closePHA) {
+                                if(this.latestClosePha != pha) {
                                     this.closePHA = pha;
                                     this.alertShowed = true;
-                                    this.ui.showWarning(this.closePHA.name)
                                     this.latestClosePha = pha;
+                                    this.ui.showWarning(this.closePHA.name)
+                                    
+                                } else {
+                                    // console.log(this.closePHA.name, this.latestClosePha.name)
                                 }
                             }
                             pha.show();
@@ -340,8 +343,6 @@ export default class SolarSystem {
         for (let [_, phaBody] of this.phaBodies) {
             phaBody.setLivePosition(this.currentDate);
         }
-
-        
     }
 
     public resetCamPosition(): void {
@@ -417,6 +418,10 @@ export default class SolarSystem {
 
     public resetClosePHA(): void {
         this.closePHA = null;
+        this.alertShowed = false;
+        this.renderPHA = true;
+
+        console.log(this.closePHA)
     }
 
     public showOrbit(): void {

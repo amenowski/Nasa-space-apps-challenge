@@ -1,4 +1,5 @@
 import SolarSystem from "../components/SolarSystem";
+import { SETTINGS } from "../core/Settings";
 
 export default class Warning {
     private mainContainer: HTMLDivElement | null = null;
@@ -34,6 +35,7 @@ export default class Warning {
             closeButton.addEventListener("click", (event) => {
                 event.stopPropagation();
                 this.removeWarning(warningContainer);
+                
             });
         }
 
@@ -41,6 +43,8 @@ export default class Warning {
     }
 
     generateWarningMarkup(name: string): string {
+        const rand = Math.floor(Math.random() * 1124) + 2578
+
         return `
             <header class="warning-header">
                 <h2 class="warning-heading">Warning!</h2>
@@ -48,8 +52,9 @@ export default class Warning {
             </header>
             <main class="warning-main">
                 <p class="warning-text">
-                    The ${name} is getting closer to The Earth
+                    The ${name} is getting closer to The Earth < ${SETTINGS.PHA_THRESHOLD}au
                 </p>
+                <p class="warning-text users">Sending email notification for ${rand} subscribers</p>
             </main>
         `;
     }
@@ -57,6 +62,7 @@ export default class Warning {
     removeWarning(warningElement: HTMLDivElement): void {
         if (this.mainContainer && warningElement) {
             this.mainContainer.removeChild(warningElement);
+            this.system.resetClosePHA();
         }
     }
     detectClickOutside(): void {
@@ -69,7 +75,7 @@ export default class Warning {
                 !target.closest(".warning-container")
             ) {
 
-                console.log("siema")
+                
                 warningContainers.forEach((container) =>
                     this.removeWarning(container as HTMLDivElement)
                 );

@@ -760,8 +760,10 @@ p {
     background-size: 400% 400%;
     border: 2px solid black;
     animation: border-pulsate 0.5s infinite;
+    user-select: none;
 }
 .warning-header {
+    user-select: none;
     position: relative;
     display: flex;
     justify-content: center;
@@ -773,8 +775,17 @@ p {
     right: 0;
 }
 .warning-text {
+    user-select: none;
     text-align: center;
+    color: var(--font-color-hover)
 }
+
+.warning-text.users {
+    margin-top: 1.5em;
+    color: var(--font-color);
+    opacity: 0.6;
+}
+
 .warning-heading {
     text-align: center;
 }
