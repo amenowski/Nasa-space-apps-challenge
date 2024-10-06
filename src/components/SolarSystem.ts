@@ -61,7 +61,6 @@ export default class SolarSystem {
     private phas: Map<string, AsteroidData>;
     private renderedPHA: number;
     private renderPHA: boolean;
-    private alertShowed: boolean;
     private closePHA: PHA | null = null;
     private latestClosePha: PHA | null = null;
 
@@ -72,7 +71,6 @@ export default class SolarSystem {
         this.group = new Group();
         this.group.layers.set(0);
         this.renderedPHA  = 0;
-        this.alertShowed = false;
         // create sun
         this.centralBody = new Sun(
             scene,
@@ -152,12 +150,10 @@ export default class SolarSystem {
         if(this.renderPHA) {
                     for(let [_, pha] of this.phaBodies) {
                         if(pha.calcDistanceToEarth(earthPos)) {
-                            // console.log(this.closePHA)
 
                             if(!this.closePHA) {
                                 if(pha != this.latestClosePha) {
                                     this.closePHA = pha;
-                                    this.alertShowed = true;
                                     this.latestClosePha = pha;
                                     this.ui.showWarning(this.closePHA.name)
                                     
@@ -351,7 +347,6 @@ export default class SolarSystem {
         this.selectedObject = null;
         this.closePHA = null;
         this.latestClosePha = null;
-        this.alertShowed = false;
         for (let [_, celestialBody] of this.celestialBodies) {
             celestialBody.setLivePosition(this.currentDate);
         }
@@ -434,7 +429,6 @@ export default class SolarSystem {
 
     public resetClosePHA(): void {
         this.closePHA = null;
-        this.alertShowed = false;
         this.renderPHA = true;
 
         console.log(this.closePHA)
