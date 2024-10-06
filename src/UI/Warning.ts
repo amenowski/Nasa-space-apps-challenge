@@ -52,7 +52,7 @@ export default class Warning {
             </header>
             <main class="warning-main">
                 <p class="warning-text">
-                    The ${name} is getting closer to The Earth < ${SETTINGS.PHA_THRESHOLD}au
+                    The ${name} is getting closer to The Earth <br> < ${SETTINGS.WARNING_THRESHOLD}au
                 </p>
                 <p class="warning-text users">Sending email notification for ${rand} subscribers</p>
             </main>

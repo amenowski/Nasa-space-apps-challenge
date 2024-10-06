@@ -153,10 +153,13 @@ export default class SolarSystem {
 
                             if(!this.closePHA) {
                                 if(pha != this.latestClosePha) {
-                                    this.closePHA = pha;
-                                    this.latestClosePha = pha;
-                                    this.ui.showWarning(this.closePHA.name)
-                                    
+                                    let dist = pha.mesh!.position.distanceTo(earthPos) / 149597870.7
+                                    dist *= SETTINGS.DISTANCE_SCALE
+                                    if(dist < SETTINGS.WARNING_THRESHOLD) {
+                                        this.closePHA = pha;
+                                        this.ui.showWarning(this.closePHA.name)
+                                        this.latestClosePha = pha;
+                                    }
                                 }
                             }
                             pha.show();
