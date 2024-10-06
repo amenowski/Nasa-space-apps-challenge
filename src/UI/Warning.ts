@@ -60,7 +60,7 @@ export default class Warning {
         }
     }
     detectClickOutside(): void {
-        document.addEventListener("click", (event) => {
+        document.addEventListener("mousedown", (event) => {
             const target = event.target as HTMLElement;
             const warningContainers =
                 document.querySelectorAll(".warning-container");
@@ -68,6 +68,8 @@ export default class Warning {
                 warningContainers.length > 0 &&
                 !target.closest(".warning-container")
             ) {
+
+                console.log("siema")
                 warningContainers.forEach((container) =>
                     this.removeWarning(container as HTMLDivElement)
                 );
