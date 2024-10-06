@@ -67,7 +67,7 @@ export default class SolarSystem {
     constructor(scene: Scene, renderer: WebGLRenderer, camera: Camera) {
         this.textureLoader = new TextureLoader();
         this.camera = camera;
-        this.renderPHA = false;
+        this.renderPHA = true;
         this.group = new Group();
         this.group.layers.set(0);
         this.renderedPHA  = 0;
@@ -110,7 +110,7 @@ export default class SolarSystem {
         await this.loadAsteroidsData();
         await this.loadPHA();
         this.loadFamousObjects();
-        this.hideObjectsOfType("PHA")
+        // this.hideObjectsOfType("PHA")
     }
 
     public update(deltaTime: number): void {
@@ -148,7 +148,6 @@ export default class SolarSystem {
         }
 
         const earthPos = this.celestialBodies.get("Earth")!.mesh!.position
-
         if(this.renderPHA) {
                     for(let [_, pha] of this.phaBodies) {
                         if(pha.calcDistanceToEarth(earthPos, this.renderedPHA)) {

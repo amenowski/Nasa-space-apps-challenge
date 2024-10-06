@@ -44,8 +44,8 @@ export default class Layers {
         const phaCB =
             this.parentElement.querySelector<HTMLInputElement>("#PHA");
 
-        if(phaCB)
-            phaCB.checked = false
+        // if(phaCB)
+        //     phaCB.checked = false
 
         const orbitCB =
             this.parentElement.querySelector<HTMLInputElement>("#orbits");
