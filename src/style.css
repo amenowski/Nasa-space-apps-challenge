@@ -768,6 +768,8 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 1.05ch;
 }
 .warning-btn--close {
     position: absolute;
