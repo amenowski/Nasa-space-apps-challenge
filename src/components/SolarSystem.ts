@@ -155,14 +155,12 @@ export default class SolarSystem {
                             // console.log(this.closePHA)
 
                             if(!this.closePHA) {
-                                if(pha.name == "99942 Apophis (2004 MN4)") {
+                                if(pha != this.latestClosePha) {
                                     this.closePHA = pha;
                                     this.alertShowed = true;
                                     this.latestClosePha = pha;
                                     this.ui.showWarning(this.closePHA.name)
                                     
-                                } else {
-                                    // console.log(this.closePHA.name, this.latestClosePha.name)
                                 }
                             }
                             pha.show();
